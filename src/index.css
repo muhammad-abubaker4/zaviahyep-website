@@ -268,7 +268,8 @@
   }
 
   .display-hero {
-    @apply text-[2.75rem] font-extrabold leading-[0.95] tracking-[-0.04em] sm:text-6xl md:text-7xl lg:text-[5.25rem];
+    font-size: clamp(2rem, 8.5vw, 5.25rem);
+    @apply font-extrabold leading-[1.02] tracking-[-0.03em] sm:leading-[0.95] sm:tracking-[-0.04em];
   }
 
   .marquee-track {
@@ -334,7 +335,7 @@
   }
 
   .btn-primary-modern {
-    @apply inline-flex items-center justify-center rounded-full bg-primary-foreground px-8 py-4 text-base font-semibold text-primary;
+    @apply inline-flex w-full max-w-full items-center justify-center rounded-full bg-primary-foreground px-5 py-3.5 text-sm font-semibold text-primary sm:w-auto sm:px-8 sm:py-4 sm:text-base;
     box-shadow: 0 4px 24px -4px hsl(0 0% 100% / 0.4);
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, opacity 0.3s ease;
   }
@@ -345,7 +346,7 @@
   }
 
   .btn-ghost-modern {
-    @apply inline-flex items-center justify-center rounded-full border border-primary-foreground/25 bg-primary-foreground/5 px-8 py-4 text-base font-semibold text-primary-foreground backdrop-blur-sm;
+    @apply inline-flex w-full max-w-full items-center justify-center rounded-full border border-primary-foreground/25 bg-primary-foreground/5 px-5 py-3.5 text-sm font-semibold text-primary-foreground backdrop-blur-sm sm:w-auto sm:px-8 sm:py-4 sm:text-base;
     transition: background 0.3s ease, border-color 0.3s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 

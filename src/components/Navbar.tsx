@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -58,6 +58,8 @@ const navDropdowns: NavDropdown[] = [
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
+  const [isNavVisible, setIsNavVisible] = useState(true);
+  const prefersReducedMotion = useReducedMotion();
   const navigate = useNavigate();
   const location = useLocation();
   const activeSection = useActiveSection();
@@ -109,6 +111,32 @@ const Navbar = () => {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isMobileMenuOpen, closeMobileMenu]);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      setIsNavVisible(true);
+      return;
+    }
+
+    let frame = 0;
+
+    const onScroll = () => {
+      if (frame) return;
+
+      frame = window.requestAnimationFrame(() => {
+        setIsNavVisible(window.scrollY < 64);
+        frame = 0;
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [isMobileMenuOpen]);
 
   const scrollToSection = (href: string) => {
     closeMobileMenu();
@@ -247,15 +275,15 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+        initial={prefersReducedMotion ? false : { y: -100 }}
+        animate={{ y: isNavVisible ? 0 : "-120%" }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.35, ease: [0.22, 1, 0.36, 1] }}
         id="navbar"
-        className="fixed left-0 right-0 top-0 z-50 px-2 pt-3 sm:px-3 sm:pt-4"
+        className="fixed left-0 right-0 top-0 z-50 px-3 pt-3 sm:px-3 sm:pt-4"
       >
         <div
           className={cn(
-            "mx-auto flex h-[5rem] w-[calc(100%-0.75rem)] max-w-[100rem] items-center justify-between rounded-2xl border border-primary-foreground/15 bg-primary px-4 shadow-lift sm:px-8 lg:px-10 xl:px-12",
+            "mx-auto flex h-14 w-full max-w-[100rem] items-center justify-between gap-3 rounded-2xl border border-primary-foreground/15 bg-primary px-3 shadow-lift sm:h-[5rem] sm:px-8 lg:px-10 xl:px-12",
           )}
         >
           <a
@@ -270,18 +298,18 @@ const Navbar = () => {
               }
               closeMobileMenu();
             }}
-            className="flex cursor-pointer items-center gap-2 sm:gap-2.5"
+            className="flex min-w-0 cursor-pointer items-center gap-2 sm:gap-2.5"
           >
             <ZaviahLogo
               variant="dark"
               className={cn(
                 "transition-all duration-300",
-                "h-14 w-auto sm:h-16",
+                "h-10 w-auto shrink-0 sm:h-14 lg:h-16",
               )}
             />
             <span
               className={cn(
-                "text-lg font-bold tracking-tight text-primary-foreground sm:text-2xl",
+                "truncate text-base font-bold tracking-tight text-primary-foreground sm:text-2xl",
               )}
             >
               Zaviah
@@ -360,7 +388,7 @@ const Navbar = () => {
           transition={{ duration: 0.3 }}
           className="fixed inset-x-0 top-0 z-40 max-h-screen overflow-y-auto rounded-b-3xl border border-primary-foreground/15 bg-primary/98 shadow-lift backdrop-blur-xl lg:hidden"
         >
-          <div className="container px-4 py-6 pt-24">
+          <div className="container px-4 py-6 pt-[4.5rem] sm:pt-24">
             <div className="flex flex-col gap-1">
               {navDropdowns.map((item) => renderDropdown(item, true))}
               {navLinks.map((item) => (
