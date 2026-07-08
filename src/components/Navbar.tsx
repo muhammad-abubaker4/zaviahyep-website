@@ -9,15 +9,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  AMBASSADOR_FORM_URL,
-  CORE_TEAM_FORM_URL,
-  JOIN_FORM_URL,
-} from "@/lib/constants";
 import { scrollToHashWhenReady, unlockPageScroll } from "@/lib/scroll";
 import { useActiveSection, isAboutSectionActive, isTeamRouteActive } from "@/hooks/useActiveSection";
 import { cn } from "@/lib/utils";
-import zaviahLogo from "@/assets/Zaviah_Logo1.png";
+import ZaviahLogo from "@/components/ZaviahLogo";
 
 type NavLink = { name: string; href: string };
 type NavDropdown = {
@@ -36,19 +31,20 @@ const aboutSubItems: NavDropdown["subItems"] = [
 
 const teamSubItems: NavDropdown["subItems"] = [
   { name: "Founder", href: "/founder", internal: true },
-  { name: "Co-Founder", href: "/co-founder", internal: true },
+  { name: "Co Founder", href: "/co-founder", internal: true },
   { name: "Core Members", href: "/core-members", internal: true },
   { name: "Guest Speakers", href: "#guest-speakers" },
 ];
 
 const joinSubItems: NavDropdown["subItems"] = [
-  { name: "Member", href: JOIN_FORM_URL },
-  { name: "Ambassador", href: AMBASSADOR_FORM_URL },
-  { name: "Core Team Member", href: CORE_TEAM_FORM_URL },
+  { name: "Member", href: "#apply" },
+  { name: "Ambassador", href: "#apply" },
+  { name: "Core Team Member", href: "#apply" },
 ];
 
 const navLinks: NavLink[] = [
   { name: "Programs", href: "#offerings" },
+  { name: "Impact", href: "#impact" },
   { name: "Gallery", href: "#gallery" },
   { name: "Partners", href: "#partnerships" },
   { name: "Contact", href: "#contact" },
@@ -60,7 +56,6 @@ const navDropdowns: NavDropdown[] = [
 ];
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -70,12 +65,16 @@ const Navbar = () => {
   const isLinkActive = (href: string) =>
     location.pathname === "/" && activeSection === href.replace("#", "");
 
+  const navTextClass = "text-primary-foreground/90";
+  const navHoverClass = "hover:bg-primary-foreground/10";
+  const navActiveClass = "text-primary-foreground bg-primary-foreground/15";
+
   const navButtonClass = (href: string, mobile = false) =>
     cn(
       mobile
         ? "w-full rounded-lg px-4 py-3.5 text-left text-lg font-semibold transition-colors"
         : "rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-300 xl:text-base",
-      isLinkActive(href) ? "text-primary bg-primary/10" : "text-foreground hover:bg-muted",
+      isLinkActive(href) ? navActiveClass : cn(navTextClass, navHoverClass),
     );
 
   const aboutNavClass = (mobile = false) =>
@@ -84,20 +83,14 @@ const Navbar = () => {
         ? "flex w-full items-center justify-between rounded-lg px-4 py-3.5 text-lg font-semibold transition-colors"
         : "flex items-center gap-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-300 xl:text-base",
       location.pathname === "/" && isAboutSectionActive(activeSection)
-        ? "text-primary bg-primary/10"
-        : "text-foreground hover:bg-muted",
+        ? navActiveClass
+        : cn(navTextClass, navHoverClass),
     );
 
   const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
     setOpenMobileDropdown(null);
     unlockPageScroll();
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -141,16 +134,16 @@ const Navbar = () => {
           : "flex items-center gap-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-300 xl:text-base",
         isTeamRouteActive(location.pathname) ||
           (location.pathname === "/" && (activeSection === "team" || activeSection === "guest-speakers"))
-          ? "text-primary bg-primary/10"
-          : "text-foreground hover:bg-muted",
+          ? navActiveClass
+          : cn(navTextClass, navHoverClass),
       );
     }
     return cn(
-          mobile
-            ? "flex w-full items-center justify-between rounded-lg px-4 py-3.5 text-lg font-semibold transition-colors"
-            : "flex items-center gap-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-300 xl:text-base",
-          "text-foreground hover:bg-muted",
-        );
+      mobile
+        ? "flex w-full items-center justify-between rounded-lg px-4 py-3.5 text-lg font-semibold transition-colors"
+        : "flex items-center gap-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-300 xl:text-base",
+      cn(navTextClass, navHoverClass),
+    );
   };
 
   const renderDropdown = (item: NavDropdown, mobile = false) => {
@@ -174,7 +167,7 @@ const Navbar = () => {
                     key={subItem.name}
                     to={subItem.href}
                     onClick={closeMobileMenu}
-                    className="rounded-lg px-4 py-2 text-foreground hover:bg-muted transition-colors"
+                    className="rounded-lg px-4 py-2 text-primary-foreground/85 transition-colors hover:bg-primary-foreground/10"
                   >
                     {subItem.name}
                   </Link>
@@ -183,7 +176,7 @@ const Navbar = () => {
                     key={subItem.name}
                     type="button"
                     onClick={() => scrollToSection(subItem.href)}
-                    className="w-full rounded-lg px-4 py-2 text-left text-foreground hover:bg-muted transition-colors"
+                    className="w-full rounded-lg px-4 py-2 text-left text-primary-foreground/85 transition-colors hover:bg-primary-foreground/10"
                   >
                     {subItem.name}
                   </button>
@@ -194,7 +187,7 @@ const Navbar = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={closeMobileMenu}
-                    className="rounded-lg px-4 py-2 text-foreground hover:bg-muted transition-colors"
+                    className="rounded-lg px-4 py-2 text-primary-foreground/85 transition-colors hover:bg-primary-foreground/10"
                   >
                     {subItem.name}
                   </a>
@@ -209,10 +202,7 @@ const Navbar = () => {
     return (
       <DropdownMenu key={item.name} modal={false}>
         <DropdownMenuTrigger asChild>
-          <button
-            type="button"
-            className={dropdownTriggerClass(item)}
-          >
+          <button type="button" className={dropdownTriggerClass(item)}>
             {item.name}
             <ChevronDown className="h-4 w-4" />
           </button>
@@ -261,43 +251,44 @@ const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
         id="navbar"
-        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-          isScrolled ? "bg-white/95 shadow-md backdrop-blur-md" : "bg-white shadow-sm"
-        }`}
+        className="fixed left-0 right-0 top-0 z-50 px-2 pt-3 sm:px-3 sm:pt-4"
       >
-        <div className="container px-4">
-          <div
-            className={`flex items-center justify-between transition-all duration-300 ${
-              isScrolled ? "h-16" : "h-20"
-            }`}
+        <div
+          className={cn(
+            "mx-auto flex h-[5rem] w-[calc(100%-0.75rem)] max-w-[100rem] items-center justify-between rounded-2xl border border-primary-foreground/15 bg-primary px-4 shadow-lift sm:px-8 lg:px-10 xl:px-12",
+          )}
+        >
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              if (location.pathname === "/") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                window.history.replaceState(null, "", "/");
+              } else {
+                navigate("/");
+              }
+              closeMobileMenu();
+            }}
+            className="flex cursor-pointer items-center gap-2 sm:gap-2.5"
           >
-            <a
-              href="/"
-              onClick={(e) => {
-                e.preventDefault();
-                if (location.pathname === "/") {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                  window.history.replaceState(null, "", "/");
-                } else {
-                  navigate("/");
-                }
-                closeMobileMenu();
-              }}
-              className="flex items-center gap-2 cursor-pointer sm:gap-3"
+            <ZaviahLogo
+              variant="dark"
+              className={cn(
+                "transition-all duration-300",
+                "h-14 w-auto sm:h-16",
+              )}
+            />
+            <span
+              className={cn(
+                "text-lg font-bold tracking-tight text-primary-foreground sm:text-2xl",
+              )}
             >
-              <img
-                src={zaviahLogo}
-                alt="Zaviah Logo"
-                className={`w-auto object-contain transition-all duration-300 ${
-                  isScrolled ? "h-12" : "h-16"
-                }`}
-              />
-              <span className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent tracking-tight sm:text-3xl">
-                Zaviah
-              </span>
-            </a>
+              Zaviah
+            </span>
+          </a>
 
-            <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden items-center gap-1 lg:flex">
               {navDropdowns.map((item) => renderDropdown(item))}
               {navLinks.map((item) => (
                 <button
@@ -313,7 +304,10 @@ const Navbar = () => {
                 <DropdownMenuTrigger asChild>
                   <Button
                     size="sm"
-                    className="ml-2 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/90 font-semibold"
+                    className={cn(
+                      "ml-1 rounded-full font-semibold shadow-soft",
+                      "bg-primary-foreground text-primary hover:bg-primary-foreground/90",
+                    )}
                   >
                     Join Us
                     <ChevronDown className="ml-1 h-4 w-4" />
@@ -321,15 +315,15 @@ const Navbar = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-64">
                   {joinSubItems.map((subItem) => (
-                    <DropdownMenuItem key={subItem.name} asChild>
-                      <a
-                        href={subItem.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="cursor-pointer"
-                      >
-                        {subItem.name}
-                      </a>
+                    <DropdownMenuItem
+                      key={subItem.name}
+                      className="cursor-pointer"
+                      onSelect={(e) => {
+                        e.preventDefault();
+                        scrollToSection(subItem.href);
+                      }}
+                    >
+                      {subItem.name}
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
@@ -339,12 +333,14 @@ const Navbar = () => {
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg text-foreground hover:bg-muted transition-colors"
+              className={cn(
+                "rounded-xl p-2 transition-colors lg:hidden",
+                "text-primary-foreground hover:bg-primary-foreground/10",
+              )}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
       </motion.nav>
 
@@ -362,9 +358,9 @@ const Navbar = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="fixed top-0 left-0 right-0 z-40 max-h-screen overflow-y-auto bg-white shadow-lg lg:hidden"
+          className="fixed inset-x-0 top-0 z-40 max-h-screen overflow-y-auto rounded-b-3xl border border-primary-foreground/15 bg-primary/98 shadow-lift backdrop-blur-xl lg:hidden"
         >
-          <div className="container px-4 py-6 pt-20">
+          <div className="container px-4 py-6 pt-24">
             <div className="flex flex-col gap-1">
               {navDropdowns.map((item) => renderDropdown(item, true))}
               {navLinks.map((item) => (
@@ -378,18 +374,16 @@ const Navbar = () => {
                 </button>
               ))}
               <div className="px-4 py-3">
-                <p className="mb-2 px-4 text-sm font-semibold text-muted-foreground">Join Us</p>
+                <p className="mb-2 px-4 text-sm font-semibold text-primary-foreground/60">Join Us</p>
                 {joinSubItems.map((subItem) => (
-                  <a
+                  <button
                     key={subItem.name}
-                    href={subItem.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={closeMobileMenu}
-                    className="block rounded-lg px-4 py-2.5 text-foreground hover:bg-muted transition-colors"
+                    type="button"
+                    onClick={() => scrollToSection(subItem.href)}
+                    className="block w-full rounded-lg px-4 py-2.5 text-left text-primary-foreground/85 transition-colors hover:bg-primary-foreground/10"
                   >
                     {subItem.name}
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>

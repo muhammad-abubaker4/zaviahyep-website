@@ -1,21 +1,23 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import { scrollToHashWhenReady } from "@/lib/scroll";
-import { WHATSAPP_URL, EMAIL, MAILTO_URL, JOIN_FORM_URL } from "@/lib/constants";
+import { WHATSAPP_URL, EMAIL, MAILTO_URL } from "@/lib/constants";
 import { footerSocialLinks } from "@/data/socialLinks";
+import SocialLinksRow from "@/components/SocialLinksRow";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import zaviahLogo from "@/assets/Zaviah_Logo1.png";
+import ZaviahLogo from "@/components/ZaviahLogo";
 
 const footerLinks = [
   { label: "Home", href: "#hero" },
   { label: "Programs", href: "#offerings" },
-  { label: "Membership", href: "#join" },
+  { label: "Apply", href: "#apply" },
   { label: "About", href: "#about" },
   { label: "Team", href: "#team" },
 ];
 
 const footerPrograms = [
   { label: "Mentorship Programs", href: "#offerings" },
-  { label: "Skill-Building Workshops", href: "#offerings" },
+  { label: "Skill Building Workshops", href: "#offerings" },
   { label: "Career Guidance", href: "#offerings" },
   { label: "Community Events", href: "#offerings" },
   { label: "Leadership Opportunities", href: "#offerings" },
@@ -34,136 +36,92 @@ const Footer = () => {
     scrollToHashWhenReady(href);
   };
 
-  const columnHeading = "mb-4 text-sm font-bold uppercase tracking-wide text-foreground";
-  const linkClass =
-    "text-sm text-foreground transition-colors hover:text-primary md:text-[15px]";
+  const columnHeading = "mb-5 text-[11px] font-bold uppercase tracking-[0.2em] text-primary-foreground/50";
+  const linkClass = "text-sm text-primary-foreground/75 transition-colors hover:text-primary-foreground";
 
   return (
-    <footer className="bg-[#e9ecec] text-foreground">
-      <div className="mx-auto w-full max-w-[1200px] px-6 py-10 md:px-8 md:py-12">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {/* Col 1 — Brand */}
+    <footer className="relative overflow-hidden bg-primary text-primary-foreground">
+      <div className="bg-dot-grid-dark pointer-events-none absolute inset-0 opacity-50" aria-hidden />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-primary-foreground/20 to-transparent" aria-hidden />
+
+      <div className="relative mx-auto w-full max-w-6xl px-6 section-padding md:px-8 !pb-16">
+        <div className="mb-16 overflow-hidden rounded-3xl border border-primary-foreground/10 bg-primary-foreground/5 p-8 sm:flex sm:items-center sm:justify-between sm:p-10">
+          <div className="mb-6 sm:mb-0">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary-foreground/50">Join us</p>
+            <h3 className="mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">Ready to make an impact?</h3>
+            <p className="mt-2 max-w-md text-sm text-primary-foreground/65">Apply today and become part of Pakistan's fastest growing youth empowerment community.</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => handleHashLink("#apply")}
+            className="btn-primary-modern shrink-0"
+          >
+            Apply Now
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link to="/" className="mb-4 flex items-center gap-3">
-              <img
-                src={zaviahLogo}
-                alt=""
-                className="h-14 w-auto shrink-0 object-contain"
-                aria-hidden
-              />
-              <span className="text-xl font-bold uppercase leading-tight tracking-wide text-foreground">
-                Zaviah
-              </span>
+            <Link to="/" className="mb-6 flex items-center gap-3">
+              <ZaviahLogo variant="dark" className="h-16 w-auto shrink-0 sm:h-[4.5rem]" alt="" aria-hidden />
+              <span className="text-xl font-bold tracking-tight">Zaviah</span>
             </Link>
-
-            <p className="mb-2 text-sm font-bold text-primary sm:text-[15px]">
-              Access | Awareness | Aspiration
-            </p>
-
-            <p className="mb-4 text-sm leading-relaxed text-foreground md:text-[15px]">
-              🕊️ A non-profit initiative for mentorship, guidance, and growth
-            </p>
-
-            <a
-              href={MAILTO_URL}
-              className="mb-5 block text-sm font-bold text-foreground hover:text-primary md:text-[15px]"
-            >
-              {EMAIL}
-            </a>
-
-            <div className="flex flex-wrap gap-2">
-              {footerSocialLinks.map((social) => (
-                <a
-                  key={social.id}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground transition-opacity hover:opacity-90"
-                  aria-label={social.label}
-                >
-                  <social.Icon className="h-[15px] w-[15px]" />
-                </a>
-              ))}
+            <p className="mb-1 text-sm font-bold text-primary-foreground/90">Access | Awareness | Aspiration</p>
+            <p className="mb-5 text-sm leading-relaxed text-primary-foreground/60">A non profit initiative for mentorship, guidance, and growth.</p>
+            <a href={MAILTO_URL} className="mb-6 block text-sm font-semibold text-primary-foreground hover:text-primary-foreground/80">{EMAIL}</a>
+            <div className="flex items-center gap-2">
+              <SocialLinksRow links={footerSocialLinks} size="xs" nowrap />
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground transition-opacity hover:opacity-90"
                 aria-label="WhatsApp"
+                title="WhatsApp"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#25D366] text-white shadow-soft transition-transform duration-300 hover:scale-105"
               >
-                <WhatsAppIcon className="h-[15px] w-[15px]" />
+                <WhatsAppIcon className="h-3.5 w-3.5" />
               </a>
             </div>
           </div>
 
-          {/* Col 2 — Links */}
           <div>
             <h4 className={columnHeading}>Links</h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {footerLinks.map((link) => (
                 <li key={link.href}>
-                  <button type="button" onClick={() => handleHashLink(link.href)} className={linkClass}>
-                    {link.label}
-                  </button>
+                  <button type="button" onClick={() => handleHashLink(link.href)} className={linkClass}>{link.label}</button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Col 3 — Programs */}
           <div>
             <h4 className={columnHeading}>Programs</h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {footerPrograms.map((program) => (
                 <li key={program.label}>
-                  <button
-                    type="button"
-                    onClick={() => handleHashLink(program.href)}
-                    className={`text-left ${linkClass}`}
-                  >
-                    {program.label}
-                  </button>
+                  <button type="button" onClick={() => handleHashLink(program.href)} className={`text-left ${linkClass}`}>{program.label}</button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Col 4 — CTA */}
           <div>
-            <h4 className="mb-2 text-base font-bold text-foreground md:text-lg">
-              Apply to Be a Member!
-            </h4>
-            <p className="mb-5 text-sm leading-relaxed text-foreground md:text-[15px]">
-              Opportunities to connect with peers, build skills, and grow with a nationwide
-              community of students and leaders.
-            </p>
-            <a
-              href={JOIN_FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-            >
-              Apply Now
-            </a>
+            <h4 className={columnHeading}>Location</h4>
+            <p className="text-sm leading-relaxed text-primary-foreground/65">Nationwide youth empowerment platform based in Pakistan, connecting students and mentors across the country.</p>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-black/5 bg-white py-4">
-        <div className="mx-auto w-full max-w-[1200px] px-6 text-center text-sm text-foreground/80 md:px-8">
+      <div className="relative border-t border-primary-foreground/10 bg-footer-bar py-6">
+        <div className="mx-auto w-full max-w-6xl px-6 text-center text-sm text-primary-foreground/50 md:px-8">
           <p>
             Copyright &copy; {currentYear}{" "}
-            <span className="font-bold text-foreground">Zaviah - Youth Empowerment Platform</span>
-            {" | "}
+            <span className="font-semibold text-primary-foreground/70">Zaviah Youth Empowerment Platform</span>
+            {" · "}
             Design and Developed by{" "}
-            <a
-              href="https://www.instagram.com/muhammad._abubaker/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold text-primary hover:underline underline-offset-2"
-            >
-              Muhammad Abubaker
-            </a>
+            <a href="https://www.instagram.com/muhammad._abubaker/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary-foreground hover:underline underline-offset-2">Muhammad Abubaker</a>
           </p>
         </div>
       </div>

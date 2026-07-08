@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { User } from "lucide-react";
 import { guestSpeakers, type GuestSpeaker } from "@/data/mentors";
+import SectionHeader from "@/components/SectionHeader";
 import { cn } from "@/lib/utils";
 
 function getInitials(displayName: string) {
@@ -20,26 +21,24 @@ const GuestSpeakers = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="guest-speakers" className="bg-gradient-subtle py-20 md:py-28" ref={ref}>
-      <div className="container px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.5 }}
-          className="mx-auto mb-14 max-w-4xl text-center"
-        >
-          <h2 className="mb-6 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
-            Guest Speakers & <span className="text-primary">Mentors</span>
-          </h2>
-          <div className="mx-auto mb-6 h-1 w-24 bg-gradient-accent" />
-          <p className="text-lg text-muted-foreground">
-            Meet the visionaries, professionals, and leaders who shared their knowledge at our sessions
-          </p>
-        </motion.div>
+    <section id="guest-speakers" className="section-muted overflow-hidden" ref={ref}>
+      <div className="bg-line-grid pointer-events-none absolute inset-0 opacity-50" aria-hidden />
+      <div className="container relative px-4">
+        <SectionHeader
+          eyebrow="Dignitaries"
+          title="Dignitaries Who Spoke"
+          highlight="at Our Initiatives"
+          description="Leaders, professionals, and mentors who contributed their knowledge and experience at Zaviah."
+        />
 
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
           {guestSpeakers.map((speaker, index) => (
-            <SpeakerCard key={speaker.id} speaker={speaker} index={index} isInView={isInView} />
+            <SpeakerCard
+              key={speaker.id}
+              speaker={speaker}
+              index={index}
+              isInView={isInView}
+            />
           ))}
         </div>
       </div>
@@ -63,12 +62,14 @@ function SpeakerCard({
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.4, delay: index * 0.04 }}
-      className="group overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-medium"
+      initial={{ opacity: 0, y: 28 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+      transition={{ duration: 0.45, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
+      className={cn(
+        "group relative overflow-hidden rounded-3xl border border-primary/10 bg-card shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift",
+      )}
     >
-      <div className="relative aspect-[3/4] w-full overflow-hidden bg-muted">
+      <div className="relative aspect-[4/5] overflow-hidden bg-muted">
         {showImage ? (
           <img
             src={speaker.image}
@@ -77,29 +78,33 @@ function SpeakerCard({
             decoding="async"
             onError={() => setImageError(true)}
             className={cn(
-              "h-full w-full transition-transform duration-500 group-hover:scale-[1.03]",
-              fitContain ? "object-contain p-2" : "object-cover",
+              "h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]",
+              fitContain ? "object-contain bg-white p-6" : "object-cover",
             )}
-            style={{
-              objectPosition: speaker.imagePosition ?? "center top",
-            }}
+            style={{ objectPosition: speaker.imagePosition ?? "center top" }}
           />
         ) : (
-          <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-hero">
-            <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-white/15">
+          <div className="flex h-full w-full flex-col items-center justify-center bg-primary">
+            <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-foreground/10">
               {initials ? (
-                <span className="text-xl font-bold text-white">{initials}</span>
+                <span className="text-lg font-bold text-primary-foreground">{initials}</span>
               ) : (
-                <User className="h-8 w-8 text-white/80" aria-hidden />
+                <User className="h-7 w-7 text-primary-foreground/70" aria-hidden />
               )}
             </div>
-            <p className="text-xs font-medium uppercase tracking-wider text-white/70">Photo coming soon</p>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-primary-foreground/50">
+              Photo soon
+            </p>
           </div>
         )}
 
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/95 via-primary/75 to-transparent px-3 pb-4 pt-16 text-center sm:px-4">
-          <h3 className="text-sm font-bold leading-snug text-white sm:text-base">{speaker.displayName}</h3>
-          <p className="mt-1 text-[11px] leading-snug text-white/85 sm:text-xs">{speaker.role}</p>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+
+        <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+          <h3 className="text-sm font-bold leading-snug tracking-tight text-white sm:text-base">
+            {speaker.displayName}
+          </h3>
+          <p className="mt-1 text-xs leading-snug text-white/75 sm:text-sm">{speaker.role}</p>
         </div>
       </div>
     </motion.article>

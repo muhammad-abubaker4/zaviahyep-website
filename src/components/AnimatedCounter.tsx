@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type AnimatedCounterProps = {
   end: number;
@@ -18,26 +16,40 @@ const AnimatedCounter = ({
   className,
 }: AnimatedCounterProps) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-40px" });
   const [value, setValue] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (!isInView) return;
+    const element = ref.current;
+    if (!element || hasAnimated) return;
 
-    let startTime: number | null = null;
-    let frame: number;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry?.isIntersecting) return;
 
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.floor(eased * end));
-      if (progress < 1) frame = requestAnimationFrame(step);
-    };
+        setHasAnimated(true);
+        observer.disconnect();
 
-    frame = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(frame);
-  }, [isInView, end, duration]);
+        let startTime: number | null = null;
+        let frame: number;
+
+        const step = (timestamp: number) => {
+          if (!startTime) startTime = timestamp;
+          const progress = Math.min((timestamp - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          setValue(Math.floor(eased * end));
+          if (progress < 1) frame = requestAnimationFrame(step);
+        };
+
+        frame = requestAnimationFrame(step);
+      },
+      { threshold: 0.3, rootMargin: "-40px" },
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [end, duration, hasAnimated]);
 
   return (
     <span ref={ref} className={className}>

@@ -2,7 +2,6 @@ import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
-import ColorSchemeToggle from "@/components/ColorSchemeToggle";
 import SectionFallback from "@/components/SectionFallback";
 import PageMeta from "@/components/PageMeta";
 import { buildFaqSchema, faqs } from "@/data/faqs";
@@ -15,6 +14,7 @@ const Vision = lazy(() => import("@/components/Vision"));
 const Pillars = lazy(() => import("@/components/Pillars"));
 const Values = lazy(() => import("@/components/Values"));
 const Offerings = lazy(() => import("@/components/Offerings"));
+const ImpactMetrics = lazy(() => import("@/components/ImpactMetrics"));
 const JoinUs = lazy(() => import("@/components/JoinUs"));
 const Team = lazy(() => import("@/components/Team"));
 const GuestSpeakers = lazy(() => import("@/components/GuestSpeakers"));
@@ -71,6 +71,11 @@ const Index = () => {
           </section>
         </Suspense>
         <Suspense fallback={<SectionFallback />}>
+          <section id="impact-section">
+            <ImpactMetrics />
+          </section>
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
           <section id="join-section">
             <JoinUs />
           </section>
@@ -118,9 +123,6 @@ const Index = () => {
       </main>
       <section id="footer-section">
         <Footer />
-      </section>
-      <section id="color-scheme-toggle-section">
-        <ColorSchemeToggle />
       </section>
     </div>
   );

@@ -1,9 +1,10 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { User, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import SectionHeader from "@/components/SectionHeader";
+import { cn } from "@/lib/utils";
 
 import hafsaKhalil from "@/assets/team/Hafsa_Khalil.jpeg";
 import muhammadAbubaker from "@/assets/team/Muhammad_Abubaker.jpeg";
@@ -22,7 +23,7 @@ const teamMembers = [
   },
   {
     name: "Muhammad Abubaker",
-    role: "Co-Founder",
+    role: "Co Founder",
     description: "Leads operations, strategy, and digital direction for meaningful student communities.",
     image: muhammadAbubaker,
     profileHref: "/co-founder",
@@ -30,7 +31,8 @@ const teamMembers = [
   {
     name: "Amna Irfan",
     role: "Ambassador Lead & Sessions Host",
-    description: "Builds connections with students and mentors nationwide through outreach and hosts online mentorship sessions helping youth connect in virtual spaces.",
+    description:
+      "Builds connections with students and mentors nationwide through outreach and hosts online mentorship sessions.",
     image: amnaIrfan,
   },
   {
@@ -53,65 +55,104 @@ const teamMembers = [
   },
 ];
 
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
+
+function TeamMemberCard({
+  member,
+  index,
+  isInView,
+}: {
+  member: (typeof teamMembers)[number];
+  index: number;
+  isInView: boolean;
+}) {
+  const [imageError, setImageError] = useState(false);
+  const showImage = Boolean(member.image) && !imageError;
+  const initials = getInitials(member.name);
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 32 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
+      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      className="group h-full"
+    >
+      <div
+        className={cn(
+          "team-card overflow-hidden p-0 transition-all duration-500",
+          "hover:-translate-y-1 hover:shadow-lift",
+        )}
+      >
+        <div className="relative aspect-[4/5] overflow-hidden bg-muted">
+          {showImage ? (
+            <img
+              src={member.image}
+              alt={member.name}
+              loading="lazy"
+              decoding="async"
+              onError={() => setImageError(true)}
+              className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            />
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center bg-primary">
+              <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-foreground/10">
+                {initials ? (
+                  <span className="text-lg font-bold text-primary-foreground">{initials}</span>
+                ) : (
+                  <User className="h-7 w-7 text-primary-foreground/70" aria-hidden />
+                )}
+              </div>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-primary-foreground/50">
+                Photo soon
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-1 flex-col items-center p-6 text-center">
+          <h3 className="text-lg font-bold tracking-tight text-foreground">{member.name}</h3>
+          <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-primary">{member.role}</p>
+          <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{member.description}</p>
+          {member.profileHref && (
+            <Link
+              to={member.profileHref}
+              className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5"
+            >
+              View profile
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          )}
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
 const Team = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="team" className="py-24 bg-gradient-subtle" ref={ref}>
-      <div className="container px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto text-center mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Meet Our <span className="text-primary">Team</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-accent mx-auto mb-8" />
-          <p className="text-lg sm:text-xl text-muted-foreground">
-            Passionate young individuals working together to empower students
-          </p>
-        </motion.div>
+    <section id="team" className="section-light" ref={ref}>
+      <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden />
+      <div className="container relative px-4">
+        <SectionHeader
+          eyebrow="People"
+          title="Meet Our"
+          highlight="Team"
+          description="Passionate young individuals working together to empower students across Pakistan."
+        />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {teamMembers.map((member, index) => (
-            <motion.div
-              key={member.name}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group"
-            >
-              <div className="bg-card rounded-2xl p-6 shadow-soft hover:shadow-medium transition-all duration-300 border border-border h-full flex flex-col items-center text-center hover:-translate-y-2">
-                <Avatar className="w-32 h-32 mb-4 group-hover:scale-105 transition-transform duration-300">
-                  <AvatarImage
-                    src={member.image}
-                    alt={member.name}
-                    className="object-cover"
-                    loading="lazy"
-                  />
-                  <AvatarFallback className="bg-gradient-hero">
-                    <User className="w-16 h-16 text-white" />
-                  </AvatarFallback>
-                </Avatar>
-
-                <h3 className="text-xl font-bold text-foreground mb-1">{member.name}</h3>
-                <div className="text-sm font-semibold text-primary mb-3">{member.role}</div>
-                <p className="text-sm text-muted-foreground leading-relaxed flex-1">{member.description}</p>
-
-                {member.profileHref && (
-                  <Link
-                    to={member.profileHref}
-                    className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline underline-offset-4"
-                  >
-                    View profile
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                )}
-              </div>
-            </motion.div>
+            <TeamMemberCard key={member.name} member={member} index={index} isInView={isInView} />
           ))}
         </div>
       </div>

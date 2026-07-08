@@ -1,7 +1,5 @@
-import sameenMir from "@/assets/mentors/sameen-mir.jpeg";
 import samaZaidi from "@/assets/mentors/sama-zaidi.jpg";
 import usamaNadeemQureshi from "@/assets/mentors/usama-nadeem-qureshi.png";
-import bismaMirza from "@/assets/mentors/bisma-mirza.jpg";
 import amnaIrfan from "@/assets/mentors/amna-irfan.jpg";
 import hafsaKhalil from "@/assets/mentors/hafsa-khalil.jpg";
 import amnaSardar from "@/assets/mentors/amna-sardar.jpg";
@@ -14,7 +12,6 @@ import zunairaRehman from "@/assets/mentors/zunaira-rehman.jpg";
 import arbeehaZahid from "@/assets/mentors/arbeeha-zahid.jpg";
 import hibaSyed from "@/assets/mentors/hiba-syed.jpg";
 import duaAmjad from "@/assets/mentors/dua-amjad.jpg";
-import muhammadUsman from "@/assets/mentors/muhammad-usman.jpg";
 import ibtisamBabar from "@/assets/mentors/ibtisam-babar.jpg";
 
 export type GuestSpeaker = {
@@ -29,13 +26,6 @@ export type GuestSpeaker = {
 };
 
 export const guestSpeakers: GuestSpeaker[] = [
-  {
-    id: "sameen-mir",
-    displayName: "Ms. Sameen Mir",
-    role: "International Students Ambassador",
-    image: sameenMir,
-    imagePosition: "center 15%",
-  },
   {
     id: "sama-zaidi",
     displayName: "Ms. Sama Zaidi",
@@ -54,8 +44,6 @@ export const guestSpeakers: GuestSpeaker[] = [
     id: "bisma-mirza",
     displayName: "Ms. Bisma Mirza",
     role: "Co-Founder, Red International",
-    image: bismaMirza,
-    imagePosition: "center 20%",
   },
   {
     id: "amna-irfan",
@@ -139,13 +127,6 @@ export const guestSpeakers: GuestSpeaker[] = [
     displayName: "Ms. Dua Amjad",
     role: "Youth Advocate & Published Author",
     image: duaAmjad,
-    imagePosition: "center 15%",
-  },
-  {
-    id: "muhammad-usman",
-    displayName: "Mr. Muhammad Usman",
-    role: "HR Professional",
-    image: muhammadUsman,
     imagePosition: "center 15%",
   },
   {
