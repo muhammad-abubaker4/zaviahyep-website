@@ -3,6 +3,12 @@
   publish = "dist"
 
 [[headers]]
+  for = "/assets/og-share.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    Content-Type = "image/jpeg"
+
+[[headers]]
   for = "/og-image.jpg"
   [headers.values]
     Cache-Control = "public, max-age=3600"
