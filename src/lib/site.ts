@@ -2,10 +2,12 @@ export const SITE_URL = "https://zaviahyep.netlify.app";
 
 export const SITE_NAME = "Zaviah";
 
-export const DEFAULT_DESCRIPTION =
-  "Zaviah is a youth-led non-profit empowering students through mentorship, skill development, and personal growth. Access, Awareness, Aspiration.";
+export const DEFAULT_TITLE = "Zaviah - Youth Empowerment Platform";
 
-export const OG_IMAGE = `${SITE_URL}/og-preview.png?v=2`;
+export const DEFAULT_DESCRIPTION =
+  "Zaviah is a youth-led non-profit initiative, empowering students through mentorship, skill development, and personal growth.";
+
+export const OG_IMAGE = `${SITE_URL}/og-image.jpg?v=3`;
 
 export const SOCIAL_SAME_AS = [
   "https://www.instagram.com/zaviahorg",

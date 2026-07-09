@@ -3,14 +3,18 @@ import sharp from "sharp";
 
 const ROOT = process.cwd();
 const SOURCE_PATH = path.join(ROOT, "src", "assets", "og-preview-screenshot.png");
-const OUT_PATH = path.join(ROOT, "public", "og-preview.png");
+const JPG_PATH = path.join(ROOT, "public", "og-image.jpg");
+const PNG_PATH = path.join(ROOT, "public", "og-preview.png");
 
-await sharp(SOURCE_PATH)
-  .resize(1200, 630, {
-    fit: "cover",
-    position: "centre",
-  })
+const resized = sharp(SOURCE_PATH).resize(1200, 630, {
+  fit: "cover",
+  position: "centre",
+});
+
+await resized.clone().jpeg({ quality: 86, progressive: true, mozjpeg: true }).toFile(JPG_PATH);
+await resized
+  .clone()
   .png({ compressionLevel: 9, adaptiveFiltering: true })
-  .toFile(OUT_PATH);
+  .toFile(PNG_PATH);
 
-console.log(`Generated ${OUT_PATH} from ${SOURCE_PATH}`);
+console.log(`Generated ${JPG_PATH} and ${PNG_PATH}`);

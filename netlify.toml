@@ -2,6 +2,16 @@
   command = "npm run build"
   publish = "dist"
 
+[[headers]]
+  for = "/og-image.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/og-preview.png"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import SectionFallback from "@/components/SectionFallback";
 import PageMeta from "@/components/PageMeta";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from "@/lib/site";
 import { buildFaqSchema, faqs } from "@/data/faqs";
 
 const HOME_FAQ_SCHEMA = buildFaqSchema(faqs);
@@ -29,7 +30,8 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <PageMeta
-        title="Zaviah - Youth Empowerment Through Mentorship"
+        title={DEFAULT_TITLE}
+        description={DEFAULT_DESCRIPTION}
         path="/"
         jsonLd={HOME_FAQ_SCHEMA}
       />

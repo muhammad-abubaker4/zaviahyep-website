@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { DEFAULT_DESCRIPTION, OG_IMAGE, pageTitle, pageUrl } from "@/lib/site";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, OG_IMAGE, pageTitle, pageUrl } from "@/lib/site";
 
 type PageMetaProps = {
   title: string;
@@ -48,7 +48,9 @@ const PageMeta = ({
     setMeta("property", "og:title", fullTitle);
     setMeta("property", "og:description", description);
     setMeta("property", "og:url", url);
+    setMeta("property", "og:site_name", "Zaviah");
     setMeta("property", "og:image", OG_IMAGE);
+    setMeta("property", "og:image:secure_url", OG_IMAGE);
     setMeta("name", "twitter:title", fullTitle);
     setMeta("name", "twitter:description", description);
     setMeta("name", "twitter:image", OG_IMAGE);
