@@ -70,6 +70,28 @@
   </head>
 
   <body>
+    <!-- Static forms for Netlify detection at build time (SPA forms are JS-only otherwise) -->
+    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+    <form name="application" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="text" name="fullName" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="city" />
+      <input type="text" name="age" />
+      <input type="text" name="education" />
+      <input type="text" name="institution" />
+      <input type="text" name="role" />
+      <textarea name="motivation"></textarea>
+      <input type="text" name="referral" />
+      <input type="text" name="bot-field" />
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

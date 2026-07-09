@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { EMAIL } from "@/lib/constants";
+import { submitNetlifyForm } from "@/lib/netlifyForm";
 import { cn } from "@/lib/utils";
 import type { ApplicationRole } from "@/components/JoinUs";
 
@@ -28,15 +29,6 @@ const roleLabels: Record<ApplicationRole, string> = {
 };
 
 const steps = ["Personal Info", "Background", "Your Goals", "Review"];
-
-const encodeForm = (form: HTMLFormElement) => {
-  const formData = new FormData(form);
-  const params = new URLSearchParams();
-  for (const [key, value] of formData.entries()) {
-    params.append(key, typeof value === "string" ? value : "");
-  }
-  return params.toString();
-};
 
 type ApplicationFormProps = {
   defaultRole: ApplicationRole;
@@ -90,12 +82,7 @@ const ApplicationForm = ({ defaultRole, onChangeRole }: ApplicationFormProps) =>
 
     const form = e.currentTarget;
     try {
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encodeForm(form),
-      });
-      if (!response.ok) throw new Error("Submit failed");
+      await submitNetlifyForm(form);
       setSubmitted(true);
     } catch {
       setError(`Could not submit right now. Please email us at ${EMAIL}.`);

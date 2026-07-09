@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { scrollToHashWhenReady } from "@/lib/scroll";
 import { WHATSAPP_NUMBER, WHATSAPP_URL, EMAIL, MAILTO_URL } from "@/lib/constants";
+import { submitNetlifyForm } from "@/lib/netlifyForm";
 import { GmailIcon, WhatsAppIcon } from "@/components/icons/SocialIcons";
 import { followUsLinks } from "@/data/socialLinks";
 import SectionHeader from "@/components/SectionHeader";
@@ -24,15 +25,6 @@ const Contact = () => {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const encodeForm = (form: HTMLFormElement) => {
-    const formData = new FormData(form);
-    const params = new URLSearchParams();
-    for (const [key, value] of formData.entries()) {
-      params.append(key, typeof value === "string" ? value : "");
-    }
-    return params.toString();
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSending(true);
@@ -46,12 +38,7 @@ const Contact = () => {
 
     const form = e.currentTarget;
     try {
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encodeForm(form),
-      });
-      if (!response.ok) throw new Error("Submit failed");
+      await submitNetlifyForm(form);
       setSubmitted(true);
       form.reset();
     } catch {
