@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { scrollToHashWhenReady } from "@/lib/scroll";
 import { WHATSAPP_NUMBER, WHATSAPP_URL, EMAIL, MAILTO_URL } from "@/lib/constants";
-import { submitNetlifyForm } from "@/lib/netlifyForm";
+import { formDataToObject, submitForm } from "@/lib/submitForm";
 import { GmailIcon, WhatsAppIcon } from "@/components/icons/SocialIcons";
 import { followUsLinks } from "@/data/socialLinks";
 import SectionHeader from "@/components/SectionHeader";
@@ -30,19 +30,25 @@ const Contact = () => {
     setSending(true);
     setError(null);
 
-    if (import.meta.env.DEV) {
-      setError(`The contact form works on the live site after deploy. For now, email ${EMAIL} or message us on WhatsApp.`);
-      setSending(false);
-      return;
-    }
-
     const form = e.currentTarget;
+    const fields = formDataToObject(form);
     try {
-      await submitNetlifyForm(form);
+      await submitForm({
+        ...fields,
+        _subject: `Zaviah Contact: ${fields.subject}`,
+        _replyto: fields.email,
+      });
       setSubmitted(true);
       form.reset();
-    } catch {
-      setError(`Could not send right now. Please email us at ${EMAIL} or message on WhatsApp.`);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "";
+      if (message === "ACTIVATION_REQUIRED") {
+        setError(
+          `One-time setup: check ${EMAIL} for a FormSubmit activation email, click the link, then submit again.`,
+        );
+      } else {
+        setError(`Could not send right now. Please email us at ${EMAIL} or message on WhatsApp.`);
+      }
     } finally {
       setSending(false);
     }
@@ -144,20 +150,7 @@ const Contact = () => {
                     <p className="text-sm text-muted-foreground">We received your message and will reply soon.</p>
                   </div>
                 ) : (
-                  <form
-                    name="contact"
-                    method="POST"
-                    data-netlify="true"
-                    data-netlify-honeypot="bot-field"
-                    className="space-y-5"
-                    onSubmit={handleSubmit}
-                  >
-                    <input type="hidden" name="form-name" value="contact" />
-                    <p className="hidden">
-                      <label>
-                        Do not fill: <input name="bot-field" />
-                      </label>
-                    </p>
+                  <form name="contact" className="space-y-5" onSubmit={handleSubmit}>
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor="contact-name">Name</Label>

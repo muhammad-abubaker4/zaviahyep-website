@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { EMAIL } from "@/lib/constants";
-import { submitNetlifyForm } from "@/lib/netlifyForm";
+import { formDataToObject, submitForm } from "@/lib/submitForm";
 import { cn } from "@/lib/utils";
 import type { ApplicationRole } from "@/components/JoinUs";
 
@@ -74,18 +74,24 @@ const ApplicationForm = ({ defaultRole, onChangeRole }: ApplicationFormProps) =>
     setSending(true);
     setError(null);
 
-    if (import.meta.env.DEV) {
-      setError(`Application form works on the live site after deploy. For now, email ${EMAIL}.`);
-      setSending(false);
-      return;
-    }
-
     const form = e.currentTarget;
+    const fields = formDataToObject(form);
     try {
-      await submitNetlifyForm(form);
+      await submitForm({
+        ...fields,
+        _subject: `Zaviah Application: ${roleLabels[data.role]}`,
+        _replyto: fields.email,
+      });
       setSubmitted(true);
-    } catch {
-      setError(`Could not submit right now. Please email us at ${EMAIL}.`);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "";
+      if (message === "ACTIVATION_REQUIRED") {
+        setError(
+          `One-time setup: check ${EMAIL} for a FormSubmit activation email, click the link, then submit again.`,
+        );
+      } else {
+        setError(`Could not submit right now. Please email us at ${EMAIL}.`);
+      }
     } finally {
       setSending(false);
     }
@@ -165,15 +171,7 @@ const ApplicationForm = ({ defaultRole, onChangeRole }: ApplicationFormProps) =>
         ))}
       </div>
 
-      <form
-        name="application"
-        method="POST"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-        onSubmit={handleSubmit}
-        className="glass-card-light p-6 sm:p-10"
-      >
-        <input type="hidden" name="form-name" value="application" />
+      <form name="application" onSubmit={handleSubmit} className="glass-card-light p-6 sm:p-10">
         <input type="hidden" name="role" value={data.role} />
         <input type="hidden" name="fullName" value={data.fullName} />
         <input type="hidden" name="email" value={data.email} />
@@ -184,11 +182,6 @@ const ApplicationForm = ({ defaultRole, onChangeRole }: ApplicationFormProps) =>
         <input type="hidden" name="institution" value={data.institution} />
         <input type="hidden" name="motivation" value={data.motivation} />
         <input type="hidden" name="referral" value={data.referral} />
-        <p className="hidden">
-          <label>
-            Do not fill this out: <input name="bot-field" />
-          </label>
-        </p>
 
         {step === 0 && (
           <div className="space-y-5">
