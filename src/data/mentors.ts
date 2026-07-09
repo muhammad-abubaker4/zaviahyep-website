@@ -28,8 +28,8 @@ export type GuestSpeaker = {
 export const guestSpeakers: GuestSpeaker[] = [
   {
     id: "sama-zaidi",
-    displayName: "Ms. Sama Zaidi",
-    role: "Founder, Super Student PK",
+    displayName: "Mr. Osama",
+    role: "SuperStudent",
     image: samaZaidi,
     imagePosition: "center 15%",
   },
