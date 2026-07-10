@@ -15,6 +15,7 @@ import zunairaRehman from "@/assets/mentors/zunaira-rehman.jpg";
 import arbeehaZahid from "@/assets/mentors/arbeeha-zahid.jpg";
 import hibaSyed from "@/assets/mentors/hiba-syed.jpg";
 import duaAmjad from "@/assets/mentors/dua-amjad.jpg";
+import muhammadUsmanJamal from "@/assets/mentors/muhammad-usman.jpg";
 import ibtisamBabar from "@/assets/mentors/ibtisam-babar.jpg";
 
 export type GuestSpeaker = {
@@ -146,6 +147,13 @@ export const guestSpeakers: GuestSpeaker[] = [
     displayName: "Ms. Dua Amjad",
     role: "Youth Advocate & Published Author",
     image: duaAmjad,
+    imagePosition: "center 15%",
+  },
+  {
+    id: "muhammad-usman-jamal",
+    displayName: "Mr. Muhammad Usman Jamal",
+    role: "HR Professional",
+    image: muhammadUsmanJamal,
     imagePosition: "center 15%",
   },
   {
