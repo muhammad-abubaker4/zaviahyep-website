@@ -2,6 +2,8 @@
   command = "npm run build"
   publish = "dist"
 
+# Optional: set VITE_WEB3FORMS_ACCESS_KEY in Netlify UI for the most reliable form delivery.
+
 [[headers]]
   for = "/assets/og-share.jpg"
   [headers.values]

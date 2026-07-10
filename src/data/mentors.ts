@@ -1,9 +1,12 @@
+import sameenMeer from "@/assets/mentors/sameen-meer.jpg";
 import samaZaidi from "@/assets/mentors/sama-zaidi.jpg";
-import usamaNadeemQureshi from "@/assets/mentors/usama-nadeem-qureshi.png";
+import osamaNadeemQureshi from "@/assets/mentors/osama-nadeem-qureshi.png";
+import bismahMirza from "@/assets/mentors/bismah-mirza.jpg";
 import amnaIrfan from "@/assets/mentors/amna-irfan.jpg";
 import hafsaKhalil from "@/assets/mentors/hafsa-khalil.jpg";
+import saeedaChaudhry from "@/assets/mentors/saeeda-ch.jpg";
 import amnaSardar from "@/assets/mentors/amna-sardar.jpg";
-import farhanUllah from "@/assets/mentors/farhan-ullah.jpg";
+import farhanAliBaloch from "@/assets/mentors/farhan-ali-baloch.jpg";
 import ahsanLakhani from "@/assets/mentors/ahsan-lakhani.jpg";
 import drAtifAli from "@/assets/mentors/dr-atif-ali.jpg";
 import drSassiMalikSher from "@/assets/mentors/dr-sassi-malik-sher.jpg";
@@ -27,23 +30,32 @@ export type GuestSpeaker = {
 
 export const guestSpeakers: GuestSpeaker[] = [
   {
+    id: "sameen-meer",
+    displayName: "Ms. Sameen Meer",
+    role: "International Students Ambassador",
+    image: sameenMeer,
+    imagePosition: "center 15%",
+  },
+  {
     id: "sama-zaidi",
-    displayName: "Mr. Osama",
-    role: "SuperStudent",
+    displayName: "Ms. Sama Zaidi",
+    role: "Founder, SuperStudent PK",
     image: samaZaidi,
     imagePosition: "center 15%",
   },
   {
-    id: "usama-nadeem",
-    displayName: "Mr. Usama Nadeem Qureshi",
+    id: "osama-nadeem",
+    displayName: "Mr. Osama Nadeem Qureshi",
     role: "Chairman, Pakistan Youth Parliament by ITP",
-    image: usamaNadeemQureshi,
+    image: osamaNadeemQureshi,
     imagePosition: "center 12%",
   },
   {
     id: "bisma-mirza",
     displayName: "Ms. Bisma Mirza",
     role: "Co-Founder, Red International",
+    image: bismahMirza,
+    imagePosition: "center 20%",
   },
   {
     id: "amna-irfan",
@@ -60,6 +72,13 @@ export const guestSpeakers: GuestSpeaker[] = [
     imagePosition: "center 15%",
   },
   {
+    id: "saeeda-chaudhry",
+    displayName: "Ms. Saeeda Chaudhry",
+    role: "Behavioral Science Professional",
+    image: saeedaChaudhry,
+    imagePosition: "center 15%",
+  },
+  {
     id: "amna-sardar",
     displayName: "Ms. Amna Sardar",
     role: "Member of Provincial Assembly, KPK",
@@ -67,10 +86,10 @@ export const guestSpeakers: GuestSpeaker[] = [
     imagePosition: "center 12%",
   },
   {
-    id: "farhan-ullah",
-    displayName: "Mr. Farhan Ullah",
+    id: "farhan-ali-baloch",
+    displayName: "Mr. Farhan Ali Baloch",
     role: "Social Activist",
-    image: farhanUllah,
+    image: farhanAliBaloch,
     imagePosition: "center 18%",
   },
   {
@@ -111,7 +130,7 @@ export const guestSpeakers: GuestSpeaker[] = [
   {
     id: "arbeeha-zahid",
     displayName: "Ms. Arbeeha Zahid",
-    role: "Youth Advocate",
+    role: "Youth Advocate & Community Educator",
     image: arbeehaZahid,
     imagePosition: "center 18%",
   },

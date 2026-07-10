@@ -48,7 +48,7 @@ const Hero = () => {
             initial={prefersReducedMotion ? false : { opacity: 0, y: 48 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="min-w-0 lg:col-span-6"
+            className="min-w-0 lg:col-span-5"
           >
             <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-primary-foreground/15 bg-primary-foreground/[0.06] px-3 py-1.5 backdrop-blur-md sm:mb-8 sm:gap-2.5 sm:px-4 sm:py-2">
               <Sparkles className="h-3.5 w-3.5 shrink-0 text-primary-foreground/70" aria-hidden />
@@ -99,7 +99,7 @@ const Hero = () => {
             initial={prefersReducedMotion ? false : { opacity: 0, y: 64 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="min-w-0 w-full lg:col-span-6"
+            className="min-w-0 w-full lg:col-span-7"
           >
             <div className="relative w-full overflow-hidden rounded-2xl bg-primary-foreground/[0.04] ring-1 ring-primary-foreground/15 shadow-lift sm:rounded-3xl">
               <div className="relative aspect-[4/3] min-h-[220px] overflow-hidden bg-primary sm:aspect-[16/9] sm:min-h-[360px] lg:min-h-[520px]">

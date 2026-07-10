@@ -42,9 +42,9 @@ const Contact = () => {
       form.reset();
     } catch (err) {
       const message = err instanceof Error ? err.message : "";
-      if (message === "ACTIVATION_REQUIRED") {
+      if (message === "SUBMIT_TIMEOUT") {
         setError(
-          `One-time setup: check ${EMAIL} for a FormSubmit activation email, click the link, then submit again.`,
+          `Submission timed out. Please email ${EMAIL} or message us on WhatsApp — we are fixing delivery.`,
         );
       } else {
         setError(`Could not send right now. Please email us at ${EMAIL} or message on WhatsApp.`);

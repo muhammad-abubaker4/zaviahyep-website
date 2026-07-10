@@ -85,9 +85,9 @@ const ApplicationForm = ({ defaultRole, onChangeRole }: ApplicationFormProps) =>
       setSubmitted(true);
     } catch (err) {
       const message = err instanceof Error ? err.message : "";
-      if (message === "ACTIVATION_REQUIRED") {
+      if (message === "SUBMIT_TIMEOUT") {
         setError(
-          `One-time setup: check ${EMAIL} for a FormSubmit activation email, click the link, then submit again.`,
+          `Submission timed out. Please email ${EMAIL} directly — we are fixing delivery.`,
         );
       } else {
         setError(`Could not submit right now. Please email us at ${EMAIL}.`);

@@ -61,7 +61,7 @@ export const partners: Partner[] = [
     logo: ygpLogo,
   },
   {
-    name: "Super Student PK",
+    name: "SuperStudent PK",
     type: "Educational & Career Partner",
     description:
       "Led by education and career coach Sama Zaidi: one on one career counseling, designing star careers, and youth voice through the Super Space Podcast.",
