@@ -17,6 +17,7 @@ import hibaSyed from "@/assets/mentors/hiba-syed.jpg";
 import duaAmjad from "@/assets/mentors/dua-amjad.jpg";
 import muhammadUsmanJamal from "@/assets/mentors/muhammad-usman.jpg";
 import ibtisamBabar from "@/assets/mentors/ibtisam-babar.jpg";
+import kaleemMustafa from "@/assets/mentors/kaleem-mustafa.jpg";
 
 export type GuestSpeaker = {
   id: string;
@@ -162,6 +163,13 @@ export const guestSpeakers: GuestSpeaker[] = [
     role: "Founder & CEO, Society Circle",
     image: ibtisamBabar,
     imagePosition: "center 12%",
+  },
+  {
+    id: "kaleem-mustafa",
+    displayName: "Mr. Kaleem Mustafa",
+    role: "PhD Scholar & Academic Trainer, ATIF",
+    image: kaleemMustafa,
+    imagePosition: "center 15%",
   },
 ];
 
