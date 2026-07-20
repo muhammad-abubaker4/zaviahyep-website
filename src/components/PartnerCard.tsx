@@ -7,9 +7,9 @@ type PartnerCardProps = {
 
 const PartnerCard = ({ partner, className = "" }: PartnerCardProps) => (
   <article
-    className={`flex h-full w-full flex-col items-center rounded-3xl border border-primary/10 bg-card p-7 text-center shadow-soft ${className}`}
+    className={`flex h-full w-full flex-col items-center rounded-3xl border border-primary/10 bg-white p-7 text-center shadow-soft ${className}`}
   >
-    <div className="mb-5 flex h-24 w-24 items-center justify-center rounded-2xl border border-primary/10 bg-muted/50 p-2">
+    <div className="mb-5 flex h-24 w-24 items-center justify-center rounded-2xl border border-primary/10 bg-muted/40 p-2">
       <img
         src={partner.logo}
         alt={`${partner.name} logo`}

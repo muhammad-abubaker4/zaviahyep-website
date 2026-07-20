@@ -14,7 +14,7 @@ import abdulWahab from "@/assets/mentors/abdul-wahab.jpg";
 import zunairaRehman from "@/assets/mentors/zunaira-rehman.jpg";
 import arbeehaZahid from "@/assets/mentors/arbeeha-zahid.jpg";
 import hibaSyed from "@/assets/mentors/hiba-syed.jpg";
-import duaAmjad from "@/assets/mentors/dua-amjad.jpg";
+import duaAmjad from "@/assets/mentors/dua_amjad.jpg";
 import muhammadUsmanJamal from "@/assets/mentors/muhammad-usman.jpg";
 import ibtisamBabar from "@/assets/mentors/ibtisam-babar.jpg";
 import kaleemMustafa from "@/assets/mentors/kaleem-mustafa.jpg";
