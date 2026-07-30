@@ -4,6 +4,12 @@ import PageMeta from "@/components/PageMeta";
 import { motion } from "framer-motion";
 import { galleryHeroImage } from "@/data/galleryImages";
 import GalleryGrid from "@/components/GalleryGrid";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const galleryJsonLd = breadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Gallery", path: "/gallery" },
+]);
 
 const Gallery = () => {
   return (
@@ -12,6 +18,7 @@ const Gallery = () => {
         title="Gallery"
         description="Photos from Zaviah events, mentorship sessions, and youth programs across Pakistan."
         path="/gallery"
+        jsonLd={galleryJsonLd}
       />
       <Navbar />
       <main id="main-content" tabIndex={-1} className="outline-none">

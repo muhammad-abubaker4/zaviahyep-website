@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -63,6 +63,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const activeSection = useActiveSection();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobilePanelRef = useRef<HTMLDivElement>(null);
 
   const isLinkActive = (href: string) =>
     location.pathname === "/" && activeSection === href.replace("#", "");
@@ -93,11 +95,16 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
     setOpenMobileDropdown(null);
     unlockPageScroll();
+    window.requestAnimationFrame(() => menuButtonRef.current?.focus());
   }, []);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.classList.add("overflow-hidden");
+      const firstFocusable = mobilePanelRef.current?.querySelector<HTMLElement>(
+        'button, a, [href], [tabindex]:not([tabindex="-1"])',
+      );
+      window.requestAnimationFrame(() => firstFocusable?.focus());
     } else {
       unlockPageScroll();
     }
@@ -106,7 +113,30 @@ const Navbar = () => {
   useEffect(() => {
     if (!isMobileMenuOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeMobileMenu();
+      if (e.key === "Escape") {
+        closeMobileMenu();
+        return;
+      }
+      if (e.key !== "Tab" || !mobilePanelRef.current) return;
+
+      const focusable = Array.from(
+        mobilePanelRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null);
+
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
@@ -183,12 +213,19 @@ const Navbar = () => {
             type="button"
             onClick={() => setOpenMobileDropdown(isOpen ? null : item.name)}
             className={dropdownTriggerClass(item, true)}
+            aria-expanded={isOpen}
+            aria-controls={`mobile-submenu-${item.name.toLowerCase()}`}
           >
             {item.name}
-            <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+            <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`} aria-hidden />
           </button>
           {isOpen && (
-            <div className="ml-4 mt-1 flex flex-col gap-1">
+            <div
+              id={`mobile-submenu-${item.name.toLowerCase()}`}
+              role="group"
+              aria-label={`${item.name} submenu`}
+              className="ml-4 mt-1 flex flex-col gap-1"
+            >
               {item.subItems.map((subItem) =>
                 subItem.internal ? (
                   <Link
@@ -279,6 +316,7 @@ const Navbar = () => {
         animate={{ y: isNavVisible ? 0 : "-120%" }}
         transition={{ duration: prefersReducedMotion ? 0 : 0.35, ease: [0.22, 1, 0.36, 1] }}
         id="navbar"
+        aria-label="Primary"
         className="fixed left-0 right-0 top-0 z-50 px-3 pt-3 sm:px-3 sm:pt-4"
       >
         <div
@@ -359,15 +397,18 @@ const Navbar = () => {
             </div>
 
             <button
+              ref={menuButtonRef}
               type="button"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
               className={cn(
                 "rounded-xl p-2 transition-colors lg:hidden",
                 "text-primary-foreground hover:bg-primary-foreground/10",
               )}
-              aria-label="Toggle menu"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMobileMenuOpen ? <X className="h-6 w-6" aria-hidden /> : <Menu className="h-6 w-6" aria-hidden />}
           </button>
         </div>
       </motion.nav>
@@ -382,10 +423,15 @@ const Navbar = () => {
 
       {isMobileMenuOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          ref={mobilePanelRef}
+          id="mobile-navigation"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
+          initial={prefersReducedMotion ? false : { opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
+          exit={prefersReducedMotion ? undefined : { opacity: 0, y: -20 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.3 }}
           className="fixed inset-x-0 top-0 z-40 max-h-screen overflow-y-auto rounded-b-3xl border border-primary-foreground/15 bg-primary/98 shadow-lift backdrop-blur-xl lg:hidden"
         >
           <div className="container px-4 py-6 pt-[4.5rem] sm:pt-24">

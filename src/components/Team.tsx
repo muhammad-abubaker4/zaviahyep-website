@@ -94,7 +94,7 @@ function TeamMemberCard({
           {showImage ? (
             <img
               src={member.image}
-              alt={member.name}
+              alt={`${member.name}, ${member.role} at Zaviah`}
               loading="lazy"
               decoding="async"
               onError={() => setImageError(true)}

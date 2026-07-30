@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
-import { JOIN_FORM_URL } from "@/lib/constants";
 
 const NotFound = () => {
   const location = useLocation();
@@ -32,9 +31,7 @@ const NotFound = () => {
               <Link to="/#contact">Contact us</Link>
             </Button>
             <Button asChild variant="secondary" className="rounded-full" size="lg">
-              <a href={JOIN_FORM_URL} target="_blank" rel="noopener noreferrer">
-                Join Zaviah
-              </a>
+              <Link to="/#apply">Join Zaviah</Link>
             </Button>
           </div>
         </section>

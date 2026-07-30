@@ -104,16 +104,32 @@ const Hero = () => {
             <div className="relative w-full overflow-hidden rounded-2xl bg-primary-foreground/[0.04] ring-1 ring-primary-foreground/15 shadow-lift sm:rounded-3xl">
               <div className="relative aspect-[4/3] min-h-[220px] overflow-hidden bg-primary sm:aspect-[16/9] sm:min-h-[360px] lg:min-h-[520px]">
                 <AnimatePresence mode="wait">
-                  <motion.img
+                  <motion.div
                     key={heroSlides[activeIndex].src}
-                    src={heroSlides[activeIndex].src}
-                    alt={heroSlides[activeIndex].alt}
                     initial={prefersReducedMotion ? false : { opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={prefersReducedMotion ? undefined : { opacity: 0 }}
                     transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute inset-0 h-full w-full object-cover object-center"
-                  />
+                    className="absolute inset-0"
+                  >
+                    <picture>
+                      {heroSlides[activeIndex].srcSet ? (
+                        <source
+                          type="image/webp"
+                          srcSet={heroSlides[activeIndex].srcSet}
+                          sizes={heroSlides[activeIndex].sizes}
+                        />
+                      ) : null}
+                      <img
+                        src={heroSlides[activeIndex].src}
+                        alt={heroSlides[activeIndex].alt}
+                        className="absolute inset-0 h-full w-full object-cover object-center"
+                        sizes={heroSlides[activeIndex].sizes ?? "(max-width: 1024px) 100vw, 58vw"}
+                        decoding="async"
+                        fetchPriority={activeIndex === 0 ? "high" : "auto"}
+                      />
+                    </picture>
+                  </motion.div>
                 </AnimatePresence>
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 

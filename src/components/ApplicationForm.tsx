@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { EMAIL } from "@/lib/constants";
-import { formDataToObject, submitForm } from "@/lib/submitForm";
+import { formDataToObject, submitForm, validateFormAntiSpam } from "@/lib/submitForm";
+import { FormConsent, FormHoneypot } from "@/components/FormConsent";
 import { cn } from "@/lib/utils";
 import type { ApplicationRole } from "@/components/JoinUs";
 
@@ -52,6 +53,12 @@ const ApplicationForm = ({ defaultRole, onChangeRole }: ApplicationFormProps) =>
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [consent, setConsent] = useState(false);
+  const openedAtRef = useRef(Date.now());
+
+  useEffect(() => {
+    openedAtRef.current = Date.now();
+  }, []);
 
   const update = (field: keyof FormData, value: string) => {
     setData((prev) => ({ ...prev, [field]: value }));
@@ -61,20 +68,38 @@ const ApplicationForm = ({ defaultRole, onChangeRole }: ApplicationFormProps) =>
     if (step === 0) return data.fullName && data.email && data.phone && data.city;
     if (step === 1) return data.age && data.education && data.institution;
     if (step === 2) return data.motivation.length >= 20;
+    if (step === 3) return consent;
     return true;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (sending) return;
+
     if (step < steps.length - 1) {
       if (canProceed()) setStep((s) => s + 1);
+      return;
+    }
+
+    if (!consent) {
+      setError("Please agree to the Privacy Policy and Terms of Service to continue.");
+      return;
+    }
+
+    const form = e.currentTarget;
+    const spamCheck = validateFormAntiSpam(form, openedAtRef.current);
+    if (spamCheck) {
+      setError(
+        spamCheck === "TOO_FAST"
+          ? "Please wait a moment and try again."
+          : `Could not submit right now. Please email us at ${EMAIL}.`,
+      );
       return;
     }
 
     setSending(true);
     setError(null);
 
-    const form = e.currentTarget;
     const fields = formDataToObject(form);
     try {
       await submitForm({
@@ -171,7 +196,12 @@ const ApplicationForm = ({ defaultRole, onChangeRole }: ApplicationFormProps) =>
         ))}
       </div>
 
-      <form name="application" onSubmit={handleSubmit} className="glass-card-light p-6 sm:p-10">
+      <form
+        name="application"
+        onSubmit={handleSubmit}
+        className="glass-card-light relative p-6 sm:p-10"
+      >
+        <FormHoneypot id="application-botcheck" />
         <input type="hidden" name="role" value={data.role} />
         <input type="hidden" name="fullName" value={data.fullName} />
         <input type="hidden" name="email" value={data.email} />
@@ -270,10 +300,15 @@ const ApplicationForm = ({ defaultRole, onChangeRole }: ApplicationFormProps) =>
               ))}
             </dl>
             <p className="text-sm leading-relaxed text-muted-foreground">{data.motivation}</p>
+            <FormConsent id="application-consent" checked={consent} onChange={setConsent} />
           </div>
         )}
 
-        {error && <p className="mt-4 text-center text-sm text-destructive">{error}</p>}
+        {error && (
+          <p className="mt-4 text-center text-sm text-destructive" role="alert">
+            {error}
+          </p>
+        )}
 
         <div className="mt-8 flex items-center justify-between gap-4">
           <Button type="button" variant="outline" onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0} className="rounded-full border-primary/20">

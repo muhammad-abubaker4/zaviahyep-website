@@ -3,6 +3,22 @@ import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
 import { motion } from "framer-motion";
 import muhammadAbubaker from "@/assets/team/Muhammad_Abubaker.jpeg";
+import { breadcrumbSchema, personSchema } from "@/lib/schema";
+
+const coFounderJsonLd = [
+  personSchema({
+    name: "Muhammad Abubaker",
+    jobTitle: "Co-Founder",
+    path: "/co-founder",
+    description:
+      "Co-Founder of Zaviah — leading operations, strategy, and digital direction for student communities nationwide.",
+    image: typeof muhammadAbubaker === "string" ? muhammadAbubaker : undefined,
+  }),
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Co-Founder", path: "/co-founder" },
+  ]),
+];
 
 const CoFounder = () => {
   return (
@@ -11,6 +27,7 @@ const CoFounder = () => {
         title="Muhammad Abubaker — Co-Founder"
         description="Meet Muhammad Abubaker, Co-Founder of Zaviah — leading operations, strategy, and digital direction for student communities nationwide."
         path="/co-founder"
+        jsonLd={coFounderJsonLd}
       />
       <Navbar />
       <main id="main-content" tabIndex={-1} className="outline-none">
@@ -50,7 +67,7 @@ const CoFounder = () => {
                 <div className="w-full max-w-md">
                   <img
                     src={muhammadAbubaker}
-                    alt="Muhammad Abubaker"
+                    alt="Muhammad Abubaker, Co-Founder of Zaviah"
                     className="w-full h-auto rounded-lg shadow-lg object-cover"
                   />
                 </div>

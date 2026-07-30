@@ -38,7 +38,7 @@ const PageMeta = ({
   jsonLd,
 }: PageMetaProps) => {
   useEffect(() => {
-    const fullTitle = pageTitle(title);
+    const fullTitle = title === DEFAULT_TITLE ? DEFAULT_TITLE : pageTitle(title);
     const url = pageUrl(path);
 
     document.title = fullTitle;
@@ -47,13 +47,22 @@ const PageMeta = ({
     setMeta("name", "robots", noIndex ? "noindex, nofollow" : "index, follow");
     setMeta("property", "og:title", fullTitle);
     setMeta("property", "og:description", description);
+    setMeta("property", "og:type", "website");
     setMeta("property", "og:url", url);
     setMeta("property", "og:site_name", "Zaviah");
     setMeta("property", "og:image", OG_IMAGE);
     setMeta("property", "og:image:secure_url", OG_IMAGE);
+    setMeta("property", "og:image:width", "1200");
+    setMeta("property", "og:image:height", "630");
+    setMeta("property", "og:image:alt", fullTitle);
+    setMeta("property", "og:locale", "en_PK");
+    setMeta("name", "twitter:card", "summary_large_image");
+    setMeta("name", "twitter:site", "@ZaviahOrg");
+    setMeta("name", "twitter:url", url);
     setMeta("name", "twitter:title", fullTitle);
     setMeta("name", "twitter:description", description);
     setMeta("name", "twitter:image", OG_IMAGE);
+    setMeta("name", "twitter:image:alt", fullTitle);
 
     const scriptId = "page-jsonld";
     document.getElementById(scriptId)?.remove();

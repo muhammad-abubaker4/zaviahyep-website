@@ -3,6 +3,22 @@ import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
 import { motion } from "framer-motion";
 import hafsaKhalil from "@/assets/team/Hafsa_Khalil.jpeg";
+import { breadcrumbSchema, personSchema } from "@/lib/schema";
+
+const founderJsonLd = [
+  personSchema({
+    name: "Hafsa Khalil",
+    jobTitle: "Founder & CEO",
+    path: "/founder",
+    description:
+      "Founder & CEO of Zaviah — empowering youth across Pakistan through mentorship, leadership, and learning.",
+    image: typeof hafsaKhalil === "string" ? hafsaKhalil : undefined,
+  }),
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Founder", path: "/founder" },
+  ]),
+];
 
 const Founder = () => {
   return (
@@ -11,6 +27,7 @@ const Founder = () => {
         title="Hafsa Khalil — Founder"
         description="Meet Hafsa Khalil, Founder & CEO of Zaviah — empowering youth across Pakistan through mentorship, leadership, and learning."
         path="/founder"
+        jsonLd={founderJsonLd}
       />
       <Navbar />
       <main id="main-content" tabIndex={-1} className="outline-none">
@@ -50,7 +67,7 @@ const Founder = () => {
                 <div className="w-full max-w-md">
                   <img
                     src={hafsaKhalil}
-                    alt="Hafsa Khalil"
+                    alt="Hafsa Khalil, Founder and CEO of Zaviah"
                     className="w-full h-auto rounded-lg shadow-lg object-cover"
                   />
                 </div>
@@ -141,4 +158,3 @@ const Founder = () => {
 };
 
 export default Founder;
-

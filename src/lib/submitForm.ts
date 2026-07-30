@@ -3,15 +3,29 @@ import { EMAIL } from "@/lib/constants";
 const WEB3FORMS_URL = "https://api.web3forms.com/submit";
 const FORM_SUBMIT_URL = `https://formsubmit.co/${EMAIL}`;
 
+/** Minimum time (ms) the form must be open before submit — blocks instant bot posts. */
+export const MIN_FORM_DWELL_MS = 2500;
+
 type FormPayload = Record<string, string>;
 
 export function formDataToObject(form: HTMLFormElement): FormPayload {
   const result: FormPayload = {};
   for (const [key, value] of new FormData(form).entries()) {
-    if (key === "bot-field" || key === "form-name" || key === "botcheck") continue;
+    if (key === "bot-field" || key === "form-name" || key === "botcheck" || key === "consent") continue;
     if (typeof value === "string" && value.trim()) result[key] = value;
   }
   return result;
+}
+
+/** Returns an error code if spam checks fail; otherwise null. */
+export function validateFormAntiSpam(form: HTMLFormElement, openedAt: number): string | null {
+  const honeypot = form.querySelector<HTMLInputElement>('input[name="botcheck"]');
+  // Web3Forms expects an unchecked checkbox named botcheck; any check/value = bot.
+  if (honeypot?.checked || honeypot?.value?.trim()) return "SPAM_REJECTED";
+
+  if (Date.now() - openedAt < MIN_FORM_DWELL_MS) return "TOO_FAST";
+
+  return null;
 }
 
 async function submitViaWeb3Forms(payload: FormPayload, accessKey: string): Promise<void> {
@@ -22,6 +36,7 @@ async function submitViaWeb3Forms(payload: FormPayload, accessKey: string): Prom
       access_key: accessKey,
       from_name: "Zaviah Website",
       subject: payload._subject || payload.subject || "Zaviah Website Form",
+      botcheck: "",
       ...payload,
     }),
   });
@@ -67,6 +82,8 @@ function submitViaFormSubmitIframe(payload: FormPayload): Promise<void> {
     appendField("_captcha", "false");
     appendField("_template", "table");
     appendField("_next", "https://formsubmit.co/thank-you");
+    // FormSubmit honeypot — leave empty (captcha stays off to preserve silent iframe UX).
+    appendField("_honey", "");
 
     for (const [key, value] of Object.entries(payload)) {
       appendField(key, value);

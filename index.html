@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zaviah - Youth Empowerment Platform</title>
-    <link rel="canonical" href="https://zaviahorg.netlify.app/" />
+    <link rel="canonical" href="https://zaviah.org/" />
+    <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#253439" />
     <link rel="icon" type="image/png" href="/assets/Zaviah_Logo.png" />
     <link rel="apple-touch-icon" href="/assets/Zaviah_Logo.png" />
@@ -21,23 +22,26 @@
       content="Zaviah is a youth-led non-profit initiative, empowering students through mentorship, skill development, and personal growth."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://zaviahorg.netlify.app/" />
+    <meta property="og:url" content="https://zaviah.org/" />
     <meta property="og:site_name" content="Zaviah" />
-    <meta property="og:image" content="https://zaviahorg.netlify.app/assets/og-share.jpg" />
-    <meta property="og:image:secure_url" content="https://zaviahorg.netlify.app/assets/og-share.jpg" />
+    <meta property="og:image" content="https://zaviah.org/assets/og-share.jpg" />
+    <meta property="og:image:secure_url" content="https://zaviah.org/assets/og-share.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="Zaviah youth empowerment platform homepage" />
+    <meta property="og:locale" content="en_PK" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@ZaviahOrg" />
+    <meta name="twitter:url" content="https://zaviah.org/" />
     <meta name="twitter:title" content="Zaviah - Youth Empowerment Platform" />
     <meta
       name="twitter:description"
       content="Zaviah is a youth-led non-profit initiative, empowering students through mentorship, skill development, and personal growth."
     />
-    <meta name="twitter:image" content="https://zaviahorg.netlify.app/assets/og-share.jpg" />
+    <meta name="twitter:image" content="https://zaviah.org/assets/og-share.jpg" />
+    <meta name="twitter:image:alt" content="Zaviah youth empowerment platform homepage" />
 
     <script type="application/ld+json">
       {
@@ -45,24 +49,74 @@
         "@graph": [
           {
             "@type": "Organization",
+            "@id": "https://zaviah.org/#organization",
             "name": "Zaviah",
-            "url": "https://zaviahorg.netlify.app/",
-            "logo": "https://zaviahorg.netlify.app/assets/Zaviah_Logo.png",
+            "alternateName": "Zaviah Youth Empowerment Platform",
+            "url": "https://zaviah.org/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://zaviah.org/assets/Zaviah_Logo.png"
+            },
+            "image": "https://zaviah.org/assets/og-share.jpg",
             "email": "zaviahorg@gmail.com",
+            "description": "Zaviah is a youth-led non-profit initiative, empowering students through mentorship, skill development, and personal growth.",
+            "foundingDate": "2024",
+            "areaServed": {
+              "@type": "Country",
+              "name": "Pakistan"
+            },
+            "knowsAbout": [
+              "Youth empowerment",
+              "Mentorship",
+              "Student leadership",
+              "Career guidance"
+            ],
             "sameAs": [
               "https://www.instagram.com/zaviahorg",
               "https://www.facebook.com/zaviahorg",
               "https://www.linkedin.com/company/zaviahorg",
               "https://www.tiktok.com/@zaviahorg",
               "https://www.linktr.ee/zaviahorg"
+            ],
+            "founder": [
+              {
+                "@type": "Person",
+                "name": "Hafsa Khalil",
+                "jobTitle": "Founder & CEO",
+                "url": "https://zaviah.org/founder"
+              },
+              {
+                "@type": "Person",
+                "name": "Muhammad Abubaker",
+                "jobTitle": "Co-Founder",
+                "url": "https://zaviah.org/co-founder"
+              }
             ]
           },
           {
             "@type": "WebSite",
+            "@id": "https://zaviah.org/#website",
             "name": "Zaviah",
-            "url": "https://zaviahorg.netlify.app/",
+            "url": "https://zaviah.org/",
             "description": "Zaviah is a youth-led non-profit initiative, empowering students through mentorship, skill development, and personal growth.",
-            "publisher": { "@type": "Organization", "name": "Zaviah" }
+            "inLanguage": "en",
+            "publisher": { "@id": "https://zaviah.org/#organization" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://zaviah.org/founder#person",
+            "name": "Hafsa Khalil",
+            "jobTitle": "Founder & CEO",
+            "url": "https://zaviah.org/founder",
+            "worksFor": { "@id": "https://zaviah.org/#organization" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://zaviah.org/co-founder#person",
+            "name": "Muhammad Abubaker",
+            "jobTitle": "Co-Founder",
+            "url": "https://zaviah.org/co-founder",
+            "worksFor": { "@id": "https://zaviah.org/#organization" }
           }
         ]
       }

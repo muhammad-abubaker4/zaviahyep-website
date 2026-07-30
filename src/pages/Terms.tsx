@@ -1,6 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const termsJsonLd = breadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Terms of Use", path: "/terms" },
+]);
 
 const Terms = () => {
   return (
@@ -9,6 +15,7 @@ const Terms = () => {
         title="Terms of Use"
         description="Terms and conditions for using the Zaviah website and participating in our programs."
         path="/terms"
+        jsonLd={termsJsonLd}
       />
       <Navbar />
       <main id="main-content" tabIndex={-1} className="outline-none">

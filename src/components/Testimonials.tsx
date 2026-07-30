@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
@@ -102,7 +102,7 @@ const TestimonialCard = ({ item, isActive }: { item: Testimonial; isActive: bool
         {item.image && (
           <AvatarImage
             src={item.image}
-            alt={item.name}
+            alt={`${item.name}, ${item.role}`}
             className={item.imageClass ?? facePhotoClass}
             loading="lazy"
             width={44}
@@ -124,6 +124,7 @@ const TestimonialCard = ({ item, isActive }: { item: Testimonial; isActive: bool
 const Testimonials = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const prefersReducedMotion = useReducedMotion();
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -152,14 +153,14 @@ const Testimonials = () => {
   }, [emblaApi, onSelect]);
 
   useEffect(() => {
-    if (!emblaApi) return;
+    if (!emblaApi || prefersReducedMotion) return;
 
     const timer = window.setInterval(() => {
       emblaApi.scrollNext();
     }, 5000);
 
     return () => window.clearInterval(timer);
-  }, [emblaApi]);
+  }, [emblaApi, prefersReducedMotion]);
 
   return (
     <section id="testimonials" className="section-light overflow-hidden" ref={ref}>

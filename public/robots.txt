@@ -1,4 +1,4 @@
-Sitemap: https://zaviahorg.netlify.app/sitemap.xml
+Sitemap: https://zaviah.org/sitemap.xml
 
 User-agent: Googlebot
 Allow: /

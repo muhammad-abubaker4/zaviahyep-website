@@ -3,6 +3,27 @@
   publish = "dist"
 
 # Optional: set VITE_WEB3FORMS_ACCESS_KEY in Netlify UI for the most reliable form delivery.
+# Web3Forms Pro: enable Restrict to Domain for zaviah.org in the Web3Forms dashboard.
+
+# CSP notes (intentional — do not remove without testing):
+# - style-src 'unsafe-inline' is REQUIRED: React/Framer Motion inline styles and ProgressArc
+#   widget set element.style / style attributes at runtime.
+# - script-src 'unsafe-inline' is REQUIRED: static JSON-LD in index.html and PageMeta-injected
+#   application/ld+json scripts. ProgressArc itself loads from staging-cdn (external).
+# - connect-src includes wss://*.progressarc.io for the ProgressArc chat WebSocket.
+
+# Keep old Netlify subdomain traffic on the production custom domain.
+[[redirects]]
+  from = "https://zaviahorg.netlify.app/*"
+  to = "https://zaviah.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://zaviahorg.netlify.app"
+  to = "https://zaviah.org/"
+  status = 301
+  force = true
 
 [[headers]]
   for = "/assets/og-share.jpg"
@@ -12,11 +33,6 @@
 
 [[headers]]
   for = "/og-image.jpg"
-  [headers.values]
-    Cache-Control = "public, max-age=3600"
-
-[[headers]]
-  for = "/og-preview.png"
   [headers.values]
     Cache-Control = "public, max-age=3600"
 
@@ -33,6 +49,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
     X-XSS-Protection = "1; mode=block"
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' https://staging-cdn.progressarc.io https://*.progressarc.io https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api.web3forms.com https://formsubmit.co https://*.formsubmit.co https://staging-cdn.progressarc.io https://*.progressarc.io wss://*.progressarc.io https://plausible.io; frame-src 'self' https://formsubmit.co https://*.formsubmit.co https://staging-cdn.progressarc.io https://*.progressarc.io; worker-src 'self' blob:; media-src 'self' https://staging-cdn.progressarc.io https://*.progressarc.io; form-action 'self' https://api.web3forms.com https://formsubmit.co https://*.formsubmit.co;"
 
 [[headers]]
   for = "/assets/*"

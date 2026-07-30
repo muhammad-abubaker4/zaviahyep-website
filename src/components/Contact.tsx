@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, Mail, MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { scrollToHashWhenReady } from "@/lib/scroll";
 import { WHATSAPP_NUMBER, WHATSAPP_URL, EMAIL, MAILTO_URL } from "@/lib/constants";
-import { formDataToObject, submitForm } from "@/lib/submitForm";
+import { formDataToObject, submitForm, validateFormAntiSpam } from "@/lib/submitForm";
+import { FormConsent, FormHoneypot } from "@/components/FormConsent";
 import { GmailIcon, WhatsAppIcon } from "@/components/icons/SocialIcons";
 import { followUsLinks } from "@/data/socialLinks";
 import SectionHeader from "@/components/SectionHeader";
@@ -24,13 +25,36 @@ const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [consent, setConsent] = useState(false);
+  const openedAtRef = useRef(Date.now());
+
+  useEffect(() => {
+    openedAtRef.current = Date.now();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (sending) return;
+
+    const form = e.currentTarget;
+    if (!consent) {
+      setError("Please agree to the Privacy Policy and Terms of Service to continue.");
+      return;
+    }
+
+    const spamCheck = validateFormAntiSpam(form, openedAtRef.current);
+    if (spamCheck) {
+      setError(
+        spamCheck === "TOO_FAST"
+          ? "Please wait a moment and try again."
+          : `Could not send right now. Please email us at ${EMAIL} or message on WhatsApp.`,
+      );
+      return;
+    }
+
     setSending(true);
     setError(null);
 
-    const form = e.currentTarget;
     const fields = formDataToObject(form);
     try {
       await submitForm({
@@ -39,7 +63,9 @@ const Contact = () => {
         _replyto: fields.email,
       });
       setSubmitted(true);
+      setConsent(false);
       form.reset();
+      openedAtRef.current = Date.now();
     } catch (err) {
       const message = err instanceof Error ? err.message : "";
       if (message === "SUBMIT_TIMEOUT") {
@@ -150,7 +176,8 @@ const Contact = () => {
                     <p className="text-sm text-muted-foreground">We received your message and will reply soon.</p>
                   </div>
                 ) : (
-                  <form name="contact" className="space-y-5" onSubmit={handleSubmit}>
+                  <form name="contact" className="relative space-y-5" onSubmit={handleSubmit}>
+                    <FormHoneypot id="contact-botcheck" />
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor="contact-name">Name</Label>
@@ -204,10 +231,11 @@ const Contact = () => {
                         className="rounded-xl border-primary/15 bg-background/80"
                       />
                     </div>
-                    <Button type="submit" className="w-full rounded-full py-6" disabled={sending}>
+                    <FormConsent id="contact-consent" checked={consent} onChange={setConsent} />
+                    <Button type="submit" className="w-full rounded-full py-6" disabled={sending || !consent}>
                       {sending ? "Sending..." : "Send message"}
                     </Button>
-                    {error && <p className="text-center text-sm text-destructive">{error}</p>}
+                    {error && <p className="text-center text-sm text-destructive" role="alert">{error}</p>}
                   </form>
                 )}
               </div>

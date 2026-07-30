@@ -1,4 +1,4 @@
-export const SITE_URL = "https://zaviahorg.netlify.app";
+export const SITE_URL = "https://zaviah.org";
 
 export const SITE_NAME = "Zaviah";
 
@@ -24,5 +24,5 @@ export function pageTitle(title: string) {
 
 export function pageUrl(path: string) {
   const normalized = path.startsWith("/") ? path : `/${path}`;
-  return normalized === "/" ? SITE_URL : `${SITE_URL}${normalized}`;
+  return normalized === "/" ? `${SITE_URL}/` : `${SITE_URL}${normalized}`;
 }

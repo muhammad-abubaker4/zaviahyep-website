@@ -73,9 +73,10 @@ function SpeakerCard({
         {showImage ? (
           <img
             src={speaker.image}
-            alt={speaker.displayName}
+            alt={`${speaker.displayName}, guest speaker at Zaviah`}
             loading="lazy"
             decoding="async"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             onError={() => setImageError(true)}
             className={cn(
               "h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]",
