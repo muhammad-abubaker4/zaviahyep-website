@@ -1,7 +1,8 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Users, Heart, GraduationCap, Shield, TrendingUp } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
+import { revealTransition, STAGGER } from "@/lib/motion";
 
 const values = [
   { icon: Users, title: "Empowerment", description: "We lift others up through mentorship and support, creating spaces where students feel capable and confident." },
@@ -17,7 +18,7 @@ const Values = () => {
 
   return (
     <section id="values" className="section-muted" ref={ref}>
-      <div className="bg-line-grid pointer-events-none absolute inset-0 opacity-50" aria-hidden />
+      <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden />
       <div className="container relative px-4">
         <SectionHeader
           eyebrow="Culture"
@@ -26,23 +27,30 @@ const Values = () => {
           description="Values that guide how we work, connect, and grow together."
         />
 
-        <div className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {/* Full-width rows: five values fit comfortably here, where five columns did not. */}
+        <div className="mx-auto max-w-4xl border-y border-border">
           {values.map((value, index) => (
-            <motion.article
+            <m.article
               key={value.title}
-              initial={{ opacity: 0, y: 24 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-              transition={{ duration: 0.45, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
-              className="group"
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              transition={revealTransition(index * STAGGER.base)}
+              className="group grid gap-x-8 gap-y-2 border-t border-border py-6 first:border-t-0 sm:grid-cols-[minmax(0,15rem)_1fr] sm:items-center"
             >
-              <div className="feature-card flex h-full flex-col items-center p-6 text-center">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/10 bg-primary/5 transition-all duration-300 group-hover:border-primary/20 group-hover:bg-primary group-hover:shadow-soft">
-                  <value.icon className="h-5 w-5 text-primary transition-colors group-hover:text-primary-foreground" />
-                </div>
-                <h3 className="mb-2 text-base font-bold tracking-tight text-foreground">{value.title}</h3>
-                <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">{value.description}</p>
+              <div className="flex items-center gap-3.5">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/10 bg-primary/5 transition-colors duration-300 group-hover:border-primary/20 group-hover:bg-primary">
+                  <value.icon
+                    className="h-[18px] w-[18px] text-primary transition-colors duration-300 group-hover:text-primary-foreground"
+                    aria-hidden
+                  />
+                </span>
+                <h3 className="text-lg font-bold tracking-tight text-foreground">{value.title}</h3>
               </div>
-            </motion.article>
+
+              <p className="text-[15px] leading-[1.75] text-muted-foreground">
+                {value.description}
+              </p>
+            </m.article>
           ))}
         </div>
       </div>

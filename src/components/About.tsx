@@ -1,8 +1,9 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
+import { revealTransition } from "@/lib/motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
-import { scrollToHashWhenReady } from "@/lib/scroll";
 import { ORG_PROFILE_PDF } from "@/lib/constants";
 
 const stats = [
@@ -11,13 +12,18 @@ const stats = [
   { value: "8+", label: "Partners" },
 ];
 
-const About = () => {
+type AboutProps = {
+  /** When true (homepage default), deep links go to /about. */
+  showDeepLinks?: boolean;
+};
+
+const About = ({ showDeepLinks = true }: AboutProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section id="about" className="section-muted" ref={ref}>
-      <div className="bg-line-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden />
+      <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden />
       <div className="container relative px-4">
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <SectionHeader
@@ -29,10 +35,10 @@ const About = () => {
             className="mb-0"
           />
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            transition={revealTransition()}
             className="space-y-6"
           >
             <div className="glass-card-light p-8 md:p-10">
@@ -57,14 +63,15 @@ const About = () => {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
-              <button
-                type="button"
-                onClick={() => scrollToHashWhenReady("#pillars")}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-soft"
-              >
-                Explore our Pillars
-                <ArrowRight className="h-4 w-4" />
-              </button>
+              {showDeepLinks ? (
+                <Link
+                  to="/about"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-soft"
+                >
+                  Our story & pillars
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              ) : null}
               <a
                 href={ORG_PROFILE_PDF}
                 target="_blank"
@@ -74,7 +81,7 @@ const About = () => {
                 Download profile (PDF)
               </a>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

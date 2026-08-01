@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { scrollToHashWhenReady } from "@/lib/scroll";
 
-/** Controls scroll on navigation and reload — homepage reload without hash always starts at top. */
+/** Scroll to top on route change; honor hash anchors (e.g. /about#vision). */
 const ScrollManager = () => {
   const { pathname, hash, key } = useLocation();
 
@@ -13,11 +13,12 @@ const ScrollManager = () => {
   }, []);
 
   useEffect(() => {
-    if (hash && pathname === "/") {
-      scrollToHashWhenReady(hash);
-      return;
+    if (hash) {
+      // Delay one frame so eager page content is in the DOM.
+      const id = window.setTimeout(() => scrollToHashWhenReady(hash), 50);
+      return () => window.clearTimeout(id);
     }
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" in window ? ("instant" as ScrollBehavior) : "auto" });
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [pathname, hash, key]);
 
   return null;

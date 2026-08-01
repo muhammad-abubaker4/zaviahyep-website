@@ -119,7 +119,14 @@ export default {
         "lift": "var(--shadow-lift)",
       },
       fontFamily: {
-        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+        sans: [
+          "Inter Variable",
+          "Inter",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "sans-serif",
+        ],
       },
     },
   },

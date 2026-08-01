@@ -7,11 +7,15 @@
     <link rel="canonical" href="https://zaviah.org/" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#253439" />
-    <link rel="icon" type="image/png" href="/assets/Zaviah_Logo.png" />
-    <link rel="apple-touch-icon" href="/assets/Zaviah_Logo.png" />
+    <!-- Warms the TLS handshake for the deferred chatbot script at the end of body. -->
+    <link rel="preconnect" href="https://staging-cdn.progressarc.io" crossorigin />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=6" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/assets/favicon-64.png?v=6" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png?v=6" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png?v=6" />
     <meta
       name="description"
-      content="Zaviah is a youth-led non-profit initiative, empowering students through mentorship, skill development, and personal growth."
+      content="Free mentorship and community for students across Pakistan. Join Zaviah to learn, lead, and grow."
     />
     <meta name="author" content="Zaviah" />
     <meta name="keywords" content="mentorship, youth empowerment, student development, Pakistan, career guidance, leadership" />
@@ -19,7 +23,7 @@
     <meta property="og:title" content="Zaviah - Youth Empowerment Platform" />
     <meta
       property="og:description"
-      content="Zaviah is a youth-led non-profit initiative, empowering students through mentorship, skill development, and personal growth."
+      content="Free mentorship and community for students across Pakistan. Join Zaviah to learn, lead, and grow."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://zaviah.org/" />
@@ -38,7 +42,7 @@
     <meta name="twitter:title" content="Zaviah - Youth Empowerment Platform" />
     <meta
       name="twitter:description"
-      content="Zaviah is a youth-led non-profit initiative, empowering students through mentorship, skill development, and personal growth."
+      content="Free mentorship and community for students across Pakistan. Join Zaviah to learn, lead, and grow."
     />
     <meta name="twitter:image" content="https://zaviah.org/assets/og-share.jpg" />
     <meta name="twitter:image:alt" content="Zaviah youth empowerment platform homepage" />
@@ -48,19 +52,21 @@
         "@context": "https://schema.org",
         "@graph": [
           {
-            "@type": "Organization",
+            "@type": "NGO",
             "@id": "https://zaviah.org/#organization",
             "name": "Zaviah",
             "alternateName": "Zaviah Youth Empowerment Platform",
             "url": "https://zaviah.org/",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://zaviah.org/assets/Zaviah_Logo.png"
+              "url": "https://zaviah.org/assets/favicon.png",
+              "width": 192,
+              "height": 192
             },
             "image": "https://zaviah.org/assets/og-share.jpg",
             "email": "zaviahorg@gmail.com",
             "description": "Zaviah is a youth-led non-profit initiative, empowering students through mentorship, skill development, and personal growth.",
-            "foundingDate": "2024",
+            "foundingDate": "2025-07",
             "areaServed": {
               "@type": "Country",
               "name": "Pakistan"
@@ -127,9 +133,15 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 
-    <!-- ProgressArc / Zaviah chatbot -->
+    <!--
+      ProgressArc / Zaviah chatbot.
+      `defer` is load-bearing: as a plain synchronous script this blocked the HTML
+      parser on a third-party origin and cost roughly 1.1s of FCP and 1.5s of LCP.
+      Deferred, it downloads in parallel and runs after the app has rendered.
+    -->
     <script
-      src="https://staging-cdn.progressarc.io/chat.js?v=1785249953122"
+      defer
+      src="https://staging-cdn.progressarc.io/chat.js?v=6"
       data-client-id="a7a24dceade08aa61b0ad4e911015e26da55e5b18125bafb04230d0257531fa6"
       data-greeting="Hi! I'm your Zaviah-YEP assistant. How can I help you today? 🚀"
     ></script>

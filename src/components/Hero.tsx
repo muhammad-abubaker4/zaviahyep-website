@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ArrowRight, FileDown, Sparkles } from "lucide-react";
-import { ORG_PROFILE_PDF } from "@/lib/constants";
-import { scrollToHashWhenReady } from "@/lib/scroll";
-import { heroBackgroundSlides } from "@/data/galleryImages";
+import { Link } from "react-router-dom";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
+import { DURATION, revealTransition } from "@/lib/motion";
+import { ArrowRight, ArrowUpRight, MapPin, Sparkles } from "lucide-react";
+import { heroSlides } from "@/data/heroSlides";
+import { CORE_PILLARS } from "@/data/pillars";
+import { GET_INVOLVED_PATH } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
-const scrollToApply = () => scrollToHashWhenReady("#apply");
-const scrollToAbout = () => scrollToHashWhenReady("#about");
-
-const heroSlides =
-  heroBackgroundSlides.length > 0
-    ? heroBackgroundSlides
-    : [{ src: "/og-preview.jpg", alt: "Zaviah community" }];
+const SLIDE_DURATION_MS = 5000;
+const HERO_SIZES = "(max-width: 1024px) 100vw, 62vw";
 
 const Hero = () => {
   const prefersReducedMotion = useReducedMotion();
@@ -23,10 +20,12 @@ const Hero = () => {
 
     const timer = window.setInterval(() => {
       setActiveIndex((current) => (current + 1) % heroSlides.length);
-    }, 4500);
+    }, SLIDE_DURATION_MS);
 
     return () => window.clearInterval(timer);
   }, [prefersReducedMotion]);
+
+  const activeSlide = heroSlides[activeIndex];
 
   return (
     <section
@@ -44,10 +43,10 @@ const Hero = () => {
 
       <div className="container relative z-10 flex min-h-[100dvh] w-full min-w-0 flex-col justify-center pb-20 pt-[5.75rem] sm:pb-24 sm:pt-28 md:pt-32">
         <div className="grid w-full min-w-0 items-center gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-10">
-          <motion.div
+          <m.div
             initial={prefersReducedMotion ? false : { opacity: 0, y: 48 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={revealTransition(0, DURATION.hero)}
             className="min-w-0 lg:col-span-5"
           >
             <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-primary-foreground/15 bg-primary-foreground/[0.06] px-3 py-1.5 backdrop-blur-md sm:mb-8 sm:gap-2.5 sm:px-4 sm:py-2">
@@ -74,99 +73,127 @@ const Hero = () => {
               learn, lead, and grow.
             </p>
 
-            <div className="flex w-full max-w-full flex-col gap-3 sm:flex-row sm:items-center">
-              <button type="button" onClick={scrollToApply} className="btn-primary-modern shrink-0">
-                Join Our Community
-                <ArrowRight className="ml-2 h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
-              </button>
-              <button type="button" onClick={scrollToAbout} className="btn-ghost-modern shrink-0">
-                Explore Zaviah
-              </button>
-            </div>
+            <Link to={GET_INVOLVED_PATH} className="btn-primary-modern shrink-0">
+              Get Involved
+              <ArrowRight className="ml-2 h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
+            </Link>
 
-            <a
-              href={ORG_PROFILE_PDF}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-10 inline-flex items-center gap-2 text-sm text-primary-foreground/50 transition-colors hover:text-primary-foreground/80"
-            >
-              <FileDown className="h-4 w-4" />
-              Organization Profile 2026
-            </a>
-          </motion.div>
+            <ul className="mt-9 flex max-w-lg flex-wrap items-center gap-y-2 sm:mt-11">
+              {CORE_PILLARS.map((pillar, index) => (
+                <li
+                  key={pillar.title}
+                  className={cn(
+                    "text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/45 sm:text-xs sm:tracking-[0.2em]",
+                    index > 0 &&
+                      "ml-4 border-l border-primary-foreground/20 pl-4 sm:ml-6 sm:pl-6",
+                  )}
+                >
+                  {pillar.title}
+                </li>
+              ))}
+            </ul>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={prefersReducedMotion ? false : { opacity: 0, y: 64 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            transition={revealTransition(0.12, DURATION.hero)}
             className="min-w-0 w-full lg:col-span-7"
           >
-            <div className="relative w-full overflow-hidden rounded-2xl bg-primary-foreground/[0.04] ring-1 ring-primary-foreground/15 shadow-lift sm:rounded-3xl">
-              <div className="relative aspect-[4/3] min-h-[220px] overflow-hidden bg-primary sm:aspect-[16/9] sm:min-h-[360px] lg:min-h-[520px]">
+            {/*
+              On large screens the panel bleeds past the container to the viewport
+              edge, which buys width without narrowing the headline column or
+              making the frame taller.
+            */}
+            {/*
+              width must stay auto here: with an explicit 100% the box is
+              over-constrained and the browser throws the negative margin away,
+              so the panel never widens at all.
+            */}
+            <div className="relative w-auto overflow-hidden rounded-2xl bg-primary-foreground/[0.04] ring-1 ring-primary-foreground/15 shadow-lift mr-[calc(var(--hero-to-nav-edge)*-1)] sm:rounded-3xl">
+              <div className="relative aspect-[4/3] overflow-hidden bg-primary sm:aspect-auto sm:h-[420px] lg:h-[520px]">
                 <AnimatePresence mode="wait">
-                  <motion.div
-                    key={heroSlides[activeIndex].src}
+                  <m.div
+                    key={activeSlide.src}
                     initial={prefersReducedMotion ? false : { opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={prefersReducedMotion ? undefined : { opacity: 0 }}
-                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                    transition={revealTransition(0, DURATION.hero)}
                     className="absolute inset-0"
                   >
-                    <picture>
-                      {heroSlides[activeIndex].srcSet ? (
-                        <source
-                          type="image/webp"
-                          srcSet={heroSlides[activeIndex].srcSet}
-                          sizes={heroSlides[activeIndex].sizes}
-                        />
-                      ) : null}
-                      <img
-                        src={heroSlides[activeIndex].src}
-                        alt={heroSlides[activeIndex].alt}
-                        className="absolute inset-0 h-full w-full object-cover object-center"
-                        sizes={heroSlides[activeIndex].sizes ?? "(max-width: 1024px) 100vw, 58vw"}
-                        decoding="async"
-                        fetchPriority={activeIndex === 0 ? "high" : "auto"}
-                      />
-                    </picture>
-                  </motion.div>
+                    <img
+                      src={activeSlide.src}
+                      srcSet={activeSlide.srcSet}
+                      sizes={HERO_SIZES}
+                      alt={activeSlide.alt}
+                      width={activeSlide.width}
+                      height={activeSlide.height}
+                      className="absolute inset-0 h-full w-full object-cover object-center"
+                      decoding="async"
+                      loading="eager"
+                      fetchPriority={activeIndex === 0 ? "high" : "auto"}
+                    />
+                  </m.div>
                 </AnimatePresence>
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
 
-                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-8">
+                <Link
+                  to={`/gallery/${activeSlide.albumSlug}`}
+                  className="absolute inset-x-0 bottom-0 block p-4 pb-7 sm:p-8 sm:pb-10"
+                >
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary-foreground/60">
                     Zaviah in action
                   </p>
-                  <p className="mt-1.5 text-sm font-bold leading-snug tracking-tight text-primary-foreground sm:mt-2 sm:text-lg md:text-xl">
-                    Educational Visit to Khyber Pakhtunkhwa Assembly, Peshawar
-                  </p>
-                </div>
-              </div>
+                  <span className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 sm:mt-2">
+                    <span className="text-sm font-bold leading-snug tracking-tight text-primary-foreground sm:text-lg md:text-xl">
+                      {activeSlide.albumTitle}
+                      <ArrowUpRight className="ml-1.5 inline h-4 w-4 align-baseline text-primary-foreground/70" aria-hidden />
+                    </span>
+                    {activeSlide.albumLocation && (
+                      <span className="inline-flex items-center gap-1 text-xs text-primary-foreground/65 sm:text-sm">
+                        <MapPin className="h-3.5 w-3.5" aria-hidden />
+                        {activeSlide.albumLocation}
+                      </span>
+                    )}
+                  </span>
+                </Link>
 
-              {heroSlides.length > 1 && (
-                <div className="flex items-center justify-center gap-2 bg-primary px-2 py-4">
-                  {heroSlides.map((slide, index) => (
-                    <button
-                      key={slide.src}
-                      type="button"
-                      onClick={() => setActiveIndex(index)}
-                      aria-label={`Show image ${index + 1}`}
-                      className={cn(
-                        "h-1.5 rounded-full transition-all duration-300",
-                        index === activeIndex
-                          ? "w-8 bg-primary-foreground"
-                          : "w-1.5 bg-primary-foreground/30 hover:bg-primary-foreground/50",
-                      )}
-                    />
-                  ))}
-                </div>
-              )}
+                {heroSlides.length > 1 && (
+                  <div className="absolute inset-x-4 bottom-3 flex items-center gap-1.5 sm:inset-x-8 sm:bottom-4">
+                    {heroSlides.map((slide, index) => (
+                      <button
+                        key={`${slide.src}-${index}`}
+                        type="button"
+                        onClick={() => setActiveIndex(index)}
+                        aria-label={`Show ${slide.albumTitle}, image ${index + 1}`}
+                        aria-current={index === activeIndex}
+                        className="group h-3 flex-1 py-1"
+                      >
+                        <span className="block h-1 w-full overflow-hidden rounded-full bg-primary-foreground/25 transition-colors group-hover:bg-primary-foreground/40">
+                          {index === activeIndex && (
+                            <m.span
+                              key={activeIndex}
+                              initial={{ width: prefersReducedMotion ? "100%" : 0 }}
+                              animate={{ width: "100%" }}
+                              transition={{
+                                duration: prefersReducedMotion ? 0 : SLIDE_DURATION_MS / 1000,
+                                ease: "linear",
+                              }}
+                              className="block h-full rounded-full bg-primary-foreground"
+                            />
+                          )}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
@@ -180,14 +207,14 @@ const Hero = () => {
           {prefersReducedMotion ? (
             <div className="mt-1 h-1.5 w-1.5 rounded-full bg-primary-foreground/40" />
           ) : (
-            <motion.div
+            <m.div
               animate={{ y: [0, 14, 0] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
               className="h-1.5 w-1.5 rounded-full bg-primary-foreground/50"
             />
           )}
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 };

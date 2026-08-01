@@ -1,12 +1,19 @@
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/inter/700.css";
-@import "@fontsource/inter/800.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /*
+   * How far the hero panel must reach past the page container to finish flush
+   * with the navbar pill. The container is max-w-[1400px] with 1rem of padding;
+   * the navbar is max-w-[100rem] (1600px) inside 0.75rem of padding, so the two
+   * right edges sit 4px apart until the viewport is wide enough for one or both
+   * to hit its max width.
+   */
+  --hero-to-nav-edge: calc(
+    4px + max(0px, (100vw - 1400px) / 2) - max(0px, (100vw - 1624px) / 2)
+  );
+}
 
 /* Brand: #253439 → hsl(195 21% 18%) */
 
@@ -123,7 +130,7 @@
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-feature-settings: "cv11", "ss01";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -153,7 +160,7 @@
 
 @layer components {
   .section-padding {
-    @apply py-24 md:py-32 lg:py-36;
+    @apply py-14 md:py-20 lg:py-24;
   }
 
   .section-light {
@@ -176,13 +183,6 @@
   .bg-dot-grid-dark {
     background-image: radial-gradient(hsl(0 0% 100% / 0.06) 1px, transparent 1px);
     background-size: 28px 28px;
-  }
-
-  .bg-line-grid {
-    background-image:
-      linear-gradient(hsl(195 21% 18% / 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(195 21% 18% / 0.04) 1px, transparent 1px);
-    background-size: 64px 64px;
   }
 
   .bg-mesh-dark {
@@ -290,18 +290,6 @@
     animation-play-state: paused;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-track,
-    .marquee-track-cards {
-      animation: none;
-    }
-
-    .feature-card:hover,
-    .feature-card-dark:hover {
-      transform: none;
-    }
-  }
-
   .testimonial-masonry {
     column-gap: 1.25rem;
   }
@@ -343,6 +331,22 @@
   .btn-primary-modern:hover {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 8px 32px -4px hsl(0 0% 100% / 0.5);
+  }
+
+  /*
+   * Light-section counterpart to btn-primary-modern, which is white on white
+   * here. The min-width keeps section CTAs the same size as each other instead
+   * of sizing to their label.
+   */
+  .btn-primary-solid {
+    @apply inline-flex w-full max-w-full items-center justify-center rounded-full bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground sm:w-auto sm:min-w-[19rem] sm:px-8 sm:py-4 sm:text-base;
+    box-shadow: 0 4px 24px -6px hsl(195 21% 18% / 0.45);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, opacity 0.3s ease;
+  }
+
+  .btn-primary-solid:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 32px -6px hsl(195 21% 18% / 0.55);
   }
 
   .btn-ghost-modern {
@@ -499,16 +503,6 @@
   }
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
 @keyframes pulse-glow {
   0%,
   100% {
@@ -516,5 +510,28 @@
   }
   50% {
     opacity: 0.7;
+  }
+}
+
+/*
+ * One global switch for WCAG 2.3.3. The previous opt-out listed the marquee and
+ * two card hovers by name, which left the pulsing eyebrow dots, every button
+ * lift, and all Tailwind hover:-translate-* rules still moving. Framer Motion is
+ * handled separately by <MotionConfig reducedMotion="user"> in App.tsx.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Left running, these would snap to their end frame instead of their start. */
+  .marquee-track,
+  .marquee-track-cards,
+  .pulse-dot {
+    animation: none !important;
   }
 }

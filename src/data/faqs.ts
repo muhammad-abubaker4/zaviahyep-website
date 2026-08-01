@@ -7,7 +7,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: "Who can join Zaviah?",
-    a: "Any student in Pakistan looking for guidance, skill-building, or community support can join as a member.",
+    a: "Any student in Pakistan looking for guidance, skill-building, or community support can apply to become a member. Other paths include volunteering, mentorship, campus ambassador, and core team roles.",
   },
   {
     q: "Is Zaviah free to join?",
@@ -15,11 +15,11 @@ export const faqs: FaqItem[] = [
   },
   {
     q: "How do I become a member?",
-    a: "Fill out the Member form from our Join Us menu. Our team will review your profile and connect you with programs based on your interests.",
+    a: "Visit Get Involved, open Become a Member, read the requirements, then complete the official Google Form on that page. Our team reviews applications and shares next steps.",
   },
   {
     q: "How can my organization partner with Zaviah?",
-    a: "Email us at zaviahorg@gmail.com or download our Organization Profile from the Partnerships section. We collaborate with youth-led and education-focused organizations nationwide.",
+    a: "Open Partner With Zaviah under Get Involved for collaboration details, then submit the official partnership request form. You can also download our Organization Profile from the Partnerships section.",
   },
 ];
 

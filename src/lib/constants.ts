@@ -5,5 +5,3 @@ export const EMAIL = "zaviahorg@gmail.com";
 export const MAILTO_URL = "mailto:zaviahorg@gmail.com";
 
 export const ORG_PROFILE_PDF = "/docs/Zaviah-Organization-Profile-2026.pdf";
-
-export const PARTNER_COUNT = 8;

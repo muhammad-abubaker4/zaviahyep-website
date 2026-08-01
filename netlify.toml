@@ -1,9 +1,18 @@
 [build]
-  command = "npm run build"
+  # The build ends with scripts/prerender.mjs, which drives a headless Chromium
+  # over the built site to write one HTML file per route.
+  command = "npx playwright install chromium && npm run build"
   publish = "dist"
 
-# Optional: set VITE_WEB3FORMS_ACCESS_KEY in Netlify UI for the most reliable form delivery.
-# Web3Forms Pro: enable Restrict to Domain for zaviah.org in the Web3Forms dashboard.
+[build.environment]
+  # Puts the browser download inside node_modules, which Netlify caches between
+  # builds. Left at the default it lands in ~/.cache, which is not cached, and
+  # every deploy would re-download Chromium.
+  PLAYWRIGHT_BROWSERS_PATH = "0"
+
+# The contact form uses Netlify Forms and needs no environment variables. Netlify detects
+# it from public/__forms.html at deploy time; submissions land in the Forms dashboard, and
+# email notifications are configured there rather than in this repo.
 
 # CSP notes (intentional — do not remove without testing):
 # - style-src 'unsafe-inline' is REQUIRED: React/Framer Motion inline styles and ProgressArc
@@ -36,10 +45,17 @@
   [headers.values]
     Cache-Control = "public, max-age=3600"
 
+# Every real route is prerendered to its own file, so the old SPA fallback
+# (/* -> /index.html 200) is gone. It answered 200 for genuinely missing pages,
+# which is a soft 404: crawlers indexed them and users got the homepage shell.
+#
+# This rule is not forced, so Netlify serves a matching file when one exists and
+# only falls through to here when nothing does. React still boots on 404.html,
+# so client-side navigation away from the page works normally.
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "/404.html"
+  status = 404
 
 [[headers]]
   for = "/*"
@@ -49,7 +65,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
     X-XSS-Protection = "1; mode=block"
-    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' https://staging-cdn.progressarc.io https://*.progressarc.io https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api.web3forms.com https://formsubmit.co https://*.formsubmit.co https://staging-cdn.progressarc.io https://*.progressarc.io wss://*.progressarc.io https://plausible.io; frame-src 'self' https://formsubmit.co https://*.formsubmit.co https://staging-cdn.progressarc.io https://*.progressarc.io; worker-src 'self' blob:; media-src 'self' https://staging-cdn.progressarc.io https://*.progressarc.io; form-action 'self' https://api.web3forms.com https://formsubmit.co https://*.formsubmit.co;"
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' https://staging-cdn.progressarc.io https://*.progressarc.io https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://staging-cdn.progressarc.io https://*.progressarc.io wss://*.progressarc.io https://plausible.io; frame-src 'self' https://staging-cdn.progressarc.io https://*.progressarc.io; worker-src 'self' blob:; media-src 'self' https://staging-cdn.progressarc.io https://*.progressarc.io; form-action 'self';"
 
 [[headers]]
   for = "/assets/*"

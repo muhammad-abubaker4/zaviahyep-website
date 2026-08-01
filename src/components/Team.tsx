@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
+import { revealTransition, STAGGER } from "@/lib/motion";
 import { useRef } from "react";
 import { User, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import SectionHeader from "@/components/SectionHeader";
-import { cn } from "@/lib/utils";
 
 import hafsaKhalil from "@/assets/team/Hafsa_Khalil.jpeg";
 import muhammadAbubaker from "@/assets/team/Muhammad_Abubaker.jpeg";
@@ -12,46 +12,122 @@ import qamarAbbas from "@/assets/team/Qamar_Abbas.jpeg";
 import amnaIrfan from "@/assets/team/Amna_Irfan.jpeg";
 import shaheer from "@/assets/team/Shaheer.jpeg";
 import aliGoharQureshi from "@/assets/team/Ali Gohar.jpg";
+import saeedaChaudhry from "@/assets/team/Saeeda-Chaudhry.jpeg";
+import saadButt from "@/assets/team/Saad-butt.jpeg";
+import khadijaFatima from "@/assets/team/Khadija-Fatima.jpg";
+import fidaHussain from "@/assets/team/Fida-Hussain.jpeg";
 
-const teamMembers = [
+type Member = {
+  name: string;
+  role: string;
+  description: string;
+  image: string;
+  profileHref?: string;
+};
+
+type Group = {
+  /** Split in two so the heading can carry the same two-tone treatment as SectionHeader. */
+  title: string;
+  highlight: string;
+  members: Member[];
+  /** Half-width groups share a row on large screens. */
+  half?: boolean;
+};
+
+const teamGroups: Group[] = [
   {
-    name: "Hafsa Khalil",
-    role: "Founder",
-    description: "Visionary leader committed to empowering youth through mentorship and learning.",
-    image: hafsaKhalil,
-    profileHref: "/founder",
+    title: "Executive",
+    highlight: "Leadership",
+    members: [
+      {
+        name: "Hafsa Khalil",
+        role: "Founder & CEO",
+        description:
+          "Visionary leader committed to empowering youth through mentorship and learning.",
+        image: hafsaKhalil,
+        profileHref: "/founder",
+      },
+      {
+        name: "Muhammad Abubaker",
+        role: "Co-Founder",
+        description:
+          "Leads operations, strategy, and digital direction for meaningful student communities.",
+        image: muhammadAbubaker,
+        profileHref: "/co-founder",
+      },
+    ],
   },
   {
-    name: "Muhammad Abubaker",
-    role: "Co Founder",
-    description: "Leads operations, strategy, and digital direction for meaningful student communities.",
-    image: muhammadAbubaker,
-    profileHref: "/co-founder",
+    title: "Outreach &",
+    highlight: "Community",
+    members: [
+      {
+        name: "Amna Irfan",
+        role: "Session Host",
+        description:
+          "Hosts Zaviah's online mentorship sessions and connects students with mentors nationwide.",
+        image: amnaIrfan,
+      },
+      {
+        name: "Qamar Abbas",
+        role: "Ambassador Lead",
+        description: "Builds connections with students and mentors nationwide through outreach.",
+        image: qamarAbbas,
+      },
+      {
+        name: "Ali Gohar Qureshi",
+        role: "Outreach & Engagement",
+        description:
+          "Strengthens partnerships and expands student reach through strategic outreach.",
+        image: aliGoharQureshi,
+      },
+      {
+        name: "Saad Butt",
+        role: "Director of Communications",
+        description: "Shapes how Zaviah speaks to students, partners, and the wider public.",
+        image: saadButt,
+      },
+    ],
   },
   {
-    name: "Amna Irfan",
-    role: "Ambassador Lead & Sessions Host",
-    description:
-      "Builds connections with students and mentors nationwide through outreach and hosts online mentorship sessions.",
-    image: amnaIrfan,
+    title: "Administration &",
+    highlight: "Operations",
+    half: true,
+    members: [
+      {
+        name: "Fida Hussain",
+        role: "Operations Lead",
+        description: "Keeps programs running day to day, from planning through to delivery.",
+        image: fidaHussain,
+      },
+      {
+        name: "Saeeda Chaudhry",
+        role: "HR & Community Manager",
+        description:
+          "Looks after the team behind Zaviah and keeps the wider community engaged and supported.",
+        image: saeedaChaudhry,
+      },
+    ],
   },
   {
-    name: "Qamar Abbas",
-    role: "Ambassador Lead",
-    description: "Builds connections with students and mentors nationwide through outreach.",
-    image: qamarAbbas,
-  },
-  {
-    name: "Ali Gohar Qureshi",
-    role: "Outreach & Engagement",
-    description: "Strengthens partnerships and expands student reach through strategic outreach.",
-    image: aliGoharQureshi,
-  },
-  {
-    name: "Shaheer Ali",
-    role: "Campus Coordination",
-    description: "Builds campus presence, organizing events and connecting youth leaders.",
-    image: shaheer,
+    title: "Content &",
+    highlight: "Media",
+    half: true,
+    members: [
+      {
+        name: "Khadija Fatima",
+        role: "Content Creator",
+        description: "Creates the content behind Zaviah's campaigns across its social channels.",
+        image: khadijaFatima,
+      },
+      {
+        name: "Shaheer Ali",
+        role: "Media & Graphics",
+        description:
+          "Produces the visuals behind Zaviah's events and campaigns, from graphics to social media.",
+        image: shaheer,
+      },
+    ],
   },
 ];
 
@@ -69,7 +145,7 @@ function TeamMemberCard({
   index,
   isInView,
 }: {
-  member: (typeof teamMembers)[number];
+  member: Member;
   index: number;
   isInView: boolean;
 }) {
@@ -78,64 +154,89 @@ function TeamMemberCard({
   const initials = getInitials(member.name);
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 32 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="group h-full"
+    <m.article
+      initial={{ opacity: 0, y: 24 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+      transition={revealTransition(index * STAGGER.base)}
+      className="group flex w-full flex-col sm:w-56"
     >
-      <div
-        className={cn(
-          "team-card overflow-hidden p-0 transition-all duration-500",
-          "hover:-translate-y-1 hover:shadow-lift",
+      <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-muted">
+        {showImage ? (
+          <img
+            src={member.image}
+            alt={`${member.name}, ${member.role} at Zaviah`}
+            loading="lazy"
+            decoding="async"
+            onError={() => setImageError(true)}
+            className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-primary">
+            {initials ? (
+              <span className="text-2xl font-bold text-primary-foreground">{initials}</span>
+            ) : (
+              <User className="h-8 w-8 text-primary-foreground/70" aria-hidden />
+            )}
+          </div>
         )}
-      >
-        <div className="relative aspect-[4/5] overflow-hidden bg-muted">
-          {showImage ? (
-            <img
-              src={member.image}
-              alt={`${member.name}, ${member.role} at Zaviah`}
-              loading="lazy"
-              decoding="async"
-              onError={() => setImageError(true)}
-              className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-            />
-          ) : (
-            <div className="flex h-full w-full flex-col items-center justify-center bg-primary">
-              <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-foreground/10">
-                {initials ? (
-                  <span className="text-lg font-bold text-primary-foreground">{initials}</span>
-                ) : (
-                  <User className="h-7 w-7 text-primary-foreground/70" aria-hidden />
-                )}
-              </div>
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-primary-foreground/50">
-                Photo soon
-              </p>
-            </div>
-          )}
-        </div>
 
-        <div className="flex flex-1 flex-col items-center p-6 text-center">
-          <h3 className="text-lg font-bold tracking-tight text-foreground">{member.name}</h3>
-          <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-primary">{member.role}</p>
-          <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{member.description}</p>
-          {member.profileHref && (
-            <Link
-              to={member.profileHref}
-              className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5"
-            >
-              View profile
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          )}
+        {/* Name sits on the photo so the card stays compact and the face carries the card. */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 via-black/45 to-transparent"
+          aria-hidden
+        />
+        <div className="absolute inset-x-0 bottom-0 p-4">
+          <p className="text-[10px] font-bold uppercase leading-tight tracking-[0.16em] text-white/70">
+            {member.role}
+          </p>
+          <h3 className="mt-1 text-base font-bold tracking-tight text-white">{member.name}</h3>
         </div>
       </div>
-    </motion.article>
+
+      <p className="mt-3.5 flex-1 text-sm leading-relaxed text-muted-foreground">
+        {member.description}
+      </p>
+      {member.profileHref && (
+        <Link
+          to={member.profileHref}
+          className="mt-3 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5"
+        >
+          View profile
+          <ArrowRight className="h-4 w-4" aria-hidden />
+        </Link>
+      )}
+    </m.article>
   );
 }
 
-const Team = () => {
+function TeamGroup({ group, isInView }: { group: Group; isInView: boolean }) {
+  return (
+    <div>
+      {/* Scaled-down version of SectionHeader, so group titles speak the same language. */}
+      <header className="mb-9 text-center">
+        <h3 className="text-2xl font-extrabold tracking-[-0.03em] text-foreground sm:text-3xl">
+          {group.title} <span className="text-primary/60">{group.highlight}</span>
+        </h3>
+        <div
+          className="mx-auto mt-4 h-px w-14 bg-gradient-to-r from-foreground to-transparent"
+          aria-hidden
+        />
+      </header>
+
+      {/* Centring lets a two-person group sit as a pair without a hole in the grid. */}
+      <div className="flex flex-wrap justify-center gap-x-8 gap-y-10">
+        {group.members.map((member, index) => (
+          <TeamMemberCard key={member.name} member={member} index={index} isInView={isInView} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const fullGroups = teamGroups.filter((group) => !group.half);
+const halfGroups = teamGroups.filter((group) => group.half);
+
+const Team = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -143,17 +244,27 @@ const Team = () => {
     <section id="team" className="section-light" ref={ref}>
       <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden />
       <div className="container relative px-4">
-        <SectionHeader
-          eyebrow="People"
-          title="Meet Our"
-          highlight="Team"
-          description="Passionate young individuals working together to empower students across Pakistan."
-        />
+        {!hideHeader && (
+          <SectionHeader
+            eyebrow="People"
+            title="Meet Our"
+            highlight="Team"
+            description="Passionate young individuals working together to empower students across Pakistan."
+          />
+        )}
 
-        <div className="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {teamMembers.map((member, index) => (
-            <TeamMemberCard key={member.name} member={member} index={index} isInView={isInView} />
+        <div className="mx-auto max-w-5xl space-y-16">
+          {fullGroups.map((group) => (
+            <TeamGroup key={group.highlight} group={group} isInView={isInView} />
           ))}
+
+          {halfGroups.length > 0 && (
+            <div className="grid gap-x-8 gap-y-16 lg:grid-cols-2">
+              {halfGroups.map((group) => (
+                <TeamGroup key={group.highlight} group={group} isInView={isInView} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

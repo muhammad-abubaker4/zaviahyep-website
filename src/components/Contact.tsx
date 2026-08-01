@@ -1,13 +1,12 @@
-import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { ArrowRight, CheckCircle2, Mail, MessageCircle, Send } from "lucide-react";
+import { m, useInView } from "framer-motion";
+import { revealTransition } from "@/lib/motion";
+import { useRef, useState } from "react";
+import { CheckCircle2, Mail, MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { scrollToHashWhenReady } from "@/lib/scroll";
 import { WHATSAPP_NUMBER, WHATSAPP_URL, EMAIL, MAILTO_URL } from "@/lib/constants";
-import { formDataToObject, submitForm, validateFormAntiSpam } from "@/lib/submitForm";
 import { FormConsent, FormHoneypot } from "@/components/FormConsent";
 import { GmailIcon, WhatsAppIcon } from "@/components/icons/SocialIcons";
 import { followUsLinks } from "@/data/socialLinks";
@@ -19,6 +18,9 @@ const contactInfo = [
   { type: "whatsapp" as const, label: "WhatsApp", value: WHATSAPP_NUMBER, link: WHATSAPP_URL, icon: MessageCircle },
 ];
 
+/** Must match the form declared in public/__forms.html, which is what Netlify scans. */
+const FORM_NAME = "contact";
+
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -26,11 +28,6 @@ const Contact = () => {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [consent, setConsent] = useState(false);
-  const openedAtRef = useRef(Date.now());
-
-  useEffect(() => {
-    openedAtRef.current = Date.now();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,47 +39,39 @@ const Contact = () => {
       return;
     }
 
-    const spamCheck = validateFormAntiSpam(form, openedAtRef.current);
-    if (spamCheck) {
-      setError(
-        spamCheck === "TOO_FAST"
-          ? "Please wait a moment and try again."
-          : `Could not send right now. Please email us at ${EMAIL} or message on WhatsApp.`,
-      );
-      return;
-    }
-
     setSending(true);
     setError(null);
 
-    const fields = formDataToObject(form);
+    // Netlify accepts the submission as a urlencoded POST to any page path, which keeps
+    // the visitor here instead of following the redirect a plain HTML form would.
+    const body = new URLSearchParams({ "form-name": FORM_NAME });
+    for (const [key, value] of new FormData(form).entries()) {
+      if (typeof value === "string") body.append(key, value);
+    }
+
     try {
-      await submitForm({
-        ...fields,
-        _subject: `Zaviah Contact: ${fields.subject}`,
-        _replyto: fields.email,
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
       });
+      if (!response.ok) throw new Error(`Netlify responded with ${response.status}`);
+
       setSubmitted(true);
       setConsent(false);
       form.reset();
-      openedAtRef.current = Date.now();
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "";
-      if (message === "SUBMIT_TIMEOUT") {
-        setError(
-          `Submission timed out. Please email ${EMAIL} or message us on WhatsApp — we are fixing delivery.`,
-        );
-      } else {
-        setError(`Could not send right now. Please email us at ${EMAIL} or message on WhatsApp.`);
-      }
+    } catch {
+      setError(
+        `We couldn't send your message. Please try again or email us directly at ${EMAIL}.`,
+      );
     } finally {
       setSending(false);
     }
   };
 
   return (
-    <section id="contact" className="section-muted overflow-hidden" ref={ref}>
-      <div className="bg-line-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden />
+    <section id="contact" className="section-light overflow-hidden" ref={ref}>
+      <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden />
       <div className="container relative px-4">
         <SectionHeader
           eyebrow="Connect"
@@ -92,10 +81,10 @@ const Contact = () => {
         />
 
         <div className="mx-auto grid max-w-6xl items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
-          <motion.aside
+          <m.aside
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-            transition={{ duration: 0.5 }}
+            transition={revealTransition()}
             className="flex h-full flex-col gap-5 lg:col-span-5"
           >
             <div className="relative flex-1 overflow-hidden rounded-3xl border border-primary-foreground/10 bg-primary p-7 text-primary-foreground sm:p-8">
@@ -148,12 +137,12 @@ const Contact = () => {
                 Stay updated on sessions, events, and community highlights across our social channels.
               </p>
             </div>
-          </motion.aside>
+          </m.aside>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={revealTransition(0.1)}
             className="lg:col-span-7"
           >
             <div className="glass-card-light relative h-full overflow-hidden p-6 sm:p-8">
@@ -172,12 +161,22 @@ const Contact = () => {
                 {submitted ? (
                   <div className="flex flex-col items-center gap-4 py-12 text-center">
                     <CheckCircle2 className="h-12 w-12 text-primary" />
-                    <p className="text-lg font-bold text-foreground">Message sent</p>
-                    <p className="text-sm text-muted-foreground">We received your message and will reply soon.</p>
+                    <p className="text-lg font-bold text-foreground">Thank you for contacting Zaviah</p>
+                    <p className="text-sm text-muted-foreground">
+                      We&apos;ve received your message and will respond within 24 to 48 hours.
+                    </p>
                   </div>
                 ) : (
-                  <form name="contact" className="relative space-y-5" onSubmit={handleSubmit}>
-                    <FormHoneypot id="contact-botcheck" />
+                  <form
+                    name={FORM_NAME}
+                    method="POST"
+                    data-netlify="true"
+                    netlify-honeypot="bot-field"
+                    className="relative space-y-5"
+                    onSubmit={handleSubmit}
+                  >
+                    <input type="hidden" name="form-name" value={FORM_NAME} />
+                    <FormHoneypot id="contact-bot-field" />
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor="contact-name">Name</Label>
@@ -214,9 +213,9 @@ const Contact = () => {
                           Select a topic
                         </option>
                         <option value="General Inquiry">General Inquiry</option>
-                        <option value="Partnership">Partnership</option>
-                        <option value="Mentorship">Mentorship</option>
-                        <option value="Membership">Membership</option>
+                        <option value="General Questions">General Questions</option>
+                        <option value="Website Feedback">Website Feedback</option>
+                        <option value="Technical Issues">Technical Issues</option>
                         <option value="Other">Other</option>
                       </select>
                     </div>
@@ -240,27 +239,8 @@ const Contact = () => {
                 )}
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="relative mx-auto mt-12 max-w-6xl overflow-hidden rounded-3xl border border-primary-foreground/10 bg-primary p-10 text-center text-primary-foreground sm:p-14"
-        >
-          <div className="bg-dot-grid-dark pointer-events-none absolute inset-0 opacity-30" aria-hidden />
-          <div className="relative">
-            <h3 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Join the Movement</h3>
-            <p className="mx-auto mt-4 max-w-xl text-primary-foreground/70">
-              Be part of a community that believes in Access, Awareness, and Aspiration.
-            </p>
-            <button type="button" onClick={() => scrollToHashWhenReady("#apply")} className="btn-primary-modern mt-8">
-              Start Your Journey
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </button>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

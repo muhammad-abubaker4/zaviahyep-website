@@ -35,9 +35,12 @@ const Privacy = () => {
             <h2 className="mt-8 text-xl font-semibold text-foreground">Information we collect</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5">
               <li>
-                <strong className="text-foreground">Contact and application details</strong> you submit through our
-                website forms (for example name, email, phone, city, age, education, institution, subject, message, and
-                motivation), or when you email or message us directly.
+                <strong className="text-foreground">Contact details</strong> you submit through our website contact
+                form (for example name, email, subject, and message), or when you email or message us directly.
+              </li>
+              <li>
+                <strong className="text-foreground">Application information</strong> you submit through official Google
+                Forms linked from our Get Involved pages (processed by Google under its own privacy terms).
               </li>
               <li>
                 <strong className="text-foreground">Chat messages</strong> you send to our on-site assistant (ProgressArc
@@ -52,31 +55,32 @@ const Privacy = () => {
 
             <h2 className="mt-8 text-xl font-semibold text-foreground">How we use information</h2>
             <p>
-              We use this information to respond to inquiries, process membership and volunteer applications, run youth
-              programs and partnerships, improve our website, and keep our community safe. We do not sell your personal
-              information.
+              We use website contact information to respond to inquiries and feedback. Application data submitted through
+              official Google Forms linked from Get Involved is used to review membership, volunteer, mentor, ambassador,
+              core team, and partnership requests, run youth programs, and keep our community safe. We do not sell your
+              personal information.
             </p>
 
             <h2 className="mt-8 text-xl font-semibold text-foreground">Service providers we use</h2>
             <p>To run zaviah.org we rely on the following third parties:</p>
             <ul className="mt-3 list-disc space-y-2 pl-5">
               <li>
-                <strong className="text-foreground">Netlify</strong> — website hosting and content delivery for
+                <strong className="text-foreground">Netlify</strong> - website hosting and content delivery for
                 zaviah.org.
               </li>
               <li>
-                <strong className="text-foreground">Hostinger</strong> — domain name registration for zaviah.org.
+                <strong className="text-foreground">Hostinger</strong> - domain name registration for zaviah.org.
               </li>
               <li>
-                <strong className="text-foreground">Web3Forms</strong> — primary processor for website form submissions,
-                which forwards messages to our team inbox.
+                <strong className="text-foreground">Netlify Forms</strong> - receives website contact form
+                submissions and notifies our team inbox by email.
               </li>
               <li>
-                <strong className="text-foreground">FormSubmit</strong> — backup form delivery service used if the
-                primary form processor is unavailable.
+                <strong className="text-foreground">Google Forms</strong> - official application platform for Get
+                Involved opportunities (applications are not collected through website recruitment forms).
               </li>
               <li>
-                <strong className="text-foreground">ProgressArc</strong> — on-site chatbot assistant that helps visitors
+                <strong className="text-foreground">ProgressArc</strong> - on-site chatbot assistant that helps visitors
                 with questions about Zaviah. Chat content may be processed by ProgressArc to provide responses and for
                 our team to follow up when needed.
               </li>

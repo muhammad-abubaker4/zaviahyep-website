@@ -16,7 +16,7 @@ export type SocialLink = {
   hoverClass?: string;
 };
 
-/** Social platforms for Follow Us (Contact section) — no WhatsApp (shown under Contact Information). */
+/** Social platforms for Follow Us (Contact section) - no WhatsApp (shown under Contact Information). */
 export const followUsLinks: SocialLink[] = [
   {
     id: "instagram",

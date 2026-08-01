@@ -1,4 +1,5 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
+import { revealTransition } from "@/lib/motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Quote } from "lucide-react";
@@ -15,10 +16,10 @@ const FounderWelcome = () => {
         <SectionHeader eyebrow="Leadership" title="Founder's" highlight="Message" />
 
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            transition={revealTransition()}
             className="relative lg:col-span-5"
           >
             <div className="absolute -left-6 -top-6 h-24 w-24 rounded-3xl border border-primary/10 bg-primary/5" aria-hidden />
@@ -36,12 +37,12 @@ const FounderWelcome = () => {
               <p className="text-sm font-bold text-foreground">Hafsa Khalil</p>
               <p className="text-xs font-semibold text-primary">Founder & CEO</p>
             </div>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
-            transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={revealTransition(0.1)}
             className="lg:col-span-7"
           >
             <Quote className="mb-6 h-10 w-10 text-primary/20" aria-hidden />
@@ -72,7 +73,7 @@ const FounderWelcome = () => {
               Read full profile
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

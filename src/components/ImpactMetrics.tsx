@@ -1,4 +1,5 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
+import { revealTransition, STAGGER } from "@/lib/motion";
 import { useRef } from "react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import SectionHeader from "@/components/SectionHeader";
@@ -63,11 +64,11 @@ const ImpactMetrics = () => {
 
         <div className="bento-grid mx-auto max-w-6xl">
           {metrics.map((metric, index) => (
-            <motion.article
+            <m.article
               key={metric.label}
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-              transition={{ duration: 0.5, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              transition={revealTransition(index * STAGGER.base)}
               className={cn(metric.span, metric.wide && "lg:col-span-12")}
             >
               <div
@@ -105,7 +106,7 @@ const ImpactMetrics = () => {
                   </p>
                 )}
               </div>
-            </motion.article>
+            </m.article>
           ))}
         </div>
       </div>

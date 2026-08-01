@@ -34,13 +34,14 @@ export const FormConsent = ({ id, checked, onChange }: FormConsentProps) => (
 );
 
 type FormHoneypotProps = {
-  /** Unique id — homepage mounts Contact + Application together. */
+  /** Unique id - a page may mount more than one form. */
   id: string;
 };
 
 /**
- * Hidden honeypot for Web3Forms (`botcheck` checkbox) + local anti-spam.
- * Off-screen, aria-hidden, not in tab order — ignored by assistive tech.
+ * Netlify's honeypot: the form declares `netlify-honeypot="bot-field"`, and Netlify
+ * silently discards any submission where this field is filled in. Kept off-screen,
+ * aria-hidden, and out of the tab order so people never reach it.
  */
 export const FormHoneypot = ({ id }: FormHoneypotProps) => (
   <div
@@ -49,14 +50,7 @@ export const FormHoneypot = ({ id }: FormHoneypotProps) => (
   >
     <label htmlFor={id}>
       Leave this field empty
-      <input
-        id={id}
-        type="checkbox"
-        name="botcheck"
-        tabIndex={-1}
-        autoComplete="off"
-        defaultChecked={false}
-      />
+      <input id={id} type="text" name="bot-field" tabIndex={-1} autoComplete="off" />
     </label>
   </div>
 );

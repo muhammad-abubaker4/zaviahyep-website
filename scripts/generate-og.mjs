@@ -5,19 +5,26 @@ import sharp from "sharp";
 const ROOT = process.cwd();
 const SOURCE_PATH = path.join(ROOT, "src", "assets", "og-preview-screenshot.png");
 const ASSETS_DIR = path.join(ROOT, "public", "assets");
-const JPG_PATH = path.join(ASSETS_DIR, "og-share.jpg");
-const ROOT_JPG_PATH = path.join(ROOT, "public", "og-image.jpg");
+// og-share.jpg is what the meta tags point at. The other two are legacy paths
+// that are already public URLs, so they get refreshed rather than left stale.
+const OUTPUTS = [
+  path.join(ASSETS_DIR, "og-share.jpg"),
+  path.join(ROOT, "public", "og-image.jpg"),
+  path.join(ROOT, "public", "og-preview.jpg"),
+];
 
+// Anchored to the top: the source is taller than the 1.91:1 card, and a centred
+// crop shaves the navbar off. Trimming the empty space below the hero instead.
 const resized = sharp(SOURCE_PATH).resize(1200, 630, {
   fit: "cover",
-  position: "centre",
+  position: "top",
 });
 
 await fs.mkdir(ASSETS_DIR, { recursive: true });
 
 const jpeg = resized.clone().jpeg({ quality: 86, progressive: true, mozjpeg: true });
 
-await jpeg.toFile(JPG_PATH);
-await jpeg.toFile(ROOT_JPG_PATH);
-
-console.log(`Generated ${JPG_PATH} and ${ROOT_JPG_PATH}`);
+for (const output of OUTPUTS) {
+  await jpeg.toFile(output);
+  console.log(`Generated ${output}`);
+}

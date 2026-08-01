@@ -1,0 +1,412 @@
+{
+  "gallery/1.jpeg": {
+    "width": 1176,
+    "height": 780,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoQAAsABABoJZgCdAELViQ/ZQAA+ov7dOKAe6Lc/kOV+Pdp6J7tVz6j2FuzSrGXR5uez47FR6fvnZYKYOP9FaMm+NIYAAAA"
+  },
+  "gallery/2.jpeg": {
+    "width": 718,
+    "height": 1280,
+    "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoJABAABABoJbACdADcNhtmEAD7a6x7REaHrpdHWmvNiW92tih8Nho2DHJ97TkbuHivGq+cNOyBampRHeDSf3w/Y2XOo67RLjCs4EBSoDG/UMGTgAA="
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.26 (1).jpeg": {
+    "width": 1280,
+    "height": 853,
+    "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoQAAsABABoJbACdAYuHZffeMVQAP5AXarjM134Tt85Hu+LzAHsZWCIfM9H2+cSeXqpLe6wRtbezD4rW6qR3KqDFDGVCXgqls8dT2sAAAA="
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.27 (2).jpeg": {
+    "width": 960,
+    "height": 1280,
+    "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAACQAQCdASoMABAABABoJbACdAEFywAA/AE2P6k/+UXF/W1c+tFtUSglnR2SMSj2fxmS6tBD32gMUUjypXU0vblbS/DlAAAA"
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.27.jpeg": {
+    "width": 1280,
+    "height": 960,
+    "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACwAQCdASoQAAwABABoJZQAAbsfQOtAAP5kVfqX7RnNbd4mAP3S9WBm5j2yU29lxLfiLeB6wAbvrp56rJVglvyj3iRhR46bT6bBsTL4AKleJLAmXgA="
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.28 (1).jpeg": {
+    "width": 960,
+    "height": 1280,
+    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoMABAABABoJbACdAEDeSOyLEYAzjLEWhkqIDAtFlHwYndpUmztZ0xSrZhceHImXMMzf36O7PyTEOU+ie1DPRGofX0GYeX24AA="
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.28.jpeg": {
+    "width": 1280,
+    "height": 960,
+    "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoQAAwABABoJbACdAYv04+A/iAAAPRH8eiDWVJUC5EJ7yCKsFhukzttku7T9WFE0TPccC5CcIg8Uc4jEeAcXSoUhTFjlmk9l8u/xBw5hvKtU2YAAAA="
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.29 (1).jpeg": {
+    "width": 720,
+    "height": 1280,
+    "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADwAQCdASoJABAABABoJZACdADdKoNRXIAA/q3LCpClvIJ7NeAb61p+wNn4WxljveO2Lu6hzaGj+8Dxjj6EvAAA"
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.29.jpeg": {
+    "width": 720,
+    "height": 1280,
+    "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADQAQCdASoJABAABABoJZACdACSBqFYAAD9jR0iPosBdHVaXjdshFet+k7zEoCUy2J3VKQICXhARhSEqduilIY5RRwoEXF4AAA="
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.30.jpeg": {
+    "width": 960,
+    "height": 1280,
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoMABAABABoJbACdADdfD4qYtgAAM2aJsAmFddA4FEVfm+2LCAoWb2GQuLTiJzmxrAdUl8Rdz1FpWqcuOViTLqW1uMJzV+zN9ESOwdvHOgAAA=="
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.31 (1).jpeg": {
+    "width": 1280,
+    "height": 853,
+    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoQAAsABABoJbACdAD6ix9hrgAA/TsSgz1ahE8PpBmE7f+tqQrLwQztFVUlPDWk50/bhoegbsiF1XCBhbzSMXrhigqTb0ztiAA="
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.31 (2).jpeg": {
+    "width": 1280,
+    "height": 853,
+    "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAwAgCdASoQAAsABABoJbACdAYv1OAnHWBpAAD+43rHK8sF68tmho5pjI9PY5+h6Ge6eeJ7k9i1UPqVNQuyEFZge3SW/sG9kk62imvdbITLKP2Jtyfs6g4D/0r9OsAA"
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.31.jpeg": {
+    "width": 1280,
+    "height": 853,
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAsABABoJbACdADRlWIS4+AA86rFHqSsA1LrqxzO7B5g1LMnqibzJpAW7PdptKfsNxKZjlE04LFz+kriyK4bB7gZu+72u5q5i0JEMAAAAA=="
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.32 (1).jpeg": {
+    "width": 1280,
+    "height": 853,
+    "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoQAAsABABoJagCdADhH02S5OgAAP6Df1txC8BgAncoaDjWy3ibYHV8oVH0fxy8+HxUkQgT+7PqEgGuf5/3k3OZ4fryVo0UqwJDusrMqIAeNP+/JccfvEAAAAA="
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.32 (2).jpeg": {
+    "width": 1280,
+    "height": 853,
+    "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoQAAsABABoJbACdAEU9DmWvWOAAP7Z1UA/20Tk9O/Athnr1cloIT/NKiA5oUcktfB6q//97FeM/RZtb9Y/cA8lUT0iz5vmD1r/pfDBWl/rU8AA"
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.51.32.jpeg": {
+    "width": 1280,
+    "height": 853,
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoQAAsABABoJZgCdAC6h40k2FjAAP68VuoUz9c3fPrm61BDFXQO1YPkzSIgJJjQWRsGhTs5Tx1PwxOo33igsmR2yLbkTtLYvMkcwxssPHIAAA=="
+  },
+  "gallery/WhatsApp Image 2026-04-23 at 00.53.30.jpeg": {
+    "width": 1280,
+    "height": 960,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAACQAQCdASoQAAwABABoJbACdABVCAAA/tqsQPFR+iijMNEiEwz76wXXsi8F2wc6NbYGFMA//EBmEeUTj89maHywce5TUmFH5cQHSmVer15UAAAA"
+  },
+  "gallery/kp-assembly-group-1.jpeg": {
+    "width": 1600,
+    "height": 1067,
+    "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADQAQCdASoQAAsABABoJZACdAEGAuzwAAD+ltJRoHw6KA6MignMigMnQgH0nNrG5eskH+QTAgKdkDNgtvx+OEMsM8apOy2vVpSFO++IRiBdamhcrsZcHjdJttSxq7mgAAA="
+  },
+  "gallery/kp-assembly-group-2.jpeg": {
+    "width": 1600,
+    "height": 1067,
+    "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQAAsABABoJbACdACKgmO5DAAA9hToZ3mVzYhPPr+NhOHU7Nz08aHZVW5hfjVndHVyI+hkANTI1BSUHZpS/zyadnEUJeW8/UPghDbgTU2vwAAA"
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.12.58.jpeg": {
+    "width": 1600,
+    "height": 1200,
+    "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoQAAwABABoJYgCdAEXXx5O4A9AAPzxB45ZUcgINK3eyLd7M96r8yoM8ELl7v9U51bZdqk+D7E7N4MJ9V76VaIxLs6PyFN2TgNPJ+setj4c1wAA"
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.13.23.jpeg": {
+    "width": 1200,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoMABAABABoJZgCdAD0j1/l+kUQAN4+xJjHxNmhOVZJB5KWmzuMPghZnMAGEDKB9ZtlKpdnwFVwpu5RYPco9b+ahBVu/Ybk7IZCrdtgZdD3uWIMd14bvAAA"
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.13.37.jpeg": {
+    "width": 1200,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAQCdASoMABAABABoJZgCdAD0fa5PfwAA+F2/UIe/0gi9uASAIUFXl3PqREuGkrndKJwcgrHLbpOP08HvZ1HFoH1Pn5jwPXE1yXznSfP4jbYOqKPRrxhMd9kU267XiAAAAA=="
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.13.48.jpeg": {
+    "width": 1600,
+    "height": 1200,
+    "blur": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAABQAgCdASoQAAwABABoJbACdAYv1vvF6TbAiAAA/rf9MtomMwo3v3lkm+cNU8IF/1Uv8SeogbBk/BEEX/udolY31SHo449pGGG3bID23oJJte0u1WueNw+mh5nE97lQyqrJjq1oAAA="
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.13.59.jpeg": {
+    "width": 1200,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoMABAABABoJagCdAEO9GoEGblQAP3jm3YZWgpxZ6SwDVPf/aSqzKg7IkAT8o3KJPAOP3si+KV+H2gDIGLLiIigvoUOA2rs8vg8TwaIyi3T9/BltuJaaQRRwAA="
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.00.jpeg": {
+    "width": 1600,
+    "height": 1200,
+    "blur": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAABQAgCdASoQAAwABABoJaACdAYv1mn0r3rSdMAA/sRJEjWKX3R3iDRYqcxhAk0sNrfzJNW60eqHjf+vJnw1oxHu/WfqJq3JhLMX9dRrdWGhPO6PkZgdjtZmPGBoRL7cWm46c68N1TrWAA=="
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.01.jpeg": {
+    "width": 1200,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAABQAgCdASoMABAABABoJbACdAYvhbSPIeMDdoAAzd2MdMwkny2zfaMOHVY6n0AbnKWvBTAPQJQ54te8/XOxHnJCtokWVgRAqXWnJ+9NlK67lE5/kugFZt4UIXNwtUEBPmIDgw0C0yYAAA=="
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.02.jpeg": {
+    "width": 1200,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADwAQCdASoMABAABABoJagCdAEOZwakZwAA/I+OYtnm2q+Ke4fLgjk9Ql5OfQKvAzFG3ayAd39344V+WyTOZjhowvmpWwwChxH/ADztDT/i9znUsqGV4MtuI5jS/DUAAAA="
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.03.jpeg": {
+    "width": 1200,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoMABAABABoJagCdAEPDZgULfCAAP3jm3YZWgpxZ6Qf8sH1ddzGbequHIT0NYOp1dLiwfW2kzJkADIH+X1mnpiKCl4Illcpfx3XDKap9J8NWk0vsIB3ijgA"
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.05.jpeg": {
+    "width": 1600,
+    "height": 1200,
+    "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoQAAwABABoJbACdAYu52THztwAAPaxQz642bS9sGeJwSw4MEfa1LOpe/PthB2aYB07RhC8Uxz9M6oqeJSssvurpTcorJz+2ILWDxhg1fprqyxrSae7AAAA"
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.06.jpeg": {
+    "width": 900,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoJABAABABoJQBOgB6XOnodIAD45EqErvVzOWbCSkvK4/TSlMJsfZglP+adcGFb27XT3Z3oKdUC4sglORAUCWcbsumQtp/m+CSHAAAA"
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.08.jpeg": {
+    "width": 1600,
+    "height": 1200,
+    "blur": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAwAgCdASoQAAwABABoJbACdAEPSpjvIFBaQAD+3iE1VhiiFCQaDr5DbhbtDuTD8F++gD1F/vmlc5stRO3Ta8uSCKmh+8Ajw0arBGO+hQT+CAR8l3ZxOrH2lgeEy7IRssxb53/G5AA="
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.09.jpeg": {
+    "width": 1280,
+    "height": 685,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoQAAkABABoJbACdAYp5N2mNTQAAP7FF46zyUX4iDPaplclJ+j9mCCGdNx7H282tsMxX/ti4Ro9ijCNNLzcdN71uW1095HO95qwxaAA"
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.18.jpeg": {
+    "width": 878,
+    "height": 1560,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoJABAABABoJQBOgMW0yaL8AdYAAPjkOKRnM9HvEPRA8LmNuDhAzgGHuqFwGbNOy1fkBqvfwX06npBkbe6CuuJaGrEr3IBGg8IdAgAA"
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.19 (1).jpeg": {
+    "width": 1200,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAAAwAgCdASoMABAABABoJbACdAYu5we+srF2wAD+qf/HhhHKOj1CgzYLgX9Oce9q2NdBTZLNhOKS5iyuvgC5wMgkaWzqAK86twT1fKC0hrGp/fbFqBAtBBKAmocjq9vAPe1xU88MJVOAaDhgAAA="
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.19.jpeg": {
+    "width": 878,
+    "height": 1560,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAQCdASoJABAABABoJYgCdADZm438AADJAO1L1NO0e4gznR5L/gyjSEqfPZS7jv8xb18g9LnuUBPwIviVuvk8YBhQwAiq/XDofwAA"
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.20.jpeg": {
+    "width": 1200,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAADwAQCdASoMABAABABoJbACdAYvhWKjN1AAze9kPjNzannZmttqbPJ8oohqginWsrELA7suAx1E5iGCvb81pzuhoCwWtLa9yJfZaXVx99/IjjVnGjWxdTR3eznxiF5+kxcYV9INYOttg33TbDXKZAAA"
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.21.jpeg": {
+    "width": 1200,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAABQAgCdASoMABAABABoJbACdAYxPalsjR3FWeAAziQ8dGbmBSsGcmHqIy8cYaUnM32S+ZL8YR79yTFTzCuDSyPbkjQyBClA50bdqYaEGlSBU7aanfZ4SPvIsfAWVuEcs4yh5raNpraYQ6gDmY2E5N4AAAA="
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.22.jpeg": {
+    "width": 1200,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAABQAgCdASoMABAABABoJbACdAYv/knf+z5wrgAA4Cvw8TF0VVje1N5HpWVnMq+63Q2s10cD2g0qqsbLikQm8c8eKxtQodtEuCbonKn6884K06+kxhlvaDk/RqHzTqK4386dWzQpay/2kM5pjb94uPQZ6ZSAAA=="
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.23.jpeg": {
+    "width": 1600,
+    "height": 1200,
+    "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAABQAgCdASoQAAwABABoJbACdH8AF8Y4SSbsQAAA/QBFGneDA+Y+VLL3XfxC7PyEr++pFM60EvE9Zn3FAZFF2ZO4G9EQXwBQtOzv7tmrXofeO5yk+L6pHwYCM65PeMNCQpZOAAAA"
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.24.jpeg": {
+    "width": 900,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAQCdASoJABAABABoJZACdADYvtMDAADMoYRVeq6g3oSrsp10W2VT+jPF7PASEX679X61jDI8iQvxC5s+V+Ntj4jlEaDm5LTRpsAAAAA="
+  },
+  "tahafuz-manzil/WhatsApp Image 2026-07-31 at 22.14.25.jpeg": {
+    "width": 1280,
+    "height": 960,
+    "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoQAAwABABoJQBOgCLwG44QmsQAAP4FatJJwVgIFz2nMXIrzUQrlK+FXGbulSa8jcqU3t/gwFE+irOze1CrNrC58oXORcCn8aJfNo4zIw1uRLVIAAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.28.44.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAoABABoJZwAAtvm88LJ5AAA/Z16XUDmhFShIqT5pGORoWECQgmz0kjjOxN7aFLd9n6fBWeTubbtMOxAzzjwIAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.28.47.jpeg": {
+    "width": 1280,
+    "height": 807,
+    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoQAAoABABoJZQC7B2gAlvjIVoAAP2degPbDDzGXOf9n8AvdTN8Bhpu/Ht4HIUhTUgZJxech28qO31//l+rXQBvGQAAAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.28.48.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADwAQCdASoQAAoABABoJQBYdiFdiTklMAAA/tzkUffUVT4cS7SknnDXYcKznQmNyeqriqrPUxrIY9veQ3OMCvTOKgAAAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.28.50.jpeg": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoQAAkABABoJQBOgB6UWcLEB6AA/oQfHJ9YwDh043JTm/4YOnqqT9HJfI2/ZRzJn8GBVfOl7dsBeanbdtW0Awct1fjD3cAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.28.59.jpeg": {
+    "width": 900,
+    "height": 1600,
+    "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoJABAABABoJZQAAp01P6fu4AD+wdkw+t/Hc1dym8QPxAbJ0yB3WjAA9srQ1RiEqqlBYCloAAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.00.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADwAQCdASoQAAoABABoJQBOgCG8q0jNkAAA/tuscMWKKfs1QmjA/+SqLEBEgWKutXcNibQ1cynrU6b1AAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.01.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoQAAoABABoJYwCdAD0fzWC28AA/sxlJgcWiDy50mAwlTvB4WH0BFYAmI9F+eSVGxfGUoedLG7vuD81T98w08wI9jgIfcBDwAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.03.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoQAAoABABoJQBOgCFEQRMYAAD+5fgt2icCrfmVxPol2iyzDlLO5rxgj0PWYwxP44OwSkjuyh9hQAAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.04.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAQCdASoQAAoABABoJYwCdAEOgvC6WAAA/u7ucaWXhYYQH29s+1KNvMxo5krhk2VaT1iz7WD5ccji9Hxiuf1okAAZFXBBzAAAAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.05.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoQAAoABABoJQBOj+ADBNtzF6AAAP7sUBFkwDZ5w1A2345GwPkbm2KAvmnzunG6iyV0VseFpPxg5GVq5/7AAAAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.07.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAAAQAgCdASoQAAoABABoJYwCdAEUn7vw4U4AAP7sWrPPCQBufxh5P+vmoF5rLf9SseWyVgdSnHaH6pJp70B2gAAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.08.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoQAAoABABoJZQCdAEU9xv1tq4AAP7sWqv3hcYwCgTztJgC+IWb+rhru2mMpMU7maMrWVW3nsXAAH9al8gqgAAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.10.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAwAgCdASoQAAoABABoJZQCw7EN43fUM4b8wAD+eTuMryRxU83Nga2CuddasPvZEiHqET1mmQ71FxfcPbKkKGEOhs+o/O2VqlOJjx+OOAA8wAAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.11.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoQAAoABABoJZwAAuQrNU3mDwAA9ke6RDmLZNXW1G5xwJt8CuMC3JUXfLtsZdR5oTxYGBy9AtQdYGjj5twUbwzt7/6Ol2wA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.12.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAwAgCdASoQAAoABABoJQBOj+ADA4PsR8/mAAD+2sjo7yeiExiSzMVQvIvWO+NqkSfCnOBLPsJCMfBKCx9CPADr1URKD/ktVMOiAP8ToEiKgAAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.13.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADQAQCdASoQAAoABABoJZwAAb+kz3OkgAD+J7nRkbula+pOc3znZDtWa7nOXb4dWJ0BPfMK7UbB7J7qaJwKNLQYONUNFGE2g6SjNB5l3I4AAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.14.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoQAAoABABoJQBOj+ACuP6ruHAA/tuGRp/s8C8ApFgZVsLz3tkTIW57j+1+7H7I9b/fHwHjiNVduZfgPiMBjZhYJTepfP1EWppCwAAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.15.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoQAAoABABoJbACdAEClhkRHgAUAPPNw6I0pVKufo7AXVIneoL3+np2PwW3ASE2jvj6wTnVWLB/Xp43T1Mg6dha76IsZt/bRybv7KdS68YdR91+AAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.18.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoQAAoABABoJZwAAwBQ12otlNAA/u6vqjS6lJfE5OPnRpTJni5i7ygQEVglHxYAAAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.19 (1).jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACQAQCdASoQAAoABABoJQBOgB5aoiAA/uzIlnFZhuHl0hfeDBCTpK86+2H4F2d8PJuvipiMedxWi3Qo5LFItbGiA6OAtmBxMAAAAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.19.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoQAAoABABoJZwAAuhH2BFskOAA9kfgam+bNnMOlSjE+qsUVnsq4IVqFaKd4dte+K5vAd+6KET9lJYAAAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.21.jpeg": {
+    "width": 1599,
+    "height": 899,
+    "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAkABABoJZACdADGbsJ6UYAA/puRenBDkV7JRQXHAZxjWe9ifnpmyGIUr/b0JEK6D0O3/lg5PCXy7tyiVWqFbouAdD+51NhAAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.22.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADwAQCdASoQAAoABABoJQBYdh6WcW1EJgAA/uRGtNnVS3yha+l4xcnudLF7gfIwcIvvgwCO1X7aWtRu4msAAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.23.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoQAAoABABoJYwCdAD0s2EUwAD+5Ea02dVLfHFPgSsuV66Q9vPv7ck3QBxBAR0JqEG86ckKFgsoAAAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.24.jpeg": {
+    "width": 1280,
+    "height": 800,
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoQAAoABABoJQBOj+ADAD7ilPsAAP4nvlsCQ980PByYn6sLQOihvE026mYN+FvA8NdYbRLw/ZKmoktu9N9RH3DuE1HgmRruDXv8i7i/crAAAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.26.jpeg": {
+    "width": 1600,
+    "height": 1000,
+    "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACQAQCdASoQAAoABABoJQBOgBHsLoAA/kE86Yk+N2TCcNd49/pdkQijHNNESuVPhCQIU1VnrVzlylGvEvDRqJYrwDnB9rXMNIN/ZNjsjuhg9YSuhdEYMAAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.27.jpeg": {
+    "width": 1280,
+    "height": 801,
+    "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAQCdASoQAAoABABoJQBOgCG7jOZRocAA/VPy8sDKLTkyYKc5LDbG+bsnlU2n9mNLx7OihVsQzEgD3H2MfVhXhMiAri025SWEMxvUEyhfd2eAAAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.28 (1).jpeg": {
+    "width": 1600,
+    "height": 1000,
+    "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABQAgCdASoQAAoABABoJQBOj+AW7Ay0xPHjpgAA/s91VQu7TK3hSkpE0Y7JAy7vo7pOQu24A27xYa3sPVUm5bojjJMSv3uf4jyk6d5KXjJouVv16aE0EM093Lzpz66RKSP4AA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.28.jpeg": {
+    "width": 1600,
+    "height": 1000,
+    "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoQAAoABABoJYgCdADc9Dl9jAoAAP7O+Ag7yi6t2uhrDGaduH0Y6REnjrFDc9o4CjdlsvDYI4K+1K5UU1gz5LNjLtcAFWibRwU47ugSQx9wmCCN+NRBCwH4AAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.29.jpeg": {
+    "width": 1600,
+    "height": 1000,
+    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoQAAoABABoJQAAXWU4TqEXI8AA/q2dy+rZgBn59sioUA5n1OPj5nfFYtFGEYONrQ62gyQXIK+MuSUepqzuXSEWGPdevf+EYAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.30.jpeg": {
+    "width": 1600,
+    "height": 1000,
+    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAQCdASoQAAoABABoJZwAAvenaACSgAD7pe35LpLRMT/klSKGbAphkM3/xQQSgrv2xdZx1ad3PRoMC/skCtN4yEFyvDucRMAAAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.37.jpeg": {
+    "width": 1161,
+    "height": 1512,
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoMABAABABoJZQAAvl6uKv2PQQAAP7gjnFz4B5y3tNXbsjLfPc9PdMrITExnOS1bIzvcWXhvFrMQ53g97F9a4GJAe7wRS2wxrp/JUfmlMAAAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.38 (1).jpeg": {
+    "width": 1520,
+    "height": 893,
+    "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQAAkABABoJZwAD4cttBkO1iAA/uU4QtliDpM/wqrEUCleT9qyM07LVz6zbFiuS8DhuugsvD3kbM9CR3P12t1+V9cGFD18K3aVo2O6PIzCAAAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.38.jpeg": {
+    "width": 1600,
+    "height": 868,
+    "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAkABABoJZwAAmsjSJb41wAA/uHPr8j18iRcKMzL1nhY8ZExKZ/XAcZfIP9Rx2gXoKilErzW4CpM2KtQ58Tw6diyDOMK7l4AAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.39.jpeg": {
+    "width": 1600,
+    "height": 1000,
+    "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoQAAoABABoJQBOhgiYMktAdkggAP7kYoE6fspXPyKmaBucraNxs/MHwZPVLFsUMV1RmQgewICtW+/eUek29ONMZj7FVbzgAsoAmwAAAAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.40.jpeg": {
+    "width": 1600,
+    "height": 1000,
+    "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAoABABoJZQC7AEN8E6Fg5AA8qfhqLIhfu1CSvTM66EZLjTJm1ryyWfxIqqTkEgjwTvcknUdSMbnjQMWilOzcVFHoOKJhpmgAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.41 (1).jpeg": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAwAgCdASoQAAkABABoJZQC7DL/wYOd5eXvQADOOaWXBoFK+uHeBKyGInVPLO711tjNDE2j96pNIwvKSwafN2ZY/f84LUfiE7M4AAAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.41.jpeg": {
+    "width": 1600,
+    "height": 1000,
+    "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoQAAoABABoJZQC7AEN8Y6II1YAAPKn4aix5w8XkZVxDLSxhAwXoHJJVZwhgJ+3oOpTYZgR5QHp4CUoYmbRhlyxgAA="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.42.jpeg": {
+    "width": 1600,
+    "height": 1200,
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAwABABoJZwAAtpA8N1q3AAA/ufyn5yeN9wNfu6bwN7YkMOcXfLP6bYKXu42FuMg8vfQn+UPB+s344hTa6CH2DQKL+xCMIUAkXvCAw8IAA=="
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.43.jpeg": {
+    "width": 1280,
+    "height": 575,
+    "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACwAQCdASoQAAcABABoJZwAAxZb3jdYAP7OAYB+FBO12owhq+c/U8XWc1bOTDEZ6pNiakqHQypdZuekkxqAAAAA"
+  },
+  "sessions/WhatsApp Image 2026-07-31 at 22.29.44.jpeg": {
+    "width": 1600,
+    "height": 1000,
+    "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoQAAoABABoJQBWACMCaJxu+Zb27AD+yqbW1cu304yZxvENZAud6tFZvN5nHaeKvwqqVXgGvCPnaAcZ3l+9FmpO2JLXX9iqgcyXtPQwc73oiqyTbZgPbmaQ1zFD1XAA"
+  }
+}

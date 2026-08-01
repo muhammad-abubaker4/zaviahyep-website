@@ -1,6 +1,6 @@
 import sameenMeer from "@/assets/mentors/sameen-meer.jpg";
 import samaZaidi from "@/assets/mentors/sama-zaidi.jpg";
-import osamaNadeemQureshi from "@/assets/mentors/osama-nadeem-qureshi.png";
+import osamaNadeemQureshi from "@/assets/mentors/osama-nadeem-qureshi.jpg";
 import bismahMirza from "@/assets/mentors/bismah-mirza.jpg";
 import amnaIrfan from "@/assets/mentors/amna-irfan.jpg";
 import hafsaKhalil from "@/assets/mentors/hafsa-khalil.jpg";
@@ -172,10 +172,3 @@ export const guestSpeakers: GuestSpeaker[] = [
     imagePosition: "center 15%",
   },
 ];
-
-/** Shared mentor portraits for testimonials and other sections */
-export const mentorImages = {
-  amnaSardar,
-  drSassiMalikSher,
-  arbeehaZahid,
-} as const;

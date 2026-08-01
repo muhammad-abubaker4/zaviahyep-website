@@ -9,12 +9,20 @@ const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+    // Useful while developing; in production it only pollutes visitors' consoles.
+    if (import.meta.env.DEV) {
+      console.warn("404: no route matches", location.pathname);
+    }
   }, [location.pathname]);
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta title="Page Not Found" noIndex path={location.pathname} />
+      <PageMeta
+        title="Page Not Found"
+        description="This Zaviah page does not exist or has moved. Browse our programs, gallery, and ways to get involved."
+        noIndex
+        path={location.pathname}
+      />
       <Navbar />
       <main id="main-content" tabIndex={-1} className="outline-none">
         <section className="flex min-h-[70vh] flex-col items-center justify-center px-4 py-20 text-center">
@@ -25,13 +33,13 @@ const NotFound = () => {
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
             <Button asChild className="rounded-full" size="lg">
-              <Link to="/">Back to home</Link>
+              <Link to="/">Home</Link>
             </Button>
             <Button asChild variant="outline" className="rounded-full" size="lg">
               <Link to="/#contact">Contact us</Link>
             </Button>
             <Button asChild variant="secondary" className="rounded-full" size="lg">
-              <Link to="/#apply">Join Zaviah</Link>
+              <Link to="/get-involved">Get Involved</Link>
             </Button>
           </div>
         </section>
