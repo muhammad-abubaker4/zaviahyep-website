@@ -71,6 +71,11 @@ stamps that route's title / description / canonical / Open Graph / Twitter / JSO
 of Vite's `index.html`. The result is one HTML file per route under `dist/` — so WhatsApp,
 LinkedIn, Facebook, X, Slack and Discord all read the correct card without executing JavaScript.
 
+Routes are written flat (`dist/about.html`), not as directory indexes (`dist/about/index.html`).
+Netlify 301s a directory index to its trailing-slash form, which would put a redirect in front of
+every canonical URL and sitemap entry, and leave each canonical pointing at a URL that redirects.
+Flat files serve 200 at the exact URL the canonical advertises — don't change this back.
+
 The rendered body is intentionally not saved. Shipping it was measured and rejected: React's
 `createRoot` tears down `#root` and rebuilds it, which reset the hero LCP candidate by ~800ms.
 The head is what social crawlers need; Google executes JS for body content either way.

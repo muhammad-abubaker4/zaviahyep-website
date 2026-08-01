@@ -52,9 +52,18 @@ const RENDER_TIMEOUT_MS = 30_000;
 const SITE_URL = "https://zaviah.org";
 const canonicalFor = (route) => (route === "/" ? `${SITE_URL}/` : `${SITE_URL}${route}`);
 
-/** `/` writes dist/index.html; `/a/b` writes dist/a/b/index.html. */
+/**
+ * `/` writes dist/index.html; `/a/b` writes dist/a/b.html.
+ *
+ * Deliberately flat files rather than `<route>/index.html`. Netlify 301s a
+ * directory index to its trailing-slash form (`/about` -> `/about/`), which put
+ * a redirect in front of every canonical URL, every sitemap entry and every
+ * inbound link — and left the canonical tag pointing at a URL that redirects.
+ * Netlify resolves an extensionless request to `<route>.html` directly, so this
+ * serves 200 at the URL we actually advertise.
+ */
 const outputFor = (route) =>
-  route === "/" ? path.join(DIST, "index.html") : path.join(DIST, route, "index.html");
+  route === "/" ? path.join(DIST, "index.html") : path.join(DIST, `${route}.html`);
 
 async function launchBrowser() {
   try {
