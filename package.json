@@ -1,7 +1,14 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "zaviah-website",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Official website for Zaviah — a youth-led nonprofit expanding access, awareness and aspiration.",
+  "homepage": "https://zaviah.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muhammad-abubaker4/zaviahyep-website.git"
+  },
+  "license": "UNLICENSED",
   "type": "module",
   "scripts": {
     "dev": "vite",
