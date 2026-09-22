@@ -52,25 +52,24 @@ const Hero = () => {
             <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-primary-foreground/15 bg-primary-foreground/[0.06] px-3 py-1.5 backdrop-blur-md sm:mb-8 sm:gap-2.5 sm:px-4 sm:py-2">
               <Sparkles className="h-3.5 w-3.5 shrink-0 text-primary-foreground/70" aria-hidden />
               <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-primary-foreground/75 sm:text-xs sm:tracking-[0.22em]">
-                Youth Empowerment Platform
+                Youth-Led Nonprofit Platform
               </span>
             </div>
 
             <h1 className="display-hero mb-6 text-balance sm:mb-8">
-              <span className="block">Empowering</span>
-              <span className="block text-primary-foreground/50">the Next</span>
-              <span className="relative mt-1 inline-block">
-                Generation
+              <span className="text-primary-foreground">Helping the Next Generation</span>{" "}
+              <span className="relative inline text-primary-foreground/55">
+                Learn, Connect and Grow
                 <span
-                  className="absolute -bottom-1 left-0 h-1 w-full rounded-full bg-primary-foreground/25"
+                  className="absolute -bottom-0.5 left-0 h-0.5 w-full rounded-full bg-primary-foreground/25 sm:-bottom-1 sm:h-1"
                   aria-hidden
                 />
               </span>
             </h1>
 
-            <p className="mb-8 max-w-lg text-[0.95rem] leading-[1.7] text-primary-foreground/65 sm:mb-10 sm:text-lg md:text-xl">
-              Connecting students across Pakistan with mentors, workshops, and real opportunities to
-              learn, lead, and grow.
+            <p className="mb-8 max-w-lg text-[0.95rem] leading-[1.7] text-primary-foreground/70 sm:mb-10 sm:text-lg md:text-xl">
+              Connecting people across Pakistan through learning, meaningful opportunities,
+              collaboration, and community.
             </p>
 
             <Link to={GET_INVOLVED_PATH} className="btn-primary-modern shrink-0">

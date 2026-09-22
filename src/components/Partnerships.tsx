@@ -2,7 +2,6 @@ import { m, useInView } from "framer-motion";
 import { revealTransition } from "@/lib/motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { ORG_PROFILE_PDF } from "@/lib/constants";
 import { partners } from "@/data/partners";
 import SectionHeader from "@/components/SectionHeader";
 import PartnerCard from "@/components/PartnerCard";
@@ -38,50 +37,26 @@ const Partnerships = ({ hideHeader = false, tone = "light" }: PartnershipsProps)
       />
       <div className="container relative px-4">
         {!hideHeader && (
-          <>
-            <SectionHeader
-              eyebrow="Collaboration"
-              title="Partnerships &"
-              highlight="MoUs"
-              description="Collaborating with organizations that share our mission to empower youth nationwide."
-              dark={isDark}
-            />
-            <p
-              className={cn(
-                "-mt-8 mb-10 text-center text-sm",
-                isDark ? "text-primary-foreground/65" : "text-muted-foreground",
-              )}
-            >
-              <a
-                href={ORG_PROFILE_PDF}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  "font-semibold underline-offset-4 hover:underline",
-                  isDark ? "text-primary-foreground" : "text-primary",
-                )}
-              >
-                Download Organization Profile (PDF)
-              </a>
-            </p>
-          </>
-        )}
-        {hideHeader && (
-          <p className="mb-8 text-center text-sm text-muted-foreground">
-            <a
-              href={ORG_PROFILE_PDF}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-primary underline-offset-4 hover:underline"
-            >
-              Download Organization Profile (PDF)
-            </a>
-          </p>
+          <SectionHeader
+            eyebrow="Collaboration"
+            title="Partnerships &"
+            highlight="MoUs"
+            description="Collaborating with organizations that share our mission to empower youth nationwide."
+            dark={isDark}
+          />
         )}
 
-        <div className="mx-auto mb-12 grid max-w-6xl gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-7">
-          {partners.map((partner) => (
-            <PartnerCard key={partner.name} partner={partner} className="w-full" />
+        <div className="mx-auto mb-12 grid max-w-6xl grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4 lg:gap-6">
+          {partners.map((partner, index) => (
+            <m.div
+              key={partner.name}
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              transition={revealTransition(0.04 * index)}
+              className="h-full"
+            >
+              <PartnerCard partner={partner} className="w-full" />
+            </m.div>
           ))}
         </div>
 

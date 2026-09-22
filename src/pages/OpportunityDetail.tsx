@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
 import ApplyButton from "@/components/ApplyButton";
 import ApplicationProcess from "@/components/ApplicationProcess";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
 import { GET_INVOLVED_PATH, opportunityPath } from "@/lib/routes";
 import { getOpportunity } from "@/data/opportunities";
 
@@ -25,6 +25,7 @@ const OpportunityDetail = () => {
       { name: "Get Involved", path: GET_INVOLVED_PATH },
       { name: opportunity.shortTitle, path },
     ]),
+    ...(opportunity.faqs.length > 0 ? [faqPageSchema(opportunity.faqs)] : []),
   ];
 
   return (

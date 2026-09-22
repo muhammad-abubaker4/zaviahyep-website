@@ -5,17 +5,49 @@ import SectionHeader from "@/components/SectionHeader";
 import { revealTransition } from "@/lib/motion";
 
 const shortTermGoals = [
-  { title: "Launch Zaviah's Mentorship Program", description: "Introduce a structured mentorship system that connects students with professionals, educators, and youth leaders who can guide them in academic, career, and personal growth journeys." },
-  { title: "Conduct Virtual Workshops Nationwide", description: "Organize online sessions on essential skills such as communication, leadership, critical thinking, and personal development, making learning accessible to students from all regions." },
-  { title: "Onboard Campus Ambassadors", description: "Build a network of motivated student representatives who will promote Zaviah's mission, coordinate activities, and act as a bridge between their campuses and the Zaviah team." },
-  { title: "Collaborate with Local Youth Organizations", description: "Establish partnerships with regional student and youth led groups to organize joint events, mentorship sessions, and awareness campaigns." },
+  {
+    title: "Launch Zaviah's Mentorship Program",
+    description:
+      "Develop and introduce a structured mentorship initiative connecting participants with experienced mentors for guidance, learning, and personal development.",
+  },
+  {
+    title: "Expand Learning Sessions & Workshops",
+    description:
+      "Continue organizing accessible sessions on technology, education, careers, leadership, personal development, opportunities, and other relevant topics.",
+  },
+  {
+    title: "Strengthen Community Participation",
+    description:
+      "Create more opportunities for members, volunteers, speakers, mentors, and collaborators to contribute to Zaviah's initiatives.",
+  },
+  {
+    title: "Build Meaningful Collaborations",
+    description:
+      "Continue working with organizations, communities, professionals, and educators on initiatives that create shared learning and participation opportunities.",
+  },
 ];
 
 const longTermGoals = [
-  { title: "Build Zaviah Learning Portal", description: "Develop a dedicated digital hub offering mentorship tools, learning resources, online courses, and community spaces for students to connect and grow." },
-  { title: "Host Annual Zaviah Youth Conference", description: "Launch a national event that brings together young leaders, educators, and professionals to exchange ideas, share experiences, and celebrate youth achievements." },
-  { title: "Partner with International Youth Movements", description: "Collaborate with global organizations that share Zaviah's vision to create cross border opportunities for students through exchange programs and online mentorships." },
-  { title: "Sustainable Leadership Programs", description: "Design long term initiatives that equip students with practical skills, leadership experience, and career guidance to help them transition smoothly into professional life." },
+  {
+    title: "Expand Access to Learning",
+    description:
+      "Reach more communities through accessible learning opportunities, resources, sessions, and collaborative initiatives.",
+  },
+  {
+    title: "Build a Stronger Community Network",
+    description:
+      "Grow a diverse network of participants, mentors, professionals, organizations, and collaborators connected through shared learning and contribution.",
+  },
+  {
+    title: "Strengthen Collaborative Initiatives",
+    description:
+      "Develop meaningful collaborations within Pakistan and beyond that support knowledge sharing, community participation, and new opportunities.",
+  },
+  {
+    title: "Create Sustainable Programs",
+    description:
+      "Develop long-term initiatives that can continue creating value in learning, guidance, leadership, community participation, and personal development.",
+  },
 ];
 
 const phases = [

@@ -7,34 +7,34 @@ import { cn } from "@/lib/utils";
 
 const metrics = [
   {
-    value: 1000,
+    value: 2000,
     suffix: "+",
-    label: "Total Mentees",
-    description: "Students empowered nationwide",
+    label: "Cumulative Participants",
+    description: "Across Zaviah's sessions and initiatives",
     span: "col-span-12 md:col-span-6 lg:col-span-5",
     featured: true,
   },
   {
-    value: 25,
+    value: 27,
     suffix: "+",
-    label: "Webinars Hosted",
-    description: "Live learning sessions",
+    label: "Sessions & Workshops",
+    description: "Across diverse learning and development topics",
     span: "col-span-6 md:col-span-3 lg:col-span-3",
     featured: false,
   },
   {
-    value: 500,
+    value: 30,
     suffix: "+",
-    label: "Community Hours",
-    description: "Mentorship and peer support",
+    label: "Speakers",
+    description: "Sharing knowledge and experience across Zaviah initiatives",
     span: "col-span-6 md:col-span-3 lg:col-span-4",
     featured: false,
   },
   {
-    value: 8,
+    value: 10,
     suffix: "+",
     label: "Partner Organizations",
-    description: "Collaborating for youth impact",
+    description: "Collaborating across initiatives and opportunities",
     span: "col-span-12 md:col-span-12 lg:col-span-12",
     featured: false,
     wide: true,
@@ -58,7 +58,7 @@ const ImpactMetrics = () => {
           eyebrow="Impact"
           title="Measuring"
           highlight="Real Impact"
-          description="Every number represents a student, a conversation, and a step toward a brighter future."
+          description="A look at Zaviah's growing community, activities, and reach across Pakistan."
           dark
         />
 
@@ -96,13 +96,13 @@ const ImpactMetrics = () => {
                   >
                     {metric.label}
                   </h3>
-                  <p className="mt-1.5 text-sm text-primary-foreground/55">{metric.description}</p>
+                  <p className="mt-1.5 text-sm text-primary-foreground/60">{metric.description}</p>
                 </div>
 
                 {metric.wide && (
-                  <p className="max-w-md text-sm text-primary-foreground/45">
-                    Building a nationwide network of empowered youth through consistent mentorship,
-                    live sessions, and community collaboration.
+                  <p className="max-w-md text-sm text-primary-foreground/50">
+                    Bringing people together through learning, opportunities, collaboration, and
+                    community-led initiatives across Pakistan.
                   </p>
                 )}
               </div>

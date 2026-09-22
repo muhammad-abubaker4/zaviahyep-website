@@ -1,5 +1,5 @@
-import hafsaKhalil from "@/assets/team/Hafsa_Khalil.jpeg";
-import muhammadAbubaker from "@/assets/team/Muhammad_Abubaker.jpeg";
+import hafsaKhalil from "@/assets/team/hafsa-khalil.jpeg";
+import muhammadAbubaker from "@/assets/team/muhammad-abubaker.jpeg";
 
 export type ProfileLinks = {
   email?: string;
@@ -46,11 +46,11 @@ export const profiles: Record<"founder" | "coFounder", Profile> = {
       "Visionary leader committed to empowering youth through mentorship and learning.",
     image: hafsaKhalil,
     imageAlt: "Hafsa Khalil, Founder and CEO of Zaviah",
-    metaTitle: "Hafsa Khalil - Founder",
+    metaTitle: "Hafsa Khalil | Founder & CEO of Zaviah",
     metaDescription:
-      "Meet Hafsa Khalil, Founder & CEO of Zaviah - empowering youth across Pakistan through mentorship, leadership, and learning.",
+      "Meet Hafsa Khalil, Founder & CEO of Zaviah, leading strategy, outreach, and partnerships for youth learning and opportunity across Pakistan.",
     intro:
-      "Hafsa Khalil founded Zaviah as a nationwide initiative dedicated to empowering students across Pakistan through mentorship and awareness. She has mentored 300+ students and delivered 10+ workshops on leadership and entrepreneurship, and she leads the organisation's strategy, outreach, and partnerships.",
+      "Hafsa Khalil founded Zaviah as a youth-led nonprofit platform focused on creating opportunities for learning, mentorship, awareness, and personal growth. As Founder & CEO, she leads the organisation's overall direction, strategy, outreach, and partnerships.",
     expertise: [
       "Leadership & Team Management",
       "Mentorship & Youth Development",
@@ -65,7 +65,7 @@ export const profiles: Record<"founder" | "coFounder", Profile> = {
         org: "Zaviah",
         period: "Jul 2025 – Present",
         description:
-          "Leads a 10-member team across strategy, outreach, and daily operations, with 5+ sessions engaging over 250 students.",
+          "Leads Zaviah's overall direction, strategy, outreach, partnerships, and organizational development.",
       },
       {
         title: "Territory Leader",
@@ -110,31 +110,31 @@ export const profiles: Record<"founder" | "coFounder", Profile> = {
 
   coFounder: {
     name: "Muhammad Abubaker",
-    role: "Co-Founder",
+    role: "Co-Founder & President",
     path: "/co-founder",
     tagline:
       "Leads operations, strategy, and digital direction for meaningful student communities.",
     image: muhammadAbubaker,
-    imageAlt: "Muhammad Abubaker, Co-Founder of Zaviah",
-    metaTitle: "Muhammad Abubaker - Co-Founder",
+    imageAlt: "Muhammad Abubaker, Co-Founder & President of Zaviah",
+    metaTitle: "Muhammad Abubaker | Co-Founder & President of Zaviah",
     metaDescription:
-      "Meet Muhammad Abubaker, Co-Founder of Zaviah - leading operations, strategy, and digital direction for student communities nationwide.",
+      "Meet Muhammad Abubaker, Co-Founder & President of Zaviah, leading operations, strategy, and digital direction for youth communities across Pakistan.",
     intro:
-      "Muhammad Abubaker is the Co-Founder of Zaviah, where he turns the organisation's vision into projects that reach students. He focuses on operations: building and training the team, coordinating workflows, and making sure youth-led initiatives are executed on time. His background in artificial intelligence and data science shapes Zaviah's digital direction.",
+      "Muhammad Abubaker is the Co-Founder & President of Zaviah, where he turns the organisation's vision into projects that reach students. He focuses on operations: building and training the team, coordinating workflows, and making sure youth-led initiatives are executed on time. His background in artificial intelligence and data science shapes Zaviah's digital direction.",
     expertise: [
       "Operations Management",
       "Team Coordination",
       "Project Delivery",
       "Onboarding & Training",
       "Cross-functional Collaboration",
-      "Digital & AI Strategy",
+      "Digital Systems & AI",
     ],
     achievements: [
       {
-        title: "Co-Founder",
+        title: "Co-Founder & President",
         org: "Zaviah",
         description:
-          "Recruited and manages a 10-member cross-functional team with onboarding and training plans, and coordinates the project workflows that keep youth-led initiatives on schedule.",
+          "Recruited and manages a cross-functional core team with onboarding and training plans, and coordinates the project workflows that keep youth-led initiatives on schedule.",
       },
       {
         title: "Cabinet Member",
@@ -146,7 +146,7 @@ export const profiles: Record<"founder" | "coFounder", Profile> = {
         title: "AI Engineer",
         org: "Go PK Resources (SMC-Private) Limited",
         description:
-          "Builds AI systems professionally, experience he brings to Zaviah's digital tools and workflows.",
+          "Works professionally in AI engineering, bringing this experience to Zaviah's digital tools and workflows.",
       },
     ],
     education: [

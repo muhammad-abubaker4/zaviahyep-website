@@ -6,13 +6,17 @@ import { ArrowRight } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 import OpportunityCard from "@/components/OpportunityCard";
 import { GET_INVOLVED_PATH } from "@/lib/routes";
-import { opportunities } from "@/data/opportunities";
+import { opportunities, type OpportunitySlug } from "@/data/opportunities";
 
-/** Homepage teaser: compact opportunities, then route to hub. */
+/** Homepage pathways: member, volunteer, mentor interest, and partnerships. */
+const PREVIEW_SLUGS: OpportunitySlug[] = ["member", "volunteer", "mentor", "partnerships"];
+
 const GetInvolvedSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const preview = opportunities.slice(0, 3);
+  const preview = PREVIEW_SLUGS.map((slug) => opportunities.find((item) => item.slug === slug)).filter(
+    (item): item is NonNullable<typeof item> => item !== undefined,
+  );
 
   return (
     <section id="get-involved" className="section-muted overflow-hidden" ref={ref}>
@@ -22,14 +26,14 @@ const GetInvolvedSection = () => {
           eyebrow="Get Involved"
           title="Find Your"
           highlight="Path"
-          description="Whether you are a student, mentor, volunteer or partner, there is a place for you."
+          description="Whether you want to learn, volunteer, mentor, or collaborate, there is a place for you at Zaviah."
         />
 
         <m.div
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={revealTransition()}
-          className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3"
+          className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4"
         >
           {preview.map((opportunity) => (
             <OpportunityCard key={opportunity.slug} opportunity={opportunity} />

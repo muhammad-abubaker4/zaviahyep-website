@@ -18,7 +18,7 @@ type NavDropdown = {
 
 const communitySubItems: NavDropdownItem[] = [
   { name: "Founder", href: "/founder" },
-  { name: "Co Founder", href: "/co-founder" },
+  { name: "Co-Founder", href: "/co-founder" },
   { name: "Core Members", href: "/core-members" },
   { name: "Guest Speakers", href: "/guest-speakers" },
   { name: "Partners", href: "/partners" },

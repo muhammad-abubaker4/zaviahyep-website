@@ -14,7 +14,7 @@ const PartnersPage = () => (
   <div className="min-h-screen bg-background">
     <PageMeta
       title="Partners"
-      description="Organizations collaborating with Zaviah through partnerships and MoUs."
+      description="Explore the organizations collaborating with Zaviah to support learning, mentorship, opportunities, community engagement, and meaningful participation."
       path="/partners"
       jsonLd={jsonLd}
     />

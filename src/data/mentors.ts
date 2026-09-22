@@ -1,23 +1,26 @@
-import sameenMeer from "@/assets/mentors/sameen-meer.jpg";
-import samaZaidi from "@/assets/mentors/sama-zaidi.jpg";
-import osamaNadeemQureshi from "@/assets/mentors/osama-nadeem-qureshi.jpg";
-import bismahMirza from "@/assets/mentors/bismah-mirza.jpg";
-import amnaIrfan from "@/assets/mentors/amna-irfan.jpg";
-import hafsaKhalil from "@/assets/mentors/hafsa-khalil.jpg";
-import saeedaChaudhry from "@/assets/mentors/saeeda-ch.jpg";
-import amnaSardar from "@/assets/mentors/amna-sardar.jpg";
-import farhanAliBaloch from "@/assets/mentors/farhan-ali-baloch.jpg";
-import ahsanLakhani from "@/assets/mentors/ahsan-lakhani.jpg";
-import drAtifAli from "@/assets/mentors/dr-atif-ali.jpg";
-import drSassiMalikSher from "@/assets/mentors/dr-sassi-malik-sher.jpg";
-import abdulWahab from "@/assets/mentors/abdul-wahab.jpg";
-import zunairaRehman from "@/assets/mentors/zunaira-rehman.jpg";
-import arbeehaZahid from "@/assets/mentors/arbeeha-zahid.jpg";
-import hibaSyed from "@/assets/mentors/hiba-syed.jpg";
-import duaAmjad from "@/assets/mentors/dua_amjad.jpg";
-import muhammadUsmanJamal from "@/assets/mentors/muhammad-usman.jpg";
-import ibtisamBabar from "@/assets/mentors/ibtisam-babar.jpg";
-import kaleemMustafa from "@/assets/mentors/kaleem-mustafa.jpg";
+import sameenMeer from "@/assets/speakers/sameen-meer.jpg";
+import samaZaidi from "@/assets/speakers/sama-zaidi.jpg";
+import osamaNadeemQureshi from "@/assets/speakers/osama-nadeem-qureshi.jpg";
+import bismahMirza from "@/assets/speakers/bismah-mirza.jpg";
+import amnaIrfan from "@/assets/speakers/amna-irfan.jpg";
+import hafsaKhalil from "@/assets/speakers/hafsa-khalil.jpg";
+import saeedaChaudhry from "@/assets/speakers/saeeda-ch.jpg";
+import amnaSardar from "@/assets/speakers/amna-sardar.jpg";
+import farhanAliBaloch from "@/assets/speakers/farhan-ali-baloch.jpg";
+import ahsanLakhani from "@/assets/speakers/ahsan-lakhani.jpg";
+import drAtifAli from "@/assets/speakers/dr-atif-ali.jpg";
+import drSassiMalikSher from "@/assets/speakers/dr-sassi-malik-sher.jpg";
+import abdulWahab from "@/assets/speakers/abdul-wahab.jpg";
+import zunairaRehman from "@/assets/speakers/zunaira-rehman.jpg";
+import arbeehaZahid from "@/assets/speakers/arbeeha-zahid.jpg";
+import hibaSyed from "@/assets/speakers/hiba-syed.jpg";
+import duaAmjad from "@/assets/speakers/dua-amjad.jpg";
+import muhammadUsmanJamal from "@/assets/speakers/muhammad-usman.jpg";
+import ibtisamBabar from "@/assets/speakers/ibtisam-babar.jpg";
+import kaleemMustafa from "@/assets/speakers/kaleem-mustafa.jpg";
+import syedAdeelAliBukhari from "@/assets/speakers/syed-adeel-ali-bukhari.jpg";
+import tamreenaTashfeen from "@/assets/speakers/tamreena-tashfeen.jpg";
+import hammadArif from "@/assets/speakers/hammad-arif.jpg";
 
 export type GuestSpeaker = {
   id: string;
@@ -170,5 +173,26 @@ export const guestSpeakers: GuestSpeaker[] = [
     role: "PhD Scholar & Academic Trainer, ATIF",
     image: kaleemMustafa,
     imagePosition: "center 15%",
+  },
+  {
+    id: "syed-adeel-ali-bukhari",
+    displayName: "Dr. Syed Adeel Ali Bukhari",
+    role: "CEO, Customs Matters",
+    image: syedAdeelAliBukhari,
+    imagePosition: "center 12%",
+  },
+  {
+    id: "tamreena-tashfeen",
+    displayName: "Ms. Tamreena Tashfeen",
+    role: "CEO, DIGEXN",
+    image: tamreenaTashfeen,
+    imagePosition: "center 18%",
+  },
+  {
+    id: "hammad-arif",
+    displayName: "Mr. Hammad Arif",
+    role: "Study Abroad Consultant & Co-Founder, Global Opportunities Hub",
+    image: hammadArif,
+    imagePosition: "center 12%",
   },
 ];

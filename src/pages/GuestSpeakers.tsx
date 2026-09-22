@@ -14,7 +14,7 @@ const GuestSpeakersPage = () => (
   <div className="min-h-screen bg-background">
     <PageMeta
       title="Guest Speakers"
-      description="Leaders, professionals, and mentors who have spoken at Zaviah initiatives."
+      description="Meet speakers and professionals who have shared knowledge and experience with the Zaviah community through sessions and initiatives."
       path="/guest-speakers"
       jsonLd={jsonLd}
     />
@@ -23,7 +23,7 @@ const GuestSpeakersPage = () => (
       <PageHero
         eyebrow="Community"
         title="Guest Speakers"
-        description="Dignitaries and mentors who shared their knowledge at Zaviah initiatives."
+        description="Speakers and professionals who have shared their knowledge and experiences with the Zaviah community."
       />
       <GuestSpeakers hideHeader />
     </main>

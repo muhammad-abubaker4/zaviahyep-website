@@ -77,7 +77,7 @@ const Contact = () => {
           eyebrow="Connect"
           title="Get in"
           highlight="Touch"
-          description="Ready to start your journey with Zaviah? We would love to hear from you."
+          description="Have a question or want to work with Zaviah? We would love to hear from you."
         />
 
         <div className="mx-auto grid max-w-6xl items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
@@ -95,7 +95,8 @@ const Contact = () => {
                 </p>
                 <h3 className="mt-2 text-2xl font-extrabold tracking-tight">Talk to our team</h3>
                 <p className="mt-3 text-sm leading-relaxed text-primary-foreground/70">
-                  Reach out for partnerships, mentorship questions, or general inquiries.
+                  Reach out for partnerships, opportunities, upcoming mentorship initiatives, or
+                  general inquiries.
                 </p>
 
                 <div className="mt-6 space-y-3">

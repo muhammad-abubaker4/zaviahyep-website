@@ -3,7 +3,7 @@ import path from "node:path";
 import sharp from "sharp";
 
 const ROOT = process.cwd();
-const SOURCE_PATH = path.join(ROOT, "src", "assets", "og-preview-screenshot.png");
+const SOURCE_PATH = path.join(ROOT, "src", "assets", "brand", "og-preview-screenshot.png");
 const ASSETS_DIR = path.join(ROOT, "public", "assets");
 // og-share.jpg is what the meta tags point at. The other two are legacy paths
 // that are already public URLs, so they get refreshed rather than left stale.

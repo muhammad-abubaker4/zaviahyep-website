@@ -10,7 +10,7 @@ import { chromium } from "playwright";
 import sharp from "sharp";
 
 const BASE_URL = process.env.OG_CAPTURE_URL ?? "http://localhost:8080";
-const OUT_PATH = path.join(process.cwd(), "src", "assets", "og-preview-screenshot.png");
+const OUT_PATH = path.join(process.cwd(), "src", "assets", "brand", "og-preview-screenshot.png");
 
 // 1440x792 renders the real desktop layout; the 2x scale downsamples to a
 // crisp 1920x1056, the size generate-og.mjs expects.

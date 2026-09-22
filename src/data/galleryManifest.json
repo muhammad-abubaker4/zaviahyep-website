@@ -324,20 +324,10 @@
     "height": 800,
     "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoQAAoABABoJYwCdAD0s2EUwAD+5Ea02dVLfHFPgSsuV66Q9vPv7ck3QBxBAR0JqEG86ckKFgsoAAAA"
   },
-  "sessions/WhatsApp Image 2026-07-31 at 22.29.24.jpeg": {
-    "width": 1280,
-    "height": 800,
-    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoQAAoABABoJQBOj+ADAD7ilPsAAP4nvlsCQ980PByYn6sLQOihvE026mYN+FvA8NdYbRLw/ZKmoktu9N9RH3DuE1HgmRruDXv8i7i/crAAAA=="
-  },
   "sessions/WhatsApp Image 2026-07-31 at 22.29.26.jpeg": {
     "width": 1600,
     "height": 1000,
     "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACQAQCdASoQAAoABABoJQBOgBHsLoAA/kE86Yk+N2TCcNd49/pdkQijHNNESuVPhCQIU1VnrVzlylGvEvDRqJYrwDnB9rXMNIN/ZNjsjuhg9YSuhdEYMAAA"
-  },
-  "sessions/WhatsApp Image 2026-07-31 at 22.29.27.jpeg": {
-    "width": 1280,
-    "height": 801,
-    "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAQCdASoQAAoABABoJQBOgCG7jOZRocAA/VPy8sDKLTkyYKc5LDbG+bsnlU2n9mNLx7OihVsQzEgD3H2MfVhXhMiAri025SWEMxvUEyhfd2eAAAA="
   },
   "sessions/WhatsApp Image 2026-07-31 at 22.29.28 (1).jpeg": {
     "width": 1600,
@@ -408,5 +398,35 @@
     "width": 1600,
     "height": 1000,
     "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoQAAoABABoJQBWACMCaJxu+Zb27AD+yqbW1cu304yZxvENZAud6tFZvN5nHaeKvwqqVXgGvCPnaAcZ3l+9FmpO2JLXX9iqgcyXtPQwc73oiqyTbZgPbmaQ1zFD1XAA"
+  },
+  "sessions/ai-for-learning-gemini-2026-09-07.jpg": {
+    "width": 1024,
+    "height": 640,
+    "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADwAQCdASoQAAoABABoJZwAAupCPLjW9EAAy0/Vr0jTudKQ06mBu94D8fDlsnaSTxyMY6D6p7rHbFh4Mfv1WQeaGrO9IcAA"
+  },
+  "sessions/ai-for-learning-notebooklm-2026-09-07.jpg": {
+    "width": 1024,
+    "height": 640,
+    "blur": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACwAQCdASoQAAoABABoJZwAAuP9DuoAAPKntYcYOP2LcyBUiG3DK677CxK7DsYAdhoKJe/9uD6NvQkzS5uvQuX98AAAAA=="
+  },
+  "sessions/ai-for-learning-participants-2026-09-07.jpg": {
+    "width": 1024,
+    "height": 640,
+    "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoQAAoABABoJQBOgZYBs/aJFHVAAP7l9YRdi6/4ylq23yP0PeGHWQE7CFKpiM8HfeGZRxDP8Q1003irQ45uqyUAAAA="
+  },
+  "sessions/eastern-scholarships-intro-2026-09-19.jpg": {
+    "width": 1024,
+    "height": 640,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACwAQCdASoQAAoABABoJZwAAua/2oAAAP7VFCPuDWpNCIlWaH34ivp8q4FA8Z/Ygtef9IPvfw5LCL1BVeomk6yQlj6V71TJggZgAAAA"
+  },
+  "sessions/eastern-scholarships-participants-2026-09-19.jpg": {
+    "width": 1024,
+    "height": 640,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoQAAoABABoJQBOgCHpPP8wqgAA/uRcA0RZh9i3AGh+LS/2g1YliKEfdbsTPDYqEeRd+YSidlUGgzq6wBh1/Kf5TonKa4ZYIcXMOAAA"
+  },
+  "sessions/eastern-scholarships-session-2026-09-19.jpg": {
+    "width": 1024,
+    "height": 640,
+    "blur": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAAAQAgCdASoQAAoABABoJYwCdAEQ/c9maIAAAP7sUBNjoHTBGQJw3Q6KRXjZ/N5d5cwAAA=="
   }
 }

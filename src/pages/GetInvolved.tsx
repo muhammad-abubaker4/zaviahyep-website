@@ -4,20 +4,23 @@ import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
 import OpportunityCard from "@/components/OpportunityCard";
 import ApplicationProcess from "@/components/ApplicationProcess";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
 import { GET_INVOLVED_PATH } from "@/lib/routes";
 import { GET_INVOLVED_FAQS, WHY_JOIN, opportunities } from "@/data/opportunities";
 
-const jsonLd = breadcrumbSchema([
-  { name: "Home", path: "/" },
-  { name: "Get Involved", path: GET_INVOLVED_PATH },
-]);
+const jsonLd = [
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Get Involved", path: GET_INVOLVED_PATH },
+  ]),
+  faqPageSchema([...GET_INVOLVED_FAQS]),
+];
 
 const GetInvolved = () => (
   <div className="min-h-screen bg-background">
     <PageMeta
       title="Get Involved"
-      description="Find your place at Zaviah: membership, volunteering, mentorship, campus ambassador, core team, and partnerships."
+      description="Find your place at Zaviah through membership, volunteering, campus ambassador roles, core team, partnerships, and upcoming mentorship."
       path={GET_INVOLVED_PATH}
       jsonLd={jsonLd}
     />

@@ -38,7 +38,7 @@ const ScrollToTop = () => {
           exit={{ opacity: 0, scale: 0.85 }}
           transition={revealTransition(0, DURATION.fast)}
           onClick={scrollToTop}
-          className="fixed bottom-40 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-background shadow-lg transition-all duration-300 hover:scale-110 hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
+          className="fixed bottom-[4.75rem] right-5 z-40 flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-background shadow-lg transition-all duration-300 hover:scale-110 hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 sm:bottom-[5.25rem] sm:right-6"
           aria-label="Scroll to top"
         >
           <ChevronUp className="h-5 w-5" strokeWidth={2.5} />

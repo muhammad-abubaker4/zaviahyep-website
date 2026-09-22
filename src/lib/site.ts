@@ -2,10 +2,11 @@ export const SITE_URL = "https://zaviah.org";
 
 export const SITE_NAME = "Zaviah";
 
-export const DEFAULT_TITLE = "Zaviah - Youth Empowerment Platform";
+/** Homepage document title — already includes the brand, so PageMeta will not suffix it. */
+export const DEFAULT_TITLE = "Zaviah | Access, Awareness, Aspiration";
 
 export const DEFAULT_DESCRIPTION =
-  "Free mentorship and community for students across Pakistan. Join Zaviah to learn, lead, and grow.";
+  "Zaviah is a youth-led nonprofit platform creating opportunities for learning, mentorship, collaboration, and personal growth across Pakistan.";
 
 /** Absolute URL for social crawlers (must be reachable on the live deploy). */
 export const OG_IMAGE = `${SITE_URL}/assets/og-share.jpg`;

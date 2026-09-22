@@ -85,7 +85,7 @@ prerendered page.
 
 ### Social share card
 
-`prebuild` crops `src/assets/og-preview-screenshot.png` into the three JPEGs that link previews
+`prebuild` crops `src/assets/brand/og-preview-screenshot.png` into the three JPEGs that link previews
 use. That source is a screenshot of the hero, so it goes stale whenever the hero changes — when
 it does, start the dev server and run `npm run og:capture` to re-shoot it, then rebuild. The
 capture runs with reduced motion so the carousel is always pinned to the first slide, and hides

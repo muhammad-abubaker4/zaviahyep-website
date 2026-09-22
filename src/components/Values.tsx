@@ -5,11 +5,36 @@ import SectionHeader from "@/components/SectionHeader";
 import { revealTransition, STAGGER } from "@/lib/motion";
 
 const values = [
-  { icon: Users, title: "Empowerment", description: "We lift others up through mentorship and support, creating spaces where students feel capable and confident." },
-  { icon: Heart, title: "Inclusivity", description: "Everyone is welcome. We celebrate diversity and ensure every voice is heard and valued." },
-  { icon: GraduationCap, title: "Mentorship", description: "Learning through connection and guidance, building relationships that inspire lifelong growth." },
-  { icon: Shield, title: "Integrity", description: "Honest, fair, and transparent in all our work. Trust is the foundation of everything we do." },
-  { icon: TrendingUp, title: "Growth", description: "Continuous learning and improvement, both personal and collective. We evolve with every step." },
+  {
+    icon: Users,
+    title: "Empowerment",
+    description:
+      "We lift others through learning, guidance, support, and opportunities, creating spaces where people feel capable and confident.",
+  },
+  {
+    icon: Heart,
+    title: "Inclusivity",
+    description:
+      "Everyone is welcome. We value different backgrounds, experiences, and perspectives, and work to create spaces where every voice can be heard and respected.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Mentorship",
+    description:
+      "Learning through connection, guidance, and shared experience, building relationships that encourage personal and professional growth.",
+  },
+  {
+    icon: Shield,
+    title: "Integrity",
+    description:
+      "Honest, fair, and transparent in our work. Trust is the foundation of how we build relationships and serve our community.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Growth",
+    description:
+      "Continuous learning and improvement, both personal and collective. We believe meaningful progress comes through curiosity, experience, and consistent effort.",
+  },
 ];
 
 const Values = () => {

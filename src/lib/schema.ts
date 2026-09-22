@@ -6,6 +6,39 @@ function absoluteUrl(pathOrUrl?: string) {
   return `${SITE_URL}${pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`}`;
 }
 
+/** Homepage WebPage node — complements Organization/WebSite in index.html. */
+export function homeWebPageSchema(opts: { name: string; description: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${SITE_URL}/#webpage`,
+    name: opts.name,
+    description: opts.description,
+    url: `${SITE_URL}/`,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": `${SITE_URL}/#organization` },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/assets/og-share.jpg`,
+    },
+  };
+}
+
+export function faqPageSchema(items: Array<{ q: string; a: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+}
+
 export function breadcrumbSchema(items: Array<{ name: string; path: string }>) {
   return {
     "@context": "https://schema.org",

@@ -6,16 +6,14 @@ import { User, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import SectionHeader from "@/components/SectionHeader";
 
-import hafsaKhalil from "@/assets/team/Hafsa_Khalil.jpeg";
-import muhammadAbubaker from "@/assets/team/Muhammad_Abubaker.jpeg";
-import qamarAbbas from "@/assets/team/Qamar_Abbas.jpeg";
-import amnaIrfan from "@/assets/team/Amna_Irfan.jpeg";
-import shaheer from "@/assets/team/Shaheer.jpeg";
-import aliGoharQureshi from "@/assets/team/Ali Gohar.jpg";
-import saeedaChaudhry from "@/assets/team/Saeeda-Chaudhry.jpeg";
-import saadButt from "@/assets/team/Saad-butt.jpeg";
-import khadijaFatima from "@/assets/team/Khadija-Fatima.jpg";
-import fidaHussain from "@/assets/team/Fida-Hussain.jpeg";
+import hafsaKhalil from "@/assets/team/hafsa-khalil.jpeg";
+import muhammadAbubaker from "@/assets/team/muhammad-abubaker.jpeg";
+import amnaIrfan from "@/assets/team/amna-irfan.jpeg";
+import shaheer from "@/assets/team/shaheer-ali.jpeg";
+import aliGoharQureshi from "@/assets/team/ali-gohar-qureshi.jpg";
+import saeedaChaudhry from "@/assets/team/saeeda-chaudhry.jpeg";
+import khadijaFatima from "@/assets/team/khadija-fatima.jpg";
+import fidaHussain from "@/assets/team/fida-hussain.jpeg";
 
 type Member = {
   name: string;
@@ -34,6 +32,7 @@ type Group = {
   half?: boolean;
 };
 
+/** Hierarchy matches the org chart: Founder → Co-Founder → leads → ops. */
 const teamGroups: Group[] = [
   {
     title: "Executive",
@@ -49,7 +48,7 @@ const teamGroups: Group[] = [
       },
       {
         name: "Muhammad Abubaker",
-        role: "Co-Founder",
+        role: "Co-Founder & President",
         description:
           "Leads operations, strategy, and digital direction for meaningful student communities.",
         image: muhammadAbubaker,
@@ -58,41 +57,35 @@ const teamGroups: Group[] = [
     ],
   },
   {
-    title: "Outreach &",
-    highlight: "Community",
+    title: "Program",
+    highlight: "Leadership",
     members: [
       {
         name: "Amna Irfan",
-        role: "Session Host",
+        role: "Vice President",
         description:
-          "Hosts Zaviah's online mentorship sessions and connects students with mentors nationwide.",
+          "Supports organisational leadership and hosts mentorship sessions connecting students nationwide.",
         image: amnaIrfan,
       },
       {
-        name: "Qamar Abbas",
-        role: "Ambassador Lead",
-        description: "Builds connections with students and mentors nationwide through outreach.",
-        image: qamarAbbas,
-      },
-      {
         name: "Ali Gohar Qureshi",
-        role: "Outreach & Engagement",
+        role: "Outreach & Engagement Lead",
         description:
           "Strengthens partnerships and expands student reach through strategic outreach.",
         image: aliGoharQureshi,
       },
       {
-        name: "Saad Butt",
-        role: "Director of Communications",
-        description: "Shapes how Zaviah speaks to students, partners, and the wider public.",
-        image: saadButt,
+        name: "Shaheer Ali",
+        role: "Ambassador Lead",
+        description:
+          "Leads the campus ambassador network and produces visuals for Zaviah's events and campaigns.",
+        image: shaheer,
       },
     ],
   },
   {
-    title: "Administration &",
-    highlight: "Operations",
-    half: true,
+    title: "Operations &",
+    highlight: "Content",
     members: [
       {
         name: "Fida Hussain",
@@ -102,30 +95,16 @@ const teamGroups: Group[] = [
       },
       {
         name: "Saeeda Chaudhry",
-        role: "HR & Community Manager",
+        role: "HR & Community",
         description:
           "Looks after the team behind Zaviah and keeps the wider community engaged and supported.",
         image: saeedaChaudhry,
       },
-    ],
-  },
-  {
-    title: "Content &",
-    highlight: "Media",
-    half: true,
-    members: [
       {
         name: "Khadija Fatima",
         role: "Content Creator",
         description: "Creates the content behind Zaviah's campaigns across its social channels.",
         image: khadijaFatima,
-      },
-      {
-        name: "Shaheer Ali",
-        role: "Media & Graphics",
-        description:
-          "Produces the visuals behind Zaviah's events and campaigns, from graphics to social media.",
-        image: shaheer,
       },
     ],
   },

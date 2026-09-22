@@ -33,10 +33,10 @@ const DignitariesPreview = () => {
       <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-30" aria-hidden />
       <div className="container relative px-4">
         <SectionHeader
-          eyebrow="Dignitaries"
-          title="Dignitaries Who Spoke"
+          eyebrow="Speakers & Guests"
+          title="Speakers & Guests"
           highlight="at Our Initiatives"
-          description="Leaders, professionals, and mentors who have shared their experience with our students."
+          description="Professionals, public representatives, educators, and community leaders who have shared their experience through Zaviah initiatives."
         />
 
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 xl:grid-cols-5">
@@ -58,7 +58,7 @@ const DignitariesPreview = () => {
           className="mt-12 text-center"
         >
           <Link to="/guest-speakers" className="btn-primary-solid">
-            Meet all dignitaries
+            Meet our speakers & guests
             <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
           </Link>
         </m.div>

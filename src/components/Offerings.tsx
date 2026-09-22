@@ -1,51 +1,54 @@
 import { m, useInView } from "framer-motion";
 import { revealTransition, STAGGER } from "@/lib/motion";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
-import { UserCheck, Wrench, Compass, Calendar, Award, ArrowRight } from "lucide-react";
+import { UserCheck, Wrench, Compass, Calendar, Award } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
-import { GET_INVOLVED_PATH } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
 const offerings = [
   {
     icon: UserCheck,
-    title: "Mentorship Programs",
-    tag: "Core",
-    summary: "Matched mentors, monthly check-ins, and cohort learning that actually sticks.",
-    highlights: ["1:1 matching", "3-6 month plans", "Topic cohorts"],
+    title: "Mentorship Program",
+    tag: "Upcoming",
+    summary:
+      "A structured mentorship initiative being developed to connect participants with experienced mentors for guidance, learning, and personal development.",
+    highlights: ["Mentorship", "Guidance", "Coming Soon"],
     featured: true,
   },
   {
     icon: Wrench,
-    title: "Skill Building Workshops",
-    tag: "Workshops",
-    summary: "Practical sessions on communication, resumes, interviews, and digital skills.",
-    highlights: ["Resumes", "Interviews", "Soft skills"],
+    title: "Learning Sessions & Workshops",
+    tag: "Sessions",
+    summary:
+      "Interactive sessions covering technology, education, careers, leadership, personal development, and other relevant topics.",
+    highlights: ["Learning", "Skills", "Awareness"],
     featured: false,
   },
   {
     icon: Compass,
-    title: "Career Guidance",
+    title: "Career & Opportunity Awareness",
     tag: "Careers",
-    summary: "Pathway planning, major selection help, and real employer conversations.",
-    highlights: ["Pathways", "Applications", "Panels"],
+    summary:
+      "Helping people discover educational, professional, and development opportunities and make more informed choices.",
+    highlights: ["Careers", "Education", "Opportunities"],
     featured: false,
   },
   {
     icon: Calendar,
-    title: "Community Events",
-    tag: "Events",
-    summary: "Webinars, meetups, volunteer drives, and an annual youth summit.",
-    highlights: ["Meetups", "Campaigns", "Summit"],
+    title: "Community Initiatives",
+    tag: "Community",
+    summary:
+      "Activities that bring people, volunteers, speakers, and professionals together for learning, connection, and contribution.",
+    highlights: ["Community", "Collaboration", "Participation"],
     featured: false,
   },
   {
     icon: Award,
-    title: "Leadership Opportunities",
+    title: "Leadership & Participation",
     tag: "Leadership",
-    summary: "Campus ambassador roles, project leads, and social-impact initiatives.",
-    highlights: ["Ambassadors", "Project leads", "Impact"],
+    summary:
+      "Opportunities to contribute through volunteering, campus representation, projects, and community initiatives.",
+    highlights: ["Volunteering", "Leadership", "Contribution"],
     featured: false,
   },
 ];
@@ -64,11 +67,11 @@ const Offerings = () => {
           eyebrow="Programs"
           title="What We"
           highlight="Offer"
-          description="Comprehensive mentorship programs designed to help students grow, connect, and succeed."
+          description="Learning, guidance, community initiatives, and opportunities designed to help people connect, develop, and grow."
         />
 
         <div className="mx-auto max-w-6xl space-y-4 md:space-y-5">
-          {/* Featured program */}
+          {/* Featured program — structured mentorship is upcoming, not live */}
           <m.article
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
@@ -115,13 +118,12 @@ const Offerings = () => {
                 </div>
               </div>
 
-              <Link
-                to={GET_INVOLVED_PATH}
-                className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-primary-foreground px-5 py-3 text-sm font-semibold text-primary transition-transform duration-300 hover:-translate-y-0.5 lg:self-end"
+              <span
+                className="inline-flex items-center justify-center self-start rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-5 py-3 text-sm font-semibold text-primary-foreground/85 lg:self-end"
+                aria-label="Mentorship program coming soon"
               >
-                Join a program
-                <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
+                Coming Soon
+              </span>
             </div>
           </m.article>
 

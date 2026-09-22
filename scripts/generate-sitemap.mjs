@@ -8,6 +8,9 @@ import { publicRoutes } from "./lib/routes.mjs";
  * silently went stale every time an album or opportunity was added.
  *
  * Runs from `prebuild`, so the file is on disk before Vite copies public/.
+ *
+ * lastmod is omitted: we do not have reliable per-URL modification dates, and
+ * inventing a shared build-time date teaches crawlers to ignore it.
  */
 
 const ROOT = process.cwd();
@@ -33,26 +36,6 @@ const RANKS = {
   "/terms": { changefreq: "yearly", priority: "0.4" },
 };
 
-/**
- * Newest content change across the source tree. Build time would churn
- * `lastmod` on every deploy and teach crawlers to ignore it.
- */
-function lastContentChange() {
-  let newest = 0;
-  const walk = (dir) => {
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      if (entry.name === "node_modules" || entry.name.startsWith(".")) continue;
-      const full = path.join(dir, entry.name);
-      if (entry.isDirectory()) walk(full);
-      else newest = Math.max(newest, fs.statSync(full).mtimeMs);
-    }
-  };
-  walk(path.join(ROOT, "src"));
-  return new Date(newest).toISOString().slice(0, 10);
-}
-
-const lastmod = lastContentChange();
-
 function rankFor(route) {
   if (RANKS[route]) return RANKS[route];
   // Opportunity detail pages outrank the generic default; albums stay at 0.7.
@@ -65,8 +48,7 @@ const urls = publicRoutes().map((route) => ({ path: route, ...rankFor(route) }))
 const body = urls
   .map(
     ({ path: route, changefreq, priority }) => `  <url>
-    <loc>${SITE_URL}${route}</loc>
-    <lastmod>${lastmod}</lastmod>
+    <loc>${SITE_URL}${route === "/" ? "/" : route}</loc>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`,
@@ -79,4 +61,4 @@ fs.writeFileSync(
   "utf8",
 );
 
-console.log(`Wrote ${urls.length} URLs to ${path.relative(ROOT, OUT)} (lastmod ${lastmod})`);
+console.log(`Wrote ${urls.length} URLs to ${path.relative(ROOT, OUT)} (no lastmod)`);

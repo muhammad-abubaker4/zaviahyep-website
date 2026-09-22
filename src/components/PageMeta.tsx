@@ -20,8 +20,12 @@ const setMeta = (attr: "name" | "property", key: string, content: string) => {
   el.content = content;
 };
 
-const setCanonical = (href: string) => {
+const setCanonical = (href: string | null) => {
   let el = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+  if (!href) {
+    el?.remove();
+    return;
+  }
   if (!el) {
     el = document.createElement("link");
     el.rel = "canonical";
@@ -42,13 +46,17 @@ const PageMeta = ({
     const url = pageUrl(path);
 
     document.title = fullTitle;
-    setCanonical(url);
+    // 404 / noindex pages must not claim a canonical URL.
+    setCanonical(noIndex ? null : url);
     setMeta("name", "description", description);
     setMeta("name", "robots", noIndex ? "noindex, nofollow" : "index, follow");
     setMeta("property", "og:title", fullTitle);
     setMeta("property", "og:description", description);
     setMeta("property", "og:type", "website");
-    setMeta("property", "og:url", url);
+    if (!noIndex) {
+      setMeta("property", "og:url", url);
+      setMeta("name", "twitter:url", url);
+    }
     setMeta("property", "og:site_name", "Zaviah");
     setMeta("property", "og:image", OG_IMAGE);
     setMeta("property", "og:image:secure_url", OG_IMAGE);
@@ -58,7 +66,6 @@ const PageMeta = ({
     setMeta("property", "og:locale", "en_PK");
     setMeta("name", "twitter:card", "summary_large_image");
     setMeta("name", "twitter:site", "@ZaviahOrg");
-    setMeta("name", "twitter:url", url);
     setMeta("name", "twitter:title", fullTitle);
     setMeta("name", "twitter:description", description);
     setMeta("name", "twitter:image", OG_IMAGE);

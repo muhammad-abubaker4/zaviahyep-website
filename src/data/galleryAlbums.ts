@@ -133,16 +133,29 @@ const albumSpecs: AlbumSpec[] = [
   },
   {
     slug: "online-sessions",
-    title: "Online Mentorship Sessions",
+    title: "Online Sessions",
     category: "Online Sessions",
-    date: "2026-07-30",
+    date: "2026-09-19",
     dateLabel: "Ongoing",
     summary:
-      "Our mentorship runs live and online, which means a student in any city can join. These are glimpses from sessions on careers, confidence, and self development, hosted with mentors and partner organizations.",
+      "Glimpses from Zaviah's live online sessions — including learning on scholarships, study abroad, AI for learning, careers, and personal development — hosted with speakers and partner organizations.",
     kind: "online",
     folder: "sessions",
-    coverFile: "WhatsApp Image 2026-07-31 at 22.29.15.jpeg",
-    altFor: (n, total) => `Glimpse from a live Zaviah online mentorship session, photo ${n} of ${total}`,
+    coverFile: "ai-for-learning-notebooklm-2026-09-07.jpg",
+    altFor: (n, total) => `Glimpse from a live Zaviah online session, photo ${n} of ${total}`,
+    captions: {
+      "ai-for-learning-notebooklm-2026-09-07.jpg":
+        "AI for Learning with Tamreena Tashfeen (DIGEXN), 7 September 2026",
+      "ai-for-learning-gemini-2026-09-07.jpg":
+        "Exploring Gemini Notebook during AI for Learning",
+      "ai-for-learning-participants-2026-09-07.jpg": "Participants at AI for Learning",
+      "eastern-scholarships-session-2026-09-19.jpg":
+        "Eastern Scholarships & Study Abroad with Mr. Hammad Arif, 19 September 2026",
+      "eastern-scholarships-participants-2026-09-19.jpg":
+        "Participants at Eastern Scholarships & Study Abroad",
+      "eastern-scholarships-intro-2026-09-19.jpg":
+        "Zaviah × Global Opportunities Hub session introduction",
+    },
   },
 ];
 

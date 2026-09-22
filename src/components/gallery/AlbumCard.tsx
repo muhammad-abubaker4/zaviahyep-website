@@ -2,7 +2,13 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, Images, MapPin, Monitor } from "lucide-react";
 import type { GalleryAlbum } from "@/data/galleryAlbums";
 
-const AlbumCard = ({ album }: { album: GalleryAlbum }) => (
+const AlbumCard = ({
+  album,
+  ctaLabel = "View album",
+}: {
+  album: GalleryAlbum;
+  ctaLabel?: string;
+}) => (
   <Link
     to={`/gallery/${album.slug}`}
     className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -60,7 +66,7 @@ const AlbumCard = ({ album }: { album: GalleryAlbum }) => (
       </p>
 
       <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">
-        View album
+        {ctaLabel}
         <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
       </span>
     </div>

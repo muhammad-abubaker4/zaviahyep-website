@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import zaviahLogoLight from "@/assets/Zaviah_Logo1.png";
-import zaviahLogoDark from "@/assets/Zaviah Logo.png";
+import zaviahLogoLight from "@/assets/brand/zaviah-logo-light.png";
+import zaviahLogoDark from "@/assets/brand/zaviah-logo-dark.png";
 
 type ZaviahLogoProps = {
   variant?: "light" | "dark";

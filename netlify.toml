@@ -34,6 +34,31 @@
   status = 301
   force = true
 
+# Prefer apex host; avoid splitting SEO equity across www and non-www.
+[[redirects]]
+  from = "https://www.zaviah.org/*"
+  to = "https://zaviah.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.zaviah.org"
+  to = "https://zaviah.org/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://zaviah.org/*"
+  to = "https://zaviah.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.zaviah.org/*"
+  to = "https://zaviah.org/:splat"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/assets/og-share.jpg"
   [headers.values]

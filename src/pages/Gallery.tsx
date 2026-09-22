@@ -46,7 +46,7 @@ const Gallery = () => {
     <div className="min-h-screen bg-background">
       <PageMeta
         title="Gallery"
-        description="Photo albums from Zaviah events, educational visits, community outreach, and live online mentorship sessions across Pakistan."
+        description="Photo albums from Zaviah events, educational visits, community outreach, and online learning sessions across Pakistan."
         path="/gallery"
         jsonLd={galleryJsonLd}
       />

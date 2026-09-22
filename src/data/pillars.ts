@@ -15,16 +15,16 @@ export const CORE_PILLARS: CorePillar[] = [
   {
     title: "Access",
     description:
-      "Making sure all students have fair chances to learn, grow, and connect with mentors. We work to ensure equal access to mentorship, learning, and personal growth for students across Pakistan.",
+      "Creating fair opportunities for people to learn, grow, connect, and participate. We work to make learning, guidance, and meaningful opportunities more accessible across communities.",
   },
   {
     title: "Awareness",
     description:
-      "Through mentorship, workshops, and open discussions, we help students become more confident, informed, and self aware, ready to make better choices for their future and create positive change.",
+      "Through learning sessions, workshops, discussions, and shared experiences, we help people become more informed, confident, and aware of opportunities, ideas, and issues that can shape their future.",
   },
   {
     title: "Aspiration",
     description:
-      "Inspiring youth to dream big, act with confidence, and lead with integrity. We help youth believe in themselves, pursue meaningful goals, and create lasting impact in their communities.",
+      "Encouraging people to believe in their potential, pursue meaningful goals, take initiative, and contribute positively to their communities.",
   },
 ];

@@ -19,11 +19,11 @@ const footerLinks = [
 ];
 
 const footerPrograms = [
-  { label: "Mentorship Programs", href: "#offerings" },
-  { label: "Skill Building Workshops", href: "#offerings" },
-  { label: "Career Guidance", href: "#offerings" },
-  { label: "Community Events", href: "#offerings" },
-  { label: "Leadership Opportunities", href: "#offerings" },
+  { label: "Mentorship Program", href: "#offerings" },
+  { label: "Learning Sessions & Workshops", href: "#offerings" },
+  { label: "Career & Opportunity Awareness", href: "#offerings" },
+  { label: "Community Initiatives", href: "#offerings" },
+  { label: "Leadership & Participation", href: "#offerings" },
 ];
 
 const Footer = () => {
@@ -54,11 +54,11 @@ const Footer = () => {
               Get Involved
             </p>
             <h3 className="mt-2 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
-              Ready to make an impact?
+              Ready to Get Involved?
             </h3>
             <p className="mt-2 max-w-md text-sm text-muted-foreground">
-              Explore membership, volunteering, mentorship, and partnerships, then apply through our
-              official forms.
+              Explore membership, volunteering, upcoming mentorship, and partnership opportunities
+              with Zaviah.
             </p>
           </div>
           <Link
@@ -78,7 +78,8 @@ const Footer = () => {
             </Link>
             <p className="mb-1 text-sm font-bold text-primary-foreground/90">Access | Awareness | Aspiration</p>
             <p className="mb-5 text-sm leading-relaxed text-primary-foreground/60">
-              A non profit initiative for mentorship, guidance, and growth.
+              A youth-led nonprofit creating opportunities for learning, connection, collaboration,
+              and growth.
             </p>
             <a href={MAILTO_URL} className="mb-6 block text-sm font-semibold text-primary-foreground hover:text-primary-foreground/80">
               {EMAIL}
@@ -142,8 +143,8 @@ const Footer = () => {
           <div>
             <h4 className={columnHeading}>Location</h4>
             <p className="text-sm leading-relaxed text-primary-foreground/65">
-              Nationwide youth empowerment platform based in Pakistan, connecting students and mentors
-              across the country.
+              Based in Pakistan, connecting people through learning, community, collaboration, and
+              opportunities.
             </p>
           </div>
         </div>
@@ -153,11 +154,9 @@ const Footer = () => {
         <div className="mx-auto w-full max-w-6xl px-6 text-center text-sm text-primary-foreground/50 md:px-8">
           <p>
             Copyright &copy; {currentYear}{" "}
-            <span className="font-semibold text-primary-foreground/70">
-              Zaviah Youth Empowerment Platform
-            </span>
+            <span className="font-semibold text-primary-foreground/70">Zaviah</span>
             {" · "}
-            Design and Developed by{" "}
+            Designed and developed by{" "}
             <a
               href="https://www.instagram.com/muhammad._abubaker/"
               target="_blank"

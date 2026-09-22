@@ -5,13 +5,17 @@ import Footer from "@/components/Footer";
 import SectionFallback from "@/components/SectionFallback";
 import PageMeta from "@/components/PageMeta";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from "@/lib/site";
-import { buildFaqSchema, faqs } from "@/data/faqs";
+import { homeWebPageSchema } from "@/lib/schema";
 
-const HOME_FAQ_SCHEMA = buildFaqSchema(faqs);
+const HOME_JSON_LD = homeWebPageSchema({
+  name: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
+});
 
 const About = lazy(() => import("@/components/About"));
 const Offerings = lazy(() => import("@/components/Offerings"));
 const ImpactMetrics = lazy(() => import("@/components/ImpactMetrics"));
+const LatestFromZaviah = lazy(() => import("@/components/LatestFromZaviah"));
 const DignitariesPreview = lazy(() => import("@/components/DignitariesPreview"));
 const GetInvolvedSection = lazy(() => import("@/components/GetInvolvedSection"));
 const Contact = lazy(() => import("@/components/Contact"));
@@ -30,7 +34,7 @@ const Index = () => {
         title={DEFAULT_TITLE}
         description={DEFAULT_DESCRIPTION}
         path="/"
-        jsonLd={HOME_FAQ_SCHEMA}
+        jsonLd={HOME_JSON_LD}
       />
       <Navbar />
       <main id="main-content" tabIndex={-1} className="outline-none">
@@ -43,6 +47,9 @@ const Index = () => {
         </Suspense>
         <Suspense fallback={<SectionFallback />}>
           <ImpactMetrics />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <LatestFromZaviah />
         </Suspense>
         <Suspense fallback={<SectionFallback />}>
           <DignitariesPreview />

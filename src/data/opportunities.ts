@@ -100,8 +100,8 @@ export const opportunities: Opportunity[] = [
     title: "Become a Member",
     shortTitle: "Member",
     navLabel: "Become a Member",
-    tagline: "Join Pakistan's fastest-growing youth community.",
-    chips: ["Students", "Learning", "Community"],
+    tagline: "Join Zaviah's growing community and take part in learning, activities, and opportunities.",
+    chips: ["Learning", "Community", "Opportunities"],
     cardCta: "Explore",
     description:
       "Join Zaviah's youth community, participate in programs, events, workshops, networking opportunities, and leadership initiatives.",
@@ -156,8 +156,8 @@ export const opportunities: Opportunity[] = [
     title: "Volunteer With Zaviah",
     shortTitle: "Volunteer",
     navLabel: "Volunteer",
-    tagline: "Build skills while supporting events and campaigns.",
-    chips: ["Volunteer", "Remote", "Hands-on"],
+    tagline: "Contribute your time and skills while supporting Zaviah's activities and community initiatives.",
+    chips: ["Volunteer", "Flexible", "Hands-on"],
     cardCta: "Explore",
     description:
       "Support Zaviah's activities, events, campaigns, and community initiatives while developing practical skills and professional experience.",
@@ -211,8 +211,8 @@ export const opportunities: Opportunity[] = [
     title: "Become a Mentor",
     shortTitle: "Mentor",
     navLabel: "Mentor",
-    tagline: "Share your expertise with students across Pakistan.",
-    chips: ["Mentorship", "Flexible", "Impact"],
+    tagline: "Register your interest in supporting future Zaviah mentorship and guidance initiatives.",
+    chips: ["Mentorship", "Guidance", "Future Initiative"],
     cardCta: "Explore",
     description:
       "Guide, mentor, and support students and young professionals by sharing your expertise and experience.",
@@ -376,8 +376,8 @@ export const opportunities: Opportunity[] = [
     title: "Partner With Zaviah",
     shortTitle: "Partnerships",
     navLabel: "Partnerships",
-    tagline: "Collaborate with us to expand youth impact.",
-    chips: ["Organizations", "MoUs", "Programs"],
+    tagline: "Collaborate with Zaviah on learning, community, and shared initiatives.",
+    chips: ["Partnerships", "Collaboration", "Initiatives"],
     cardCta: "Explore",
     description:
       "Universities, NGOs, companies, student societies, media organizations, and government institutions can collaborate with Zaviah.",
@@ -392,10 +392,6 @@ export const opportunities: Opportunity[] = [
     commitment: "Defined per partnership: from one-off events to multi-month collaborations.",
     applyUrl: "https://forms.gle/9M9phrhTQNiJfLEw5",
     ctaLabel: "Submit Partnership Request",
-    secondaryCta: {
-      label: "Download Organization Profile",
-      href: "/docs/Zaviah-Organization-Profile-2026.pdf",
-    },
     icon: Handshake,
     overview:
       "Partnerships multiply Zaviah's impact. We collaborate with institutions that share our mission of Access, Awareness, and Aspiration for youth.",

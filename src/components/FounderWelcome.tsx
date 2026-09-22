@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Quote } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
-import hafsaKhalil from "@/assets/team/Hafsa_Khalil.jpeg";
+import hafsaKhalil from "@/assets/team/hafsa-khalil.jpeg";
 
 const FounderWelcome = () => {
   const ref = useRef(null);

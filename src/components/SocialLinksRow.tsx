@@ -34,7 +34,7 @@ const SocialLinksRow = ({ links, size = "md", className, nowrap = false }: Socia
             social.hoverClass,
           )}
         >
-          <social.Icon className={s.icon} />
+          <social.Icon className={s.icon} aria-hidden />
         </a>
       ))}
     </div>

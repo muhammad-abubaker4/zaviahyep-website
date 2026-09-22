@@ -13,8 +13,8 @@ const coreMembersJsonLd = breadcrumbSchema([
 const CoreMembers = () => (
   <div className="min-h-screen bg-background">
     <PageMeta
-      title="Core Team"
-      description="Meet the Zaviah core team - passionate young leaders building mentorship programs and student networks across Pakistan."
+      title="Core Members"
+      description="Meet the people supporting Zaviah's programs, outreach, operations, community engagement, and content."
       path="/core-members"
       jsonLd={coreMembersJsonLd}
     />

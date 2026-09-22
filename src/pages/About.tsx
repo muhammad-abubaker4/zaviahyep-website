@@ -22,8 +22,8 @@ const aboutJsonLd = breadcrumbSchema([
 const AboutPage = () => (
   <div className="min-h-screen bg-background">
     <PageMeta
-      title="About Zaviah"
-      description="Learn about Zaviah's story, vision, pillars, values, and future goals for youth empowerment across Pakistan."
+      title="About Zaviah | Our Story, Vision & Mission"
+      description="Learn about Zaviah, our story, purpose, core pillars, values, leadership, and commitment to creating opportunities for young people across Pakistan."
       path="/about"
       jsonLd={aboutJsonLd}
     />
@@ -32,7 +32,7 @@ const AboutPage = () => (
       <PageHero
         eyebrow="About"
         title="Who we are"
-        description="A youth-led platform connecting students across Pakistan with mentorship, skills, and community."
+        description="A youth-led nonprofit platform creating opportunities for learning, connection, collaboration, and personal growth across Pakistan."
       />
       <About showDeepLinks={false} />
       <FounderWelcome />

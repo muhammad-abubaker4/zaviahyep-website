@@ -21,7 +21,7 @@ const NotFound = () => {
         title="Page Not Found"
         description="This Zaviah page does not exist or has moved. Browse our programs, gallery, and ways to get involved."
         noIndex
-        path={location.pathname}
+        path="/"
       />
       <Navbar />
       <main id="main-content" tabIndex={-1} className="outline-none">
