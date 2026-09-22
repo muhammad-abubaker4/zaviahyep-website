@@ -39,7 +39,7 @@ const SpeakerCard = ({
 
   return (
     <m.article
-      initial={{ opacity: 0, y: 28 }}
+      initial={isInView ? false : { opacity: 0, y: 28 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
       transition={revealTransition(index * STAGGER.tight)}
       className="group relative overflow-hidden rounded-3xl border border-primary/10 bg-card shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift"

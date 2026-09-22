@@ -6,7 +6,16 @@ import SpeakerCard from "@/components/SpeakerCard";
 
 const GuestSpeakers = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const sectionInView = useInView(ref, { once: true, margin: "-80px" });
+
+  /**
+   * On the dedicated /guest-speakers page (`hideHeader`), never leave the grid
+   * at opacity 0 after createRoot remounts. Googlebot smartphone Live Inspection
+   * snapshots with the hero filling the viewport, so useInView stayed false and
+   * Soft-404'd a page whose prerendered HTML was already correct.
+   * Homepage preview keeps scroll-triggered reveal.
+   */
+  const cardsVisible = hideHeader || sectionInView;
 
   return (
     <section id="guest-speakers" className="section-muted overflow-hidden" ref={ref}>
@@ -27,7 +36,8 @@ const GuestSpeakers = ({ hideHeader = false }: { hideHeader?: boolean }) => {
               key={speaker.id}
               speaker={speaker}
               index={index}
-              isInView={isInView}
+              isInView={cardsVisible}
+              eager={hideHeader && index < 8}
             />
           ))}
         </div>
