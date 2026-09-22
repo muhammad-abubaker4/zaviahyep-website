@@ -171,6 +171,7 @@ const Navbar = () => {
     }
 
     const isOpen = openMobileDropdown === item.name;
+    const submenuId = `mobile-submenu-${item.name.toLowerCase()}`;
     return (
       <div key={item.name}>
         <button
@@ -178,7 +179,7 @@ const Navbar = () => {
           onClick={() => setOpenMobileDropdown(isOpen ? null : item.name)}
           className={dropdownTriggerClass(item, true)}
           aria-expanded={isOpen}
-          aria-controls={`mobile-submenu-${item.name.toLowerCase()}`}
+          aria-controls={submenuId}
         >
           {item.name}
           <ChevronDown
@@ -186,25 +187,25 @@ const Navbar = () => {
             aria-hidden
           />
         </button>
-        {isOpen && (
-          <div
-            id={`mobile-submenu-${item.name.toLowerCase()}`}
-            role="group"
-            aria-label={`${item.name} submenu`}
-            className="ml-4 mt-1 flex flex-col gap-1"
-          >
-            {item.subItems.map((subItem) => (
-              <Link
-                key={subItem.name}
-                to={subItem.href}
-                onClick={closeMobileMenu}
-                className="rounded-lg px-4 py-2 text-primary-foreground/85 transition-colors hover:bg-primary-foreground/10"
-              >
-                {subItem.name}
-              </Link>
-            ))}
-          </div>
-        )}
+        <div
+          id={submenuId}
+          role="group"
+          aria-label={`${item.name} submenu`}
+          hidden={!isOpen}
+          className="ml-4 mt-1 flex flex-col gap-1"
+        >
+          {item.subItems.map((subItem) => (
+            <Link
+              key={subItem.name}
+              to={subItem.href}
+              tabIndex={isOpen ? 0 : -1}
+              onClick={closeMobileMenu}
+              className="rounded-lg px-4 py-2 text-primary-foreground/85 transition-colors hover:bg-primary-foreground/10"
+            >
+              {subItem.name}
+            </Link>
+          ))}
+        </div>
       </div>
     );
   };

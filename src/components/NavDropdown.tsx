@@ -16,6 +16,9 @@ type NavDropdownProps = {
  * primitive dragged @floating-ui, roving focus, focus-scope and dismissable
  * layer into the entry chunk (~150 KB of source) to position a five-item list
  * under a fixed navbar that never needs collision detection.
+ *
+ * Menu links stay in the DOM when closed (`hidden`) so crawlers and no-JS
+ * HTML still see real <a href> targets; visually the panel remains closed.
  */
 const NavDropdown = ({ label, items, triggerClassName }: NavDropdownProps) => {
   const [open, setOpen] = useState(false);
@@ -70,7 +73,7 @@ const NavDropdown = ({ label, items, triggerClassName }: NavDropdownProps) => {
         className={triggerClassName}
         aria-haspopup="menu"
         aria-expanded={open}
-        aria-controls={open ? menuId : undefined}
+        aria-controls={menuId}
         onClick={() => setOpen((value) => !value)}
         onKeyDown={(event) => {
           if (event.key === "ArrowDown") {
@@ -89,46 +92,46 @@ const NavDropdown = ({ label, items, triggerClassName }: NavDropdownProps) => {
         />
       </button>
 
-      {open && (
-        <div
-          id={menuId}
-          role="menu"
-          aria-label={label}
-          className="absolute right-0 top-full z-50 mt-1 w-56 rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
-        >
-          {items.map((item, index) => (
-            <Link
-              key={item.name}
-              to={item.href}
-              role="menuitem"
-              ref={(node) => {
-                itemRefs.current[index] = node;
-              }}
-              onClick={() => close()}
-              onKeyDown={(event) => {
-                if (event.key === "ArrowDown") {
-                  event.preventDefault();
-                  focusItem(index + 1);
-                } else if (event.key === "ArrowUp") {
-                  event.preventDefault();
-                  focusItem(index - 1);
-                } else if (event.key === "Home") {
-                  event.preventDefault();
-                  focusItem(0);
-                } else if (event.key === "End") {
-                  event.preventDefault();
-                  focusItem(items.length - 1);
-                } else if (event.key === "Tab") {
-                  setOpen(false);
-                }
-              }}
-              className="block rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
-            >
-              {item.name}
-            </Link>
-          ))}
-        </div>
-      )}
+      <div
+        id={menuId}
+        role="menu"
+        aria-label={label}
+        hidden={!open}
+        className="absolute right-0 top-full z-50 mt-1 w-56 rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
+      >
+        {items.map((item, index) => (
+          <Link
+            key={item.name}
+            to={item.href}
+            role="menuitem"
+            tabIndex={open ? 0 : -1}
+            ref={(node) => {
+              itemRefs.current[index] = node;
+            }}
+            onClick={() => close()}
+            onKeyDown={(event) => {
+              if (event.key === "ArrowDown") {
+                event.preventDefault();
+                focusItem(index + 1);
+              } else if (event.key === "ArrowUp") {
+                event.preventDefault();
+                focusItem(index - 1);
+              } else if (event.key === "Home") {
+                event.preventDefault();
+                focusItem(0);
+              } else if (event.key === "End") {
+                event.preventDefault();
+                focusItem(items.length - 1);
+              } else if (event.key === "Tab") {
+                setOpen(false);
+              }
+            }}
+            className="block rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
+          >
+            {item.name}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

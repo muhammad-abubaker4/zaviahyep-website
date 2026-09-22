@@ -82,6 +82,39 @@ async function extractPage(context, url, { expectCanonical }) {
     // Allow remaining lazy sections to settle; analytics hosts are already blocked.
     await page.waitForLoadState("networkidle", { timeout: 12_000 }).catch(() => {});
 
+    /*
+     * Framer Motion leaves below-fold (and some above-fold) nodes at opacity:0
+     * until whileInView/animate completes. Google Soft 404 scoring treats that
+     * as empty/invisible content even when the text exists in the DOM.
+     * Scroll to fire viewport reveals, wait for settles, then force any leftover
+     * hidden motion styles visible for the static crawler snapshot only.
+     */
+    await page.evaluate(async () => {
+      const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+      const height = Math.max(
+        document.body?.scrollHeight ?? 0,
+        document.documentElement?.scrollHeight ?? 0,
+      );
+      for (let y = 0; y < height; y += 280) {
+        window.scrollTo(0, y);
+        await sleep(40);
+      }
+      window.scrollTo(0, height);
+      await sleep(200);
+      window.scrollTo(0, 0);
+      await sleep(700);
+
+      const root = document.getElementById("root");
+      if (!root) return;
+      root.querySelectorAll("*").forEach((el) => {
+        if (!(el instanceof HTMLElement)) return;
+        const { style } = el;
+        if (style.opacity === "0") style.opacity = "1";
+        if (style.visibility === "hidden") style.visibility = "visible";
+        if (style.transform && style.transform !== "none") style.transform = "none";
+      });
+    });
+
     const meta = await page.evaluate(() => {
       const content = (attr, key) =>
         document.querySelector(`meta[${attr}="${key}"]`)?.getAttribute("content") ?? null;

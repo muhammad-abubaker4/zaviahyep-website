@@ -55,6 +55,21 @@ for (const route of publicRoutes()) {
   if (thin) problems.push(`${route}: body text too thin for indexing`);
   if (looksLike404) problems.push(`${route}: body looks like 404 template`);
 
+  // Invisible motion leftovers — Soft 404 risk even with text in the DOM.
+  const opacityZeros = (html.match(/opacity:\s*0/gi) || []).length;
+  if (opacityZeros > 5) {
+    // Allow a few decorative cases; fail when primary content is clearly hidden.
+    const rootMatch = html.match(/<div id="root">([\s\S]*)<\/div>\s*<\/body>/i);
+    const root = rootMatch?.[1] ?? "";
+    // Rough: if more than half of substantial text nodes sit under opacity:0 ancestors,
+    // the verifier already catches thin visible content via a simpler heuristic below.
+    const hiddenHeavy = opacityZeros >= 8 && root.length > 1000;
+    if (hiddenHeavy) {
+      problems.push(
+        `${route}: ${opacityZeros} opacity:0 styles remain in prerendered HTML (crawler-invisible)`,
+      );
+    }
+  }
   rows.push({
     route,
     title,
