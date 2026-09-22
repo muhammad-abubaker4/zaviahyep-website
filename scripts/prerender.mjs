@@ -5,31 +5,18 @@ import { chromium } from "playwright";
 import { publicRoutes } from "./lib/routes.mjs";
 
 /**
- * Build-time metadata prerendering.
+ * Build-time HTML prerendering for SEO and social crawlers.
  *
- * The app is a client-rendered SPA, so every URL used to serve the same
- * index.html: crawlers that do not execute JavaScript saw the homepage's title,
- * description and Open Graph tags on every page. Link previews on WhatsApp,
- * LinkedIn, Slack and X were therefore identical no matter what was shared.
+ * History: we previously stamped only <head> metadata onto an empty SPA shell.
+ * That left `#root` empty, so Google Live URL Inspection classified valid routes
+ * (e.g. /about) as Soft 404 despite HTTP 200 + correct canonicals.
  *
- * This runs the real app in a headless browser against the production build,
- * reads the metadata PageMeta wrote into the document, and stamps it onto a
- * copy of Vite's original index.html for that route. No SSR, no runtime server,
- * no framework change.
+ * We now also serialize `#root` innerHTML after React has painted page-specific
+ * content (including lazy routes). The client hydrates that markup via
+ * hydrateRoot so users keep interactivity without discarding the first paint.
  *
- * The body is deliberately not saved. Shipping the rendered markup was measured
- * and rejected: `createRoot` discards #root and rebuilds it, which reset the
- * hero LCP candidate and cost ~860ms under a 4x CPU throttle. Hydrating the
- * snapshot would avoid that, but framer-motion's settled inline styles never
- * match the `initial` values React paints on mount, so the page would flash
- * transparent. Social crawlers only need the head anyway; Google executes JS.
- *
- * The original shell is also kept intact on purpose. Serialising the live
- * document would bake in every `modulepreload` the browser discovered while
- * loading lazy sections, and those 15 extra preloads competed with the hero
- * image for bandwidth — same LCP regression, different cause.
- *
- * Runs from `npm run build`, after `vite build`.
+ * Flat files (`dist/about.html`) remain intentional: Netlify serves them at
+ * `/about` with HTTP 200 and does not 301 to a trailing slash.
  */
 
 const ROOT = process.cwd();
@@ -40,28 +27,10 @@ const PORT = 4179;
 /** Third parties have no business being baked into static HTML. */
 const BLOCKED = ["progressarc.io", "plausible.io"];
 
-/**
- * A route is done when React has mounted and PageMeta has written this page's
- * canonical into the head. Waiting on the canonical specifically is what
- * guarantees we never read one route while the previous route's metadata is
- * still in the document.
- */
 const RENDER_TIMEOUT_MS = 30_000;
-
-/** Mirrors pageUrl() in src/lib/site.ts. */
 const SITE_URL = "https://zaviah.org";
 const canonicalFor = (route) => (route === "/" ? `${SITE_URL}/` : `${SITE_URL}${route}`);
 
-/**
- * `/` writes dist/index.html; `/a/b` writes dist/a/b.html.
- *
- * Deliberately flat files rather than `<route>/index.html`. Netlify 301s a
- * directory index to its trailing-slash form (`/about` -> `/about/`), which put
- * a redirect in front of every canonical URL, every sitemap entry and every
- * inbound link — and left the canonical tag pointing at a URL that redirects.
- * Netlify resolves an extensionless request to `<route>.html` directly, so this
- * serves 200 at the URL we actually advertise.
- */
 const outputFor = (route) =>
   route === "/" ? path.join(DIST, "index.html") : path.join(DIST, `${route}.html`);
 
@@ -69,17 +38,11 @@ async function launchBrowser() {
   try {
     return await chromium.launch();
   } catch {
-    // Playwright's own build isn't downloaded everywhere; fall back to system Chrome.
     return await chromium.launch({ channel: "chrome" });
   }
 }
 
-/**
- * Pull the tags PageMeta (and the static shell) leave in the live document.
- * Only these are copied onto the Vite shell — nothing else from the rendered
- * page is allowed to leak into the written HTML.
- */
-async function extractMeta(context, url, { expectCanonical }) {
+async function extractPage(context, url, { expectCanonical }) {
   const page = await context.newPage();
   const errors = [];
   const isBlockedNoise = (u) => BLOCKED.some((host) => u.includes(host));
@@ -106,9 +69,26 @@ async function extractMeta(context, url, { expectCanonical }) {
       { timeout: RENDER_TIMEOUT_MS },
     );
 
+    // Lazy routes paint an H1 after their chunk loads — wait for it so Soft 404
+    // crawlers see real page copy, not a Suspense fallback.
+    await page.waitForFunction(
+      () => {
+        const h1 = document.querySelector("h1");
+        return !!(h1 && h1.textContent && h1.textContent.trim().length > 2);
+      },
+      { timeout: RENDER_TIMEOUT_MS },
+    );
+
+    // Allow remaining lazy sections to settle; analytics hosts are already blocked.
+    await page.waitForLoadState("networkidle", { timeout: 12_000 }).catch(() => {});
+
     const meta = await page.evaluate(() => {
       const content = (attr, key) =>
         document.querySelector(`meta[${attr}="${key}"]`)?.getAttribute("content") ?? null;
+
+      const root = document.getElementById("root");
+      const rootHtml = root?.innerHTML ?? "";
+      const h1 = document.querySelector("h1")?.textContent?.trim() ?? "";
 
       return {
         title: document.title,
@@ -138,6 +118,9 @@ async function extractMeta(context, url, { expectCanonical }) {
           "image:alt": content("name", "twitter:image:alt"),
         },
         jsonLd: document.getElementById("page-jsonld")?.textContent ?? null,
+        rootHtml,
+        h1,
+        rootTextLength: (root?.innerText ?? "").replace(/\s+/g, " ").trim().length,
       };
     });
 
@@ -147,7 +130,6 @@ async function extractMeta(context, url, { expectCanonical }) {
   }
 }
 
-/** Escape attribute values so a title containing `"` cannot break the tag. */
 const esc = (value) =>
   String(value)
     .replace(/&/g, "&amp;")
@@ -155,14 +137,18 @@ const esc = (value) =>
     .replace(/</g, "&lt;");
 
 /**
- * Stamp route metadata onto Vite's original shell. Replaces existing tags of
- * the same name/property in place so ordering (and therefore preload priority)
- * stays exactly as Vite emitted it.
+ * Stamp route metadata + body onto Vite's original shell.
+ * Keeps modulepreload / asset ordering from the Vite emit.
  */
-function applyMeta(shell, meta, { dropCanonical = false } = {}) {
+function applyPage(shell, meta, { dropCanonical = false, route = "/" } = {}) {
   let html = shell;
 
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${esc(meta.title)}</title>`);
+
+  // Inner pages must not inherit the homepage hero image preload (LCP-only).
+  if (route !== "/") {
+    html = html.replace(/\s*<link[^>]*\srel="preload"[^>]*\sas="image"[^>]*>/gi, "");
+  }
 
   const setName = (name, content) => {
     if (content == null) return;
@@ -181,11 +167,11 @@ function applyMeta(shell, meta, { dropCanonical = false } = {}) {
   setName("description", meta.description);
   setName("robots", meta.robots);
 
-  for (const [key, value] of Object.entries(meta.og)) {
+  for (const [key, value] of Object.entries(meta.og ?? {})) {
     if (dropCanonical && key === "url") continue;
     setProperty(`og:${key}`, value);
   }
-  for (const [key, value] of Object.entries(meta.twitter)) {
+  for (const [key, value] of Object.entries(meta.twitter ?? {})) {
     if (dropCanonical && key === "url") continue;
     setName(`twitter:${key}`, value);
   }
@@ -199,12 +185,18 @@ function applyMeta(shell, meta, { dropCanonical = false } = {}) {
       : html.replace("</head>", `    ${tag}\n  </head>`);
   }
 
-  // Page-specific JSON-LD from PageMeta. The Organization schema already in the
-  // shell stays; this adds (or replaces) the per-page block beside it.
   html = html.replace(/\s*<script id="page-jsonld"[^>]*>[\s\S]*?<\/script>/i, "");
   if (meta.jsonLd) {
     const tag = `<script id="page-jsonld" type="application/ld+json">${meta.jsonLd}</script>`;
     html = html.replace("</head>", `    ${tag}\n  </head>`);
+  }
+
+  if (meta.rootHtml) {
+    html = html.replace(
+      /<div id="root"><\/div>/,
+      `<div id="root">${meta.rootHtml}</div>`,
+    );
+    html = html.replace(/<html\s+lang="en"/i, `<html lang="en" data-prerendered="true"`);
   }
 
   return html;
@@ -225,61 +217,68 @@ await context.route("**/*", (route) => {
 });
 
 const failures = [];
-const pages = [];
+const captured = [];
 
 try {
   for (const route of routes) {
-    const { meta, errors } = await extractMeta(context, `${base}${route}`, {
+    const { meta, errors } = await extractPage(context, `${base}${route}`, {
       expectCanonical: canonicalFor(route),
     });
 
     if (errors.length) failures.push(`${route}: ${errors.join(" | ")}`);
-
-    const html = applyMeta(shell, meta);
-    const out = outputFor(route);
-    await fs.mkdir(path.dirname(out), { recursive: true });
-    await fs.writeFile(out, html, "utf8");
-    pages.push({ route, html });
-    console.log(`  ${route.padEnd(32)} -> ${path.relative(ROOT, out)}`);
+    captured.push({ route, meta });
+    console.log(
+      `  captured ${route.padEnd(28)} body ~${meta.rootTextLength} chars, h1="${meta.h1}"`,
+    );
   }
 
-  /*
-   * Catch-all, saved as dist/404.html. Netlify serves that file with a real
-   * 404 status for any path with no file behind it, which turns the old soft
-   * 404 (200 + homepage shell) into a correct one. Canonical / og:url are
-   * omitted: a 404 should not claim to be a specific URL.
-   */
   const sentinel = "/__prerender_404__";
-  const { meta } = await extractMeta(context, `${base}${sentinel}`, { expectCanonical: null });
-  const notFound = applyMeta(shell, meta, { dropCanonical: true });
-
-  if (notFound.includes(sentinel)) {
-    throw new Error("prerender: sentinel path leaked into dist/404.html");
-  }
-
-  await fs.writeFile(path.join(DIST, "404.html"), notFound, "utf8");
-  console.log(`  ${"(404 catch-all)".padEnd(32)} -> dist/404.html`);
+  const { meta: notFoundMeta, errors: notFoundErrors } = await extractPage(
+    context,
+    `${base}${sentinel}`,
+    { expectCanonical: null },
+  );
+  if (notFoundErrors.length) failures.push(`404: ${notFoundErrors.join(" | ")}`);
+  captured.push({ route: sentinel, meta: notFoundMeta, is404: true });
 } finally {
-  await context.close();
   await browser.close();
   await server.close();
 }
 
 if (failures.length) {
-  console.error(`\nprerender: console errors on ${failures.length} route(s):`);
+  console.error(`\nprerender: ${failures.length} runtime error(s):`);
   for (const failure of failures) console.error(`  ${failure}`);
   process.exit(1);
 }
 
 /*
- * The whole point of this step is that each file carries its own metadata, so
- * assert it against the written HTML rather than trusting the browser. Shared
- * titles or a stale canonical would silently undo the work, and the symptom
- * (every link preview looking identical) only shows up once it is live.
+ * Write AFTER closing the preview server. Writing about.html into dist/ while
+ * Vite preview was still running caused later routes to load that file, hydrate,
+ * and throw React #418/#423 from Framer Motion style mismatches.
  */
+const written = [];
+for (const page of captured) {
+  if (page.is404) {
+    const html = applyPage(shell, page.meta, { dropCanonical: true, route: page.route });
+    if (html.includes("/__prerender_404__")) {
+      throw new Error("prerender: sentinel path leaked into dist/404.html");
+    }
+    await fs.writeFile(path.join(DIST, "404.html"), html, "utf8");
+    console.log(`  ${"(404 catch-all)".padEnd(32)} -> dist/404.html`);
+    continue;
+  }
+
+  const html = applyPage(shell, page.meta, { route: page.route });
+  const out = outputFor(page.route);
+  await fs.mkdir(path.dirname(out), { recursive: true });
+  await fs.writeFile(out, html, "utf8");
+  written.push({ route: page.route, html, meta: page.meta });
+  console.log(`  ${page.route.padEnd(32)} -> ${path.relative(ROOT, out)}`);
+}
+
 const pick = (html, re) => html.match(re)?.[1] ?? null;
 
-const meta = pages.map(({ route, html }) => ({
+const metaSummary = written.map(({ route, html, meta }) => ({
   route,
   title: pick(html, /<title>([^<]*)<\/title>/),
   description: pick(html, /<meta name="description" content="([^"]*)"/i),
@@ -288,15 +287,17 @@ const meta = pages.map(({ route, html }) => ({
   ogTitle: pick(html, /<meta property="og:title" content="([^"]*)"/i),
   twitterTitle: pick(html, /<meta name="twitter:title" content="([^"]*)"/i),
   hasJsonLd: html.includes('id="page-jsonld"'),
-  // Guard against the LCP regression: lazy-route modulepreloads must never
-  // leak into the written shell.
+  hasH1: /<h1[\s>]/i.test(html),
+  rootTextLength: meta.rootTextLength,
+  h1: meta.h1,
+  looksLike404: /page not found/i.test(meta.h1),
   extraPreloads: [...html.matchAll(/<link rel="modulepreload"[^>]*>/g)].length,
 }));
 
 const shellPreloads = [...shell.matchAll(/<link rel="modulepreload"[^>]*>/g)].length;
 const problems = [];
 
-for (const page of meta) {
+for (const page of metaSummary) {
   const expected = canonicalFor(page.route);
   for (const field of ["title", "description", "ogTitle", "twitterTitle"]) {
     if (!page[field]) problems.push(`${page.route}: missing ${field}`);
@@ -308,6 +309,13 @@ for (const page of meta) {
     problems.push(`${page.route}: og:url is ${page.ogUrl}, expected ${expected}`);
   }
   if (!page.hasJsonLd) problems.push(`${page.route}: no page-specific JSON-LD`);
+  if (!page.hasH1) problems.push(`${page.route}: prerendered HTML missing <h1>`);
+  if (page.rootTextLength < 80) {
+    problems.push(`${page.route}: body text too thin (${page.rootTextLength} chars)`);
+  }
+  if (page.looksLike404) {
+    problems.push(`${page.route}: prerendered body looks like a 404 page`);
+  }
   if (page.extraPreloads !== shellPreloads) {
     problems.push(
       `${page.route}: modulepreload count ${page.extraPreloads} != shell ${shellPreloads}`,
@@ -317,7 +325,7 @@ for (const page of meta) {
 
 for (const field of ["title", "description", "canonical"]) {
   const byValue = new Map();
-  for (const page of meta) {
+  for (const page of metaSummary) {
     byValue.set(page[field], [...(byValue.get(page[field]) ?? []), page.route]);
   }
   for (const [value, sharedBy] of byValue) {
@@ -328,12 +336,12 @@ for (const field of ["title", "description", "canonical"]) {
 }
 
 if (problems.length) {
-  console.error(`\nprerender: ${problems.length} metadata problem(s):`);
+  console.error(`\nprerender: ${problems.length} metadata/content problem(s):`);
   for (const problem of problems) console.error(`  ${problem}`);
   process.exit(1);
 }
 
 console.log(
-  `\nPrerendered ${pages.length} routes + 404.html — every page has a unique title, ` +
-    `description and canonical, plus its own JSON-LD.`,
+  `\nPrerendered ${written.length} routes + 404.html — unique head metadata, ` +
+    `non-empty body HTML with H1, and no Soft-404 shells.`,
 );

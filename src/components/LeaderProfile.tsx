@@ -3,11 +3,11 @@ import { Instagram, Linkedin, Mail } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
-import { DURATION, revealTransition, STAGGER } from "@/lib/motion";
+import { DURATION, motionInitial, revealTransition, STAGGER } from "@/lib/motion";
 import type { Profile } from "@/data/profiles";
 
 const reveal = (delay = 0) => ({
-  initial: { opacity: 0, y: 24 },
+  initial: motionInitial({ opacity: 0, y: 24 }),
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-80px" },
   transition: revealTransition(delay),

@@ -3,6 +3,19 @@
  * mix of eased and default curves, so sections decelerated at visibly different
  * rates as you scrolled. Everything routes through here now.
  */
+
+/** True when this document was written by scripts/prerender.mjs. */
+export const isPrerenderedDocument =
+  typeof document !== "undefined" && document.documentElement.dataset.prerendered === "true";
+
+/**
+ * Skip enter animations when hydrating prerendered HTML so Framer Motion does
+ * not remount visible content from opacity/translate "initial" values.
+ */
+export function motionInitial<T>(value: T): T | false {
+  return isPrerenderedDocument ? false : value;
+}
+
 export const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
 export const DURATION = {

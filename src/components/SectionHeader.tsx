@@ -1,6 +1,6 @@
 import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { revealTransition } from "@/lib/motion";
+import { motionInitial, revealTransition } from "@/lib/motion";
 
 type SectionHeaderProps = {
   eyebrow: string;
@@ -25,7 +25,7 @@ const SectionHeader = ({
 
   return (
     <m.header
-      initial={{ opacity: 0, y: 32 }}
+      initial={motionInitial({ opacity: 0, y: 32 })}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={revealTransition()}
